@@ -5,6 +5,7 @@
 
 
 #import <Foundation/Foundation.h>
+extern NSString* const kUniformViewMatrix;
 
 @class OpenGLView;
 

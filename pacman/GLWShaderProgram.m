@@ -14,6 +14,8 @@
     self = [super init];
 
     if (self) {
+        uniformLocations = [NSMutableDictionary dictionary];
+
         program = glCreateProgram();
         vertexShader = fragmentShader = 0;
 
@@ -87,17 +89,43 @@
 
 - (void) bindAttribute: (NSString *) attribute toIndex: (uint) i {
     glBindAttribLocation(program, i, [attribute UTF8String]);
-    CHECK_GL_ERROR_DEBUG();
+    GL_ERROR();
 }
 
 - (void)use {
     glUseProgram(program);
-    CHECK_GL_ERROR_DEBUG();
+    GL_ERROR();
 }
 
 - (void)dealloc {
     if (program)
         glDeleteProgram(program);
+}
+
+-(void) updateUniformLocation: (NSString *)location withMatrix4fv:(GLvoid*)m count:(NSUInteger)count
+{
+    if ([uniformLocations objectForKey:location] == nil) {
+        int tmpLoc = glGetUniformLocation(program, [location UTF8String]);
+        if (tmpLoc == -1) {
+            DebugLog(@"Uniform location %@ wasn't found", location);
+            exit(1);
+        } else{
+            [uniformLocations setObject: @(tmpLoc) forKey: location];
+        }
+    }
+
+    GL_ERROR();
+
+    GLuint loc = [[uniformLocations objectForKey:location] unsignedIntegerValue];
+//    GLfloat mat[] = {
+//            1.0f, 0.0f, 0.0f, 0.0f,
+//            0.0f, 1.0f, 0.0f, 0.0f,
+//            0.0f, 0.0f, 1.0f, 0.0f,
+//            0.0f, 0.0f, 0.0f, 1.0f
+//    };
+//    glUniformMatrix4fv( (GLint) loc, 1, GL_FALSE, (GLvoid *)mat);
+    glUniformMatrix4fv( (GLint) loc, (GLsizei) count, GL_FALSE, m);
+    GL_ERROR();
 }
 
 @end

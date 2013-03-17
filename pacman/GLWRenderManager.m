@@ -10,6 +10,9 @@
 #import "OpenGLView.h"
 #import "GLWShaderProgram.h"
 #import "GLWShaderManager.h"
+#import "GLWMatrix.h"
+#import "GLWCamera.h"
+#import "GLWMath.h"
 
 
 @implementation GLWRenderManager {
@@ -65,15 +68,13 @@
     glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    NSString *test = kGLWDefaultProgram;
+    [GLWMatrix identityMatrix];
+
     GLWShaderProgram *program = [[GLWShaderManager sharedManager] getProgram: kGLWDefaultProgram];
 
-//    GLfloat vVertices[] =   {0.0f, 0.0f, -0.5f, 1.0f,
-//                            0.5f, 0.0f, -0.5f, 1.0f,
-//                            0.0f, 0.5f, -0.5f, 1.0f};
-    GLfloat vVertices[] =   {0.0f, 0.0f, 0.0f,
-                            -0.5f, -0.5f, -0.5f,
-                            0.5f, -0.5f, -0.5f};
+    GLfloat vVertices[] =   {0.0f, 0.f, -0.f,
+                            0.f, 100.f, -0.f,
+                            100.f, 100.f, -0.f};
 
     [program link];
     [program use];
@@ -81,19 +82,27 @@
     glViewport(0, 0, view.frame.size.width, view.frame.size.height);
 
 
+    float h = 2.0f * view.frame.size.height / view.frame.size.width;
 
-//    glVertexAttribPointer(kAttributeIndexPosition, 4, GL_FLOAT, GL_FALSE, 0, vVertices);
-//    glEnableVertexAttribArray(kAttributeIndexPosition);
+    GLWMatrix *projection = [GLWMatrix identityMatrix];
+    [projection translate:Vec3Make(-1, -1, 0)];
+    [projection scale:Vec3Make(1 / (0.5 * view.frame.size.width), 1 / (0.5 *view.frame.size.height), 0)];
+
+    GLWMatrix *transformation = [GLWMatrix identityMatrix];
+    [transformation translate:Vec3Make(0.5, 0, 0)];
+
+    [program updateUniformLocation: @"u_projection" withMatrix4fv: projection.matrix count: 1];
+    [program updateUniformLocation: @"u_transformation" withMatrix4fv: transformation.matrix count: 1];
+
     glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-    CHECK_GL_ERROR_DEBUG();
+    GL_ERROR();
     glEnableVertexAttribArray(kAttributeIndexPosition);
-    CHECK_GL_ERROR_DEBUG();
+    GL_ERROR();
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
-    CHECK_GL_ERROR_DEBUG();
-
+    GL_ERROR();
 
     [context presentRenderbuffer:GL_RENDERBUFFER];
-    CHECK_GL_ERROR_DEBUG();
+    GL_ERROR();
 }
 
 @end

@@ -9,11 +9,14 @@
 #import "GLWShaderManager.h"
 #import "GLWShaderProgram.h"
 #import "GLWShaders.h"
+#import "GLWCamera.h"
+#import "GLWMatrix.h"
 
 NSString* const kGLWDefaultProgram  = @"GLWDefaultProgram";
 NSString* const kAttributePosition  = @"a_position";
 NSString* const kAttributeColor     = @"a_color";
 NSString* const kAttributeTexCoord  = @"a_texCoord";
+NSString* const kUniformViewMatrix  = @"u_MVP";
 
 @implementation GLWShaderManager
 
@@ -33,9 +36,13 @@ NSString* const kAttributeTexCoord  = @"a_texCoord";
         shaders = [NSMutableDictionary dictionary];
         GLWShaderProgram *defaultProgram = [[GLWShaderProgram alloc] initWithVertexSource: glwVertex fragmentSource: glwFragment];
         [defaultProgram bindAttribute:kAttributePosition toIndex:kAttributeIndexPosition];
+        [defaultProgram link];
+        [defaultProgram use];
+
+//        [defaultProgram updateUniformLocation: kUniformViewMatrix withMatrix4fv: [GLWCamera sharedCamera].viewMatrix.matrix count: 1];
 //        [defaultProgram bindAttribute:kAttributeColor toIndex:kAttributeIndexColor];
 //        [defaultProgram bindAttribute:kAttributeTexCoord toIndex:kAttributeIndexTexCoord];
-        CHECK_GL_ERROR_DEBUG();
+        GL_ERROR();
 
         [self cacheProgram: defaultProgram withName: kGLWDefaultProgram];
     }
