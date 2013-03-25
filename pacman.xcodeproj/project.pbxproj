@@ -8,9 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		36EBC1EE6FF5F197649839D1 /* GLWShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCCCF0F52320DB7AA36DB /* GLWShaderProgram.m */; };
+		36EBC4481D79C4454E6DB4F9 /* GLWSpriteGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA2EA1157E8255DD9785 /* GLWSpriteGroup.m */; };
 		36EBC719CD05132E664CF2CC /* GLWMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC75E5DC69D96CEB1C29F /* GLWMatrix.m */; };
 		36EBC8F21218705AD03CE986 /* GLWCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCF361CA36478BFD92F23 /* GLWCamera.m */; };
 		36EBC903009EA0D42EA36112 /* GLWRenderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCAFDD123BF106D283A78 /* GLWRenderManager.m */; };
+		36EBCDABC347C3EF1AAB1EFD /* GLWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC30A84ED9C32F07E3A18 /* GLWObject.m */; };
+		36EBCE753168CC535FCE48BC /* GLWLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC434350C587F2987652E /* GLWLayer.m */; };
+		36EBCE83138A06E84EE96AE7 /* HelloScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA0DD3551D10646D5D39 /* HelloScene.m */; };
 		CE3745F516F10AA20067396E /* GLWShaders.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3745F416F10AA20067396E /* GLWShaders.m */; };
 		CE3745FD16F10EE40067396E /* GLWShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3745FC16F10EE40067396E /* GLWShaderManager.m */; };
 		CE71619F16EE5EB400A32C9E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE71619E16EE5EB400A32C9E /* UIKit.framework */; };
@@ -35,14 +39,22 @@
 
 /* Begin PBXFileReference section */
 		36EBC14963C46F27C681420B /* GLWRenderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWRenderManager.h; sourceTree = "<group>"; };
+		36EBC30A84ED9C32F07E3A18 /* GLWObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWObject.m; sourceTree = "<group>"; };
+		36EBC434350C587F2987652E /* GLWLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWLayer.m; sourceTree = "<group>"; };
 		36EBC4E7330BE55E4379220D /* GLWShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWShaderProgram.h; sourceTree = "<group>"; };
 		36EBC5FB9D9C2E77DE622FE7 /* GLWMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMath.h; sourceTree = "<group>"; };
+		36EBC61C19652B17820B8F14 /* GLWSpriteGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWSpriteGroup.h; sourceTree = "<group>"; };
+		36EBC6528B139F349D2DEECE /* HelloScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloScene.h; sourceTree = "<group>"; };
+		36EBC66A426F37EEE28D9545 /* GLWObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWObject.h; sourceTree = "<group>"; };
 		36EBC75E5DC69D96CEB1C29F /* GLWMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWMatrix.m; sourceTree = "<group>"; };
 		36EBC804889BCB8DD4757DA9 /* GLWMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMatrix.h; sourceTree = "<group>"; };
 		36EBC939D5618E9A81090EDE /* GLWTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTypes.h; sourceTree = "<group>"; };
+		36EBCA0DD3551D10646D5D39 /* HelloScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloScene.m; sourceTree = "<group>"; };
+		36EBCA2EA1157E8255DD9785 /* GLWSpriteGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWSpriteGroup.m; sourceTree = "<group>"; };
 		36EBCAFDD123BF106D283A78 /* GLWRenderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWRenderManager.m; sourceTree = "<group>"; };
 		36EBCCCF0F52320DB7AA36DB /* GLWShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWShaderProgram.m; sourceTree = "<group>"; };
 		36EBCD2B8D9581E7EB8EDE09 /* GLWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWCamera.h; sourceTree = "<group>"; };
+		36EBCD494D792A877D84448A /* GLWLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWLayer.h; sourceTree = "<group>"; };
 		36EBCF361CA36478BFD92F23 /* GLWCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWCamera.m; sourceTree = "<group>"; };
 		CE3745F316F10AA20067396E /* GLWShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWShaders.h; sourceTree = "<group>"; };
 		CE3745F416F10AA20067396E /* GLWShaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWShaders.m; sourceTree = "<group>"; };
@@ -119,6 +131,12 @@
 				36EBCAFDD123BF106D283A78 /* GLWRenderManager.m */,
 				36EBCF361CA36478BFD92F23 /* GLWCamera.m */,
 				36EBCD2B8D9581E7EB8EDE09 /* GLWCamera.h */,
+				36EBCA2EA1157E8255DD9785 /* GLWSpriteGroup.m */,
+				36EBC61C19652B17820B8F14 /* GLWSpriteGroup.h */,
+				36EBC30A84ED9C32F07E3A18 /* GLWObject.m */,
+				36EBC66A426F37EEE28D9545 /* GLWObject.h */,
+				36EBC434350C587F2987652E /* GLWLayer.m */,
+				36EBCD494D792A877D84448A /* GLWLayer.h */,
 			);
 			name = GLWrapper;
 			sourceTree = "<group>";
@@ -180,6 +198,8 @@
 				CE7161A916EE5EB400A32C9E /* Supporting Files */,
 				CE7161C916EE606E00A32C9E /* OpenGLView.h */,
 				CE7161CA16EE606E00A32C9E /* OpenGLView.m */,
+				36EBCA0DD3551D10646D5D39 /* HelloScene.m */,
+				36EBC6528B139F349D2DEECE /* HelloScene.h */,
 			);
 			path = pacman;
 			sourceTree = "<group>";
@@ -296,6 +316,10 @@
 				36EBC903009EA0D42EA36112 /* GLWRenderManager.m in Sources */,
 				36EBC719CD05132E664CF2CC /* GLWMatrix.m in Sources */,
 				36EBC8F21218705AD03CE986 /* GLWCamera.m in Sources */,
+				36EBC4481D79C4454E6DB4F9 /* GLWSpriteGroup.m in Sources */,
+				36EBCDABC347C3EF1AAB1EFD /* GLWObject.m in Sources */,
+				36EBCE753168CC535FCE48BC /* GLWLayer.m in Sources */,
+				36EBCE83138A06E84EE96AE7 /* HelloScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

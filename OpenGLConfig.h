@@ -7,7 +7,7 @@
 //
 
 #ifndef pacman_OpenGLConfig_h
-#define pacman_OpenGLConfig_h
+#define FRAME_RATE 60
 
 #define kApiVersion 
 

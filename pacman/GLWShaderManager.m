@@ -36,6 +36,7 @@ NSString* const kUniformViewMatrix  = @"u_MVP";
         shaders = [NSMutableDictionary dictionary];
         GLWShaderProgram *defaultProgram = [[GLWShaderProgram alloc] initWithVertexSource: glwVertex fragmentSource: glwFragment];
         [defaultProgram bindAttribute:kAttributePosition toIndex:kAttributeIndexPosition];
+        [defaultProgram bindAttribute:kAttributeColor toIndex:kAttributeIndexColor];
         [defaultProgram link];
         [defaultProgram use];
 

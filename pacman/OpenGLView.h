@@ -19,5 +19,6 @@
     GLWRenderManager *renderManager;
 }
 
+- (GLWRenderManager *) renderer;
 
 @end

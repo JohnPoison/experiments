@@ -13,16 +13,34 @@
 #import "GLWMatrix.h"
 #import "GLWCamera.h"
 #import "GLWMath.h"
+#import "OpenGLConfig.h"
+#import "GLWSpriteGroup.h"
+#import "GLWLayer.h"
+#import "GLWObject.h"
 
 
 @implementation GLWRenderManager {
 
 }
+
++ (GLWRenderManager *)sharedManager {
+    static GLWRenderManager *sharedManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[GLWRenderManager alloc] init];
+    });
+
+    return sharedManager;
+}
+
 - (id)init {
     self = [super init];
     if (self) {
+
         EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES2;
         context = [[EAGLContext alloc] initWithAPI:api];
+
+        _isRendering = NO;
 
         if (!context) {
             DebugLog(@"Failed to initialize OpenGLES 2.0 context");
@@ -33,6 +51,9 @@
             DebugLog(@"Failed to set current OpenGL context");
             exit(1);
         }
+
+        displayLink = [CADisplayLink displayLinkWithTarget: self selector:@selector(render)];
+        [displayLink setFrameInterval:(int)floor(60.0f / FRAME_RATE)];
 
         glGenRenderbuffers(1, &colorBuffer);
         glBindRenderbuffer(GL_RENDERBUFFER, colorBuffer);
@@ -47,6 +68,19 @@
     return self;
 }
 
+- (void) startRender {
+    if (self.isRendering)
+        return;
+
+    [displayLink addToRunLoop: [NSRunLoop currentRunLoop] forMode: NSDefaultRunLoopMode];
+    self.isRendering = YES;
+}
+
+- (void) stopRender {
+    [displayLink removeFromRunLoop: [NSRunLoop currentRunLoop] forMode: NSDefaultRunLoopMode];
+    self.isRendering = NO;
+}
+
 - (id) initWithView: (OpenGLView *) openGLView {
     self = [self init];
 
@@ -57,32 +91,21 @@
             exit(1);
         }
 
-        [self render];
+        [self setupView];
     }
 
     return self;
 }
 
-
-- (void)render {
-    glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
+- (void) setupView {
 
     [GLWMatrix identityMatrix];
 
     GLWShaderProgram *program = [[GLWShaderManager sharedManager] getProgram: kGLWDefaultProgram];
 
-    GLfloat vVertices[] =   {0.0f, 0.f, -0.f,
-                            0.f, 100.f, -0.f,
-                            100.f, 100.f, -0.f};
 
     [program link];
     [program use];
-
-    glViewport(0, 0, view.frame.size.width, view.frame.size.height);
-
-
-    float h = 2.0f * view.frame.size.height / view.frame.size.width;
 
     GLWMatrix *projection = [GLWMatrix identityMatrix];
     [projection translate:Vec3Make(-1, -1, 0)];
@@ -93,13 +116,32 @@
 
     [program updateUniformLocation: @"u_projection" withMatrix4fv: projection.matrix count: 1];
     [program updateUniformLocation: @"u_transformation" withMatrix4fv: transformation.matrix count: 1];
+}
 
-    glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-    GL_ERROR();
-    glEnableVertexAttribArray(kAttributeIndexPosition);
-    GL_ERROR();
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
-    GL_ERROR();
+- (void)render {
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glViewport(0, 0, view.frame.size.width, view.frame.size.height);
+
+    [self.currentScene draw];
+//    static GLWSpriteGroup *sprite = nil;
+//
+//    if (sprite == nil) {
+//        sprite = [[GLWSpriteGroup alloc] init];
+//    }
+//
+//    [sprite draw];
+//
+////    GLfloat vVertices[] =   {0.0f, 0.f, -0.f,
+////            0.f, 100.f, -0.f,
+////            100.f, 100.f, -0.f};
+////
+////    glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+////    GL_ERROR();
+////    glEnableVertexAttribArray(kAttributeIndexPosition);
+////    GL_ERROR();
+////    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+////    GL_ERROR();
 
     [context presentRenderbuffer:GL_RENDERBUFFER];
     GL_ERROR();

@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class OpenGLView;
+@class GLWObject;
+
 @interface OpenGLManager : NSObject
 
+@property (nonatomic, assign) OpenGLView *view;
+
 +(OpenGLManager *) sharedManager;
+
+-(void) startRender;
+-(void) stopRender;
+-(void) runScene: (GLWObject *) scene;
 
 @end

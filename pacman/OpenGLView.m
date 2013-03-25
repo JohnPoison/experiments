@@ -20,9 +20,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+//        renderManager = [[[GLWRenderManager alloc] initWithView: self] autorelease];
         renderManager = [[[GLWRenderManager alloc] initWithView: self] autorelease];
     }
     return self;
+}
+
+- (GLWRenderManager *) renderer {
+    return renderManager;
 }
 
 + (Class)layerClass {

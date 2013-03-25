@@ -5,20 +5,29 @@
 
 
 #import <Foundation/Foundation.h>
-extern NSString* const kUniformViewMatrix;
 
 @class OpenGLView;
+@class GLWObject;
 
 
 @interface GLWRenderManager : NSObject {
     @protected
         OpenGLView *    view;
+        CADisplayLink*	displayLink;
     @public
         EAGLContext*    context;
         GLuint          frameBuffer;
         GLuint          colorBuffer;
 }
 
+@property (assign) BOOL isRendering;
+@property (nonatomic, strong) GLWObject *currentScene;
+
 - (id) initWithView: (OpenGLView *) openGLView;
+- (void) startRender;
+- (void) stopRender;
+
++ (GLWRenderManager *) sharedManager;
+
 
 @end

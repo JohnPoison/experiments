@@ -7,19 +7,35 @@
 //
 
 #import "AppDelegate.h"
+#import "GLWRenderManager.h"
+#import "HelloScene.h"
+#import "OpenGLManager.h"
 
 @implementation AppDelegate
+
+- (void)dealloc {
+    self.window = nil;
+    self.glView = nil;
+    [super dealloc];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.glView = [[OpenGLView alloc] initWithFrame:screenBounds];
-    self.window.rootViewController = [[UIViewController alloc] init];
-    self.window.rootViewController.view = _glView;
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.glView = [[[OpenGLView alloc] initWithFrame:screenBounds] autorelease];
+    self.window.rootViewController = [[[UIViewController alloc] init] autorelease];
+    self.window.rootViewController.view = self.glView;
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+    [OpenGLManager sharedManager].view = self.glView;
+    [[OpenGLManager sharedManager] startRender];
+    [[OpenGLManager sharedManager] runScene: [[[HelloScene alloc] init] autorelease]];
+//    [GLWRenderManager sharedManager].currentScene = ;
+//    [[GLWRenderManager sharedManager] startRender];
+
     return YES;
 }
 
