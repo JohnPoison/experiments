@@ -28,3 +28,14 @@ static inline Vec3 Vec3Make(float x, float y, float z) {
 
     return v;
 }
+
+static inline Vec4 Vec4Make(float x, float y, float z, float w) {
+    Vec4 v;
+
+    v.x = x;
+    v.y = y;
+    v.z = z;
+    v.w = w;
+
+    return v;
+}

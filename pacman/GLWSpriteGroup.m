@@ -7,6 +7,7 @@
 #import "GLWSpriteGroup.h"
 #import "GLWMath.h"
 #import "GLWShaderManager.h"
+#import "GLWSprite.h"
 
 static const GLushort indices[] = {
     0, 1, 2, 3, 2, 1
@@ -20,7 +21,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 - (id)init {
     self = [super init];
     if (self) {
-        vertices = malloc(sizeof(GLWVertex4Data));
+//        _vertices = malloc(sizeof(GLWVertex4Data));
 
         GLWVertex4Data data;
 
@@ -47,7 +48,7 @@ static const int VertexSize = sizeof(GLWVertexData);
         data.bottomLeft     = bl;
         data.bottomRight    = br;
 
-        vertices[0] = data;
+//        vertices[0] = data;
         glGenBuffers(2, vboIds);
 
         isDirty = YES;
@@ -56,25 +57,68 @@ static const int VertexSize = sizeof(GLWVertexData);
     return self;
 }
 
+- (void)addChild:(GLWObject *)child {
+    if (![child isKindOfClass: [GLWSprite class]])
+        @throw [NSException exceptionWithName: @"can't add child" reason: @"GLWSpriteGroup can contain only GLWSprite children" userInfo: nil];
+
+    [children addObject: child];
+
+    isDirty = YES;
+}
+
 - (void) bindData {
     glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIds[1]);
 
-    if (!isDirty)
-        return;
+    if (isDirty) {
+        [self sortChildren];
 
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * 6, indices, GL_STATIC_DRAW);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) , vertices, GL_STATIC_DRAW);
+        free(vertices);
+        free(indices);
 
-    isDirty = NO;
+        uint capacity = children.count;
+
+        vertices = malloc(sizeof(GLWVertex4Data) * capacity);
+        indices = malloc(sizeof(GLushort) * 6 * capacity);
+
+        for (uint i = 0; i < capacity; i++) {
+            GLWSprite *child = [children objectAtIndex: i];
+            vertices[i] = child.vertices;
+
+            indices[i*6]    = (GLushort)i*4;
+            indices[i*6+1]  = (GLushort)i*4+1;
+            indices[i*6+2]  = (GLushort)i*4+2;
+            indices[i*6+3]  = (GLushort)i*4+3;
+            indices[i*6+4]  = (GLushort)i*4+2;
+            indices[i*6+5]  = (GLushort)i*4+1;
+        }
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * capacity , vertices, GL_DYNAMIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * 6 * capacity, indices, GL_STATIC_DRAW);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+        isDirty = NO;
+    }
+
+
 }
 
 - (void)dealloc {
     free(vertices);
+    free(indices);
     glDeleteBuffers(2, vboIds);
 }
 
+// called by child when child updates it's vertex data
+- (void)childIsDirty {
+    isDirty = YES;
+}
+
 - (void) draw {
+    if (!children.count)
+        return;
+
     [self bindData];
 
     glEnableVertexAttribArray(kAttributeIndexPosition);

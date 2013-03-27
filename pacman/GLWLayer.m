@@ -35,10 +35,6 @@
 }
 
 - (NSArray *)children {
-    if (isDirty) {
-        [self sortChildren];
-        isDirty = NO;
-    }
 
     return children;
 }
@@ -52,6 +48,11 @@
 }
 
 - (void)draw {
+    if (isDirty) {
+        [self sortChildren];
+        isDirty = NO;
+    }
+
     for (uint i = 0; i < children.count; i++) {
         [(GLWObject *)[children objectAtIndex: i] draw];
     }

@@ -6,18 +6,19 @@
 
 #import <Foundation/Foundation.h>
 #import "GLWTypes.h"
-#import "GLWObject.h"
+#import "GLWLayer.h"
 
 
-@interface GLWSpriteGroup : GLWObject {
+@interface GLWSpriteGroup : GLWLayer {
     GLWVertex4Data* vertices;
+    GLushort* indices;
     GLuint vboIds[2];
 //    GLushort* indices;
-    BOOL isDirty;
 }
 
 @property (nonatomic, assign) CGPoint position;
 
 -(void) draw;
+-(void) childIsDirty;
 
 @end

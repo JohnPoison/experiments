@@ -10,10 +10,14 @@
 
 
 @interface GLWObject : NSObject {
+    @public
+
 }
 
 @property (nonatomic, strong) GLWShaderProgram *shaderProgram;
 @property (nonatomic, assign) NSInteger z;
+@property (nonatomic, assign) CGPoint position;
+@property (nonatomic, assign) CGSize size;
 
 - (void) draw;
 
