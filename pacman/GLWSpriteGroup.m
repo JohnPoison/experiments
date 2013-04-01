@@ -30,6 +30,8 @@ static const int VertexSize = sizeof(GLWVertexData);
 
     [children addObject: child];
 
+    ((GLWSprite *)child).group = self;
+
     isDirty = YES;
 }
 
@@ -59,7 +61,7 @@ static const int VertexSize = sizeof(GLWVertexData);
         }
 
         glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * capacity , vertices, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * capacity, vertices, GL_DYNAMIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIds[1]);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * 6 * capacity, indices, GL_STATIC_DRAW);
@@ -101,7 +103,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIds[1]);
 
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_TRIANGLES, [children count] * 6, GL_UNSIGNED_SHORT, 0);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
