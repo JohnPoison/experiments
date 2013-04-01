@@ -41,6 +41,7 @@
         context = [[EAGLContext alloc] initWithAPI:api];
 
         _isRendering = NO;
+        lastTime = 0;
 
         if (!context) {
             DebugLog(@"Failed to initialize OpenGLES 2.0 context");
@@ -118,32 +119,24 @@
     [program updateUniformLocation: @"u_transformation" withMatrix4fv: transformation.matrix count: 1];
 }
 
-- (void)render {
-    glClear(GL_COLOR_BUFFER_BIT);
+- (void) updateDeltaTime {
+    deltaTime = displayLink.timestamp - lastTime;
+    lastTime = displayLink.timestamp;
+    totalTime += deltaTime;
+    fps = (float)deltaTime / (1 / FRAME_RATE) * FRAME_RATE;
+}
 
+- (void)render {
+
+    [self updateDeltaTime];
+
+    glClear(GL_COLOR_BUFFER_BIT);
     glViewport(0, 0, view.frame.size.width, view.frame.size.height);
 
-    [self.currentScene draw];
-//    static GLWSpriteGroup *sprite = nil;
-//
-//    if (sprite == nil) {
-//        sprite = [[GLWSpriteGroup alloc] init];
-//    }
-//
-//    [sprite draw];
-//
-////    GLfloat vVertices[] =   {0.0f, 0.f, -0.f,
-////            0.f, 100.f, -0.f,
-////            100.f, 100.f, -0.f};
-////
-////    glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-////    GL_ERROR();
-////    glEnableVertexAttribArray(kAttributeIndexPosition);
-////    GL_ERROR();
-////    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
-////    GL_ERROR();
+    [self.currentScene draw: (float)deltaTime];
 
     [context presentRenderbuffer:GL_RENDERBUFFER];
+
     GL_ERROR();
 }
 

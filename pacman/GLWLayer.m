@@ -47,14 +47,14 @@
     isDirty = YES;
 }
 
-- (void)draw {
+- (void)draw:(float)dt {
     if (isDirty) {
         [self sortChildren];
         isDirty = NO;
     }
 
     for (uint i = 0; i < children.count; i++) {
-        [(GLWObject *)[children objectAtIndex: i] draw];
+        [(GLWObject *)[children objectAtIndex: i] draw:0];
     }
 }
 

@@ -18,15 +18,23 @@
     if (self) {
         self.shaderProgram = [[GLWShaderManager sharedManager] getProgram: kGLWDefaultProgram];
         self.z = 0;
+        updateSelector = nil;
     }
 
     return self;
 }
 
 // this method will be called by GLWRenderer
-- (void)draw {
+- (void)draw:(float)dt {
+    if (updateSelector != nil) {
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self performSelector: updateSelector ];
+    }
     DebugLog(@"override me!");
 }
 
+- (void)setUpdateSelector:(SEL)sel {
+    updateSelector = sel;
+}
 
 @end

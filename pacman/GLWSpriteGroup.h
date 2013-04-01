@@ -18,7 +18,7 @@
 
 @property (nonatomic, assign) CGPoint position;
 
--(void) draw;
+- (void)draw:(float)dt;
 -(void) childIsDirty;
 
 @end

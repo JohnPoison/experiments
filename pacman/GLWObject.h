@@ -10,8 +10,7 @@
 
 
 @interface GLWObject : NSObject {
-    @public
-
+    SEL updateSelector;
 }
 
 @property (nonatomic, strong) GLWShaderProgram *shaderProgram;
@@ -19,6 +18,7 @@
 @property (nonatomic, assign) CGPoint position;
 @property (nonatomic, assign) CGSize size;
 
-- (void) draw;
+- (void)draw:(float)dt;
+- (void)setUpdateSelector: (SEL) sel;
 
 @end

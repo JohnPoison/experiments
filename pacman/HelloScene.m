@@ -38,9 +38,9 @@
     return self;
 }
 
-- (void)draw {
+- (void)draw:(float)dt {
 //    sprite.position = CGPointMake(sprite.position.x + 1.f, sprite.position.y + 1.f);
-    [super draw];
+    [super draw:dt];
 }
 
 @end

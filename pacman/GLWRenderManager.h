@@ -14,6 +14,10 @@
     @protected
         OpenGLView *    view;
         CADisplayLink*	displayLink;
+        CFTimeInterval  deltaTime;
+        CFTimeInterval  lastTime;
+        CFTimeInterval  totalTime;
+        float           fps;
     @public
         EAGLContext*    context;
         GLuint          frameBuffer;
