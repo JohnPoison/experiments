@@ -33,14 +33,15 @@
         [group addChild: sprite];
 
         [self addChild: group];
+
+        [self setUpdateSelector:@selector(update:)];
     }
 
     return self;
 }
 
-- (void)draw:(float)dt {
-//    sprite.position = CGPointMake(sprite.position.x + 1.f, sprite.position.y + 1.f);
-    [super draw:dt];
+- (void) update: (float) dt {
+    NSLog(@"update with %5.5f", dt);
 }
 
 @end

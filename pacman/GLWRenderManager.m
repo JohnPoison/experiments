@@ -133,6 +133,7 @@
     glClear(GL_COLOR_BUFFER_BIT);
     glViewport(0, 0, view.frame.size.width, view.frame.size.height);
 
+    [self.currentScene touch:(float)deltaTime];
     [self.currentScene draw: (float)deltaTime];
 
     [context presentRenderbuffer:GL_RENDERBUFFER];

@@ -24,12 +24,20 @@
     return self;
 }
 
+- (void)touch: (float)dt {
+    if (updateSelector != nil) {
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        NSMethodSignature *sig = [self methodSignatureForSelector: updateSelector];
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
+        [invocation setTarget: self];
+        [invocation setSelector: updateSelector];
+        [invocation setArgument: &dt atIndex: 2];
+        [invocation invoke];
+    }
+}
+
 // this method will be called by GLWRenderer
 - (void)draw:(float)dt {
-    if (updateSelector != nil) {
-        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self performSelector: updateSelector ];
-    }
     DebugLog(@"override me!");
 }
 

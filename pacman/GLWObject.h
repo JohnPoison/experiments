@@ -18,6 +18,8 @@
 @property (nonatomic, assign) CGPoint position;
 @property (nonatomic, assign) CGSize size;
 
+// use this method to update object before draw
+- (void)touch: (float)dt;
 - (void)draw:(float)dt;
 - (void)setUpdateSelector: (SEL) sel;
 
