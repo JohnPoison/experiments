@@ -41,7 +41,7 @@
 }
 
 - (void) update: (float) dt {
-    NSLog(@"update with %5.5f", dt);
+    sprite.position = CGPointMake(sprite.position.x + 30.f * dt, sprite.position.y);
 }
 
 @end

@@ -120,9 +120,14 @@
 }
 
 - (void) updateDeltaTime {
-    deltaTime = displayLink.timestamp - lastTime;
-    lastTime = displayLink.timestamp;
-    totalTime += deltaTime;
+    if (lastTime == 0) {
+        deltaTime = 0;
+        lastTime = displayLink.timestamp;
+    } else {
+        deltaTime = displayLink.timestamp - lastTime;
+        lastTime = displayLink.timestamp;
+    }
+
     fps = (float)deltaTime / (1 / FRAME_RATE) * FRAME_RATE;
 }
 
