@@ -19,6 +19,7 @@
 
 - (GLWShaderProgram *) initWithVertexSource: (const GLchar*) vertexSource fragmentSource: (const GLchar*) fragmentSource;
 - (void) bindAttribute: (NSString *) attribute toIndex: (uint) i;
+- (void) updateUniformLocation: (NSString *)location withInt:(GLint)value;
 - (void) updateUniformLocation: (NSString *)location withMatrix4fv:(GLvoid*)m count:(NSUInteger)count;
 - (BOOL)link;
 - (void)use;

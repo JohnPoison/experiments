@@ -11,12 +11,14 @@
 #import "GLWShaders.h"
 #import "GLWCamera.h"
 #import "GLWMatrix.h"
+#import "Debug.h"
 
 NSString* const kGLWDefaultProgram  = @"GLWDefaultProgram";
 NSString* const kAttributePosition  = @"a_position";
 NSString* const kAttributeColor     = @"a_color";
 NSString* const kAttributeTexCoord  = @"a_texCoord";
 NSString* const kUniformViewMatrix  = @"u_MVP";
+NSString* const kUniformTexture     = @"u_texture";
 
 @implementation GLWShaderManager
 

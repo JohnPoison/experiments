@@ -64,6 +64,13 @@
         glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                 GL_RENDERBUFFER, colorBuffer);
+
+
+        GL_ERROR();
+        glEnable(GL_BLEND);
+        GL_ERROR();
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        GL_ERROR();
     }
 
     return self;
@@ -115,8 +122,11 @@
     GLWMatrix *transformation = [GLWMatrix identityMatrix];
     [transformation translate:Vec3Make(0.5, 0, 0)];
 
+    // todo: move uniforms update to default shader program
     [program updateUniformLocation: @"u_projection" withMatrix4fv: projection.matrix count: 1];
     [program updateUniformLocation: @"u_transformation" withMatrix4fv: transformation.matrix count: 1];
+    // default texture is at 0 position
+    [program updateUniformLocation: @"u_texture" withInt: 0];
 }
 
 - (void) updateDeltaTime {

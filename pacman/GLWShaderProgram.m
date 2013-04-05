@@ -88,6 +88,7 @@
 }
 
 - (void) bindAttribute: (NSString *) attribute toIndex: (uint) i {
+    DebugLog(@"binding attribute %@", attribute);
     glBindAttribLocation(program, i, [attribute UTF8String]);
     GL_ERROR();
 }
@@ -102,8 +103,8 @@
         glDeleteProgram(program);
 }
 
--(void) updateUniformLocation: (NSString *)location withMatrix4fv:(GLvoid*)m count:(NSUInteger)count
-{
+-(GLint) uniformLocation: (NSString *) location {
+
     if ([uniformLocations objectForKey:location] == nil) {
         int tmpLoc = glGetUniformLocation(program, [location UTF8String]);
         if (tmpLoc == -1) {
@@ -116,15 +117,16 @@
 
     GL_ERROR();
 
-    GLuint loc = [[uniformLocations objectForKey:location] unsignedIntegerValue];
-//    GLfloat mat[] = {
-//            1.0f, 0.0f, 0.0f, 0.0f,
-//            0.0f, 1.0f, 0.0f, 0.0f,
-//            0.0f, 0.0f, 1.0f, 0.0f,
-//            0.0f, 0.0f, 0.0f, 1.0f
-//    };
-//    glUniformMatrix4fv( (GLint) loc, 1, GL_FALSE, (GLvoid *)mat);
-    glUniformMatrix4fv( (GLint) loc, (GLsizei) count, GL_FALSE, m);
+    return [[uniformLocations objectForKey:location] unsignedIntegerValue];
+}
+
+-(void) updateUniformLocation: (NSString *)location withMatrix4fv:(GLvoid*)m count:(NSUInteger)count {
+    glUniformMatrix4fv( [self uniformLocation: location], (GLsizei) count, GL_FALSE, m);
+    GL_ERROR();
+}
+
+-(void) updateUniformLocation: (NSString *)location withInt:(GLint)value {
+    glUniform1i([self uniformLocation: location], value);
     GL_ERROR();
 }
 

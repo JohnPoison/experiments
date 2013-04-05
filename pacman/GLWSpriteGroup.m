@@ -8,6 +8,7 @@
 #import "GLWMath.h"
 #import "GLWShaderManager.h"
 #import "GLWSprite.h"
+#import "GLWTexture.h"
 
 static const int VertexSize = sizeof(GLWVertexData);
 

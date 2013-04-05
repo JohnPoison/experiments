@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36EBC0457C648A4FFEE07126 /* GLWTextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC4BAE876DE5620E580FD /* GLWTextureCache.m */; };
 		36EBC1EE6FF5F197649839D1 /* GLWShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCCCF0F52320DB7AA36DB /* GLWShaderProgram.m */; };
 		36EBC2D9109D20F6870944CD /* GLWSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC8873BA1C8021C29011D /* GLWSprite.m */; };
 		36EBC4481D79C4454E6DB4F9 /* GLWSpriteGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA2EA1157E8255DD9785 /* GLWSpriteGroup.m */; };
 		36EBC719CD05132E664CF2CC /* GLWMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC75E5DC69D96CEB1C29F /* GLWMatrix.m */; };
+		36EBC881859FBA327918831E /* GLWTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC8B470D73FB998996B17 /* GLWTexture.m */; };
 		36EBC8F21218705AD03CE986 /* GLWCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCF361CA36478BFD92F23 /* GLWCamera.m */; };
 		36EBC903009EA0D42EA36112 /* GLWRenderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCAFDD123BF106D283A78 /* GLWRenderManager.m */; };
 		36EBCDABC347C3EF1AAB1EFD /* GLWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC30A84ED9C32F07E3A18 /* GLWObject.m */; };
@@ -42,14 +44,18 @@
 		36EBC14963C46F27C681420B /* GLWRenderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWRenderManager.h; sourceTree = "<group>"; };
 		36EBC30A84ED9C32F07E3A18 /* GLWObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWObject.m; sourceTree = "<group>"; };
 		36EBC434350C587F2987652E /* GLWLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWLayer.m; sourceTree = "<group>"; };
+		36EBC4BAE876DE5620E580FD /* GLWTextureCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTextureCache.m; sourceTree = "<group>"; };
 		36EBC4E7330BE55E4379220D /* GLWShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWShaderProgram.h; sourceTree = "<group>"; };
 		36EBC5FB9D9C2E77DE622FE7 /* GLWMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMath.h; sourceTree = "<group>"; };
 		36EBC61C19652B17820B8F14 /* GLWSpriteGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWSpriteGroup.h; sourceTree = "<group>"; };
 		36EBC6528B139F349D2DEECE /* HelloScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloScene.h; sourceTree = "<group>"; };
 		36EBC66A426F37EEE28D9545 /* GLWObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWObject.h; sourceTree = "<group>"; };
+		36EBC694B8414852B53083CC /* GLWTextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTextureCache.h; sourceTree = "<group>"; };
 		36EBC75E5DC69D96CEB1C29F /* GLWMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWMatrix.m; sourceTree = "<group>"; };
 		36EBC804889BCB8DD4757DA9 /* GLWMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMatrix.h; sourceTree = "<group>"; };
+		36EBC8480D2E6094114D2EB6 /* GLWTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTexture.h; sourceTree = "<group>"; };
 		36EBC8873BA1C8021C29011D /* GLWSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWSprite.m; sourceTree = "<group>"; };
+		36EBC8B470D73FB998996B17 /* GLWTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTexture.m; sourceTree = "<group>"; };
 		36EBC939D5618E9A81090EDE /* GLWTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTypes.h; sourceTree = "<group>"; };
 		36EBCA0DD3551D10646D5D39 /* HelloScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloScene.m; sourceTree = "<group>"; };
 		36EBCA2EA1157E8255DD9785 /* GLWSpriteGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWSpriteGroup.m; sourceTree = "<group>"; };
@@ -142,6 +148,10 @@
 				36EBCD494D792A877D84448A /* GLWLayer.h */,
 				36EBC8873BA1C8021C29011D /* GLWSprite.m */,
 				36EBCCE8CFB470C0071B6739 /* GLWSprite.h */,
+				36EBC8B470D73FB998996B17 /* GLWTexture.m */,
+				36EBC8480D2E6094114D2EB6 /* GLWTexture.h */,
+				36EBC4BAE876DE5620E580FD /* GLWTextureCache.m */,
+				36EBC694B8414852B53083CC /* GLWTextureCache.h */,
 			);
 			name = GLWrapper;
 			sourceTree = "<group>";
@@ -326,6 +336,8 @@
 				36EBCE753168CC535FCE48BC /* GLWLayer.m in Sources */,
 				36EBCE83138A06E84EE96AE7 /* HelloScene.m in Sources */,
 				36EBC2D9109D20F6870944CD /* GLWSprite.m in Sources */,
+				36EBC881859FBA327918831E /* GLWTexture.m in Sources */,
+				36EBC0457C648A4FFEE07126 /* GLWTextureCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

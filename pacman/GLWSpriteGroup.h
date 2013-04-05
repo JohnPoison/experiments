@@ -8,6 +8,8 @@
 #import "GLWTypes.h"
 #import "GLWLayer.h"
 
+@class GLWTexture;
+
 
 @interface GLWSpriteGroup : GLWLayer {
     GLWVertex4Data* vertices;
@@ -17,6 +19,7 @@
 }
 
 @property (nonatomic, assign) CGPoint position;
+@property (nonatomic, retain) GLWTexture *texture;
 
 - (void)draw:(float)dt;
 -(void) childIsDirty;
