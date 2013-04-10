@@ -1,39 +1,40 @@
-typedef struct {
+typedef struct Vec2 {
     GLfloat x;
     GLfloat y;
 } Vec2;
 
-typedef struct {
+typedef struct Vec3 {
     GLfloat x;
     GLfloat y;
     GLfloat z;
 } Vec3;
 
-typedef struct {
+typedef struct Vec4 {
     GLfloat x;
     GLfloat y;
     GLfloat z;
     GLfloat w;
 } Vec4;
 
-typedef struct {
+typedef struct GLWColor {
     GLfloat r;
     GLfloat g;
     GLfloat b;
     GLfloat a;
 } GLWColor;
 
-typedef struct {
+typedef struct GLWTexCoord {
     GLfloat u;
     GLfloat v;
 } GLWTexCoord;
 
-typedef struct {
+typedef struct GLWVertexData {
     Vec3 vertex;
     Vec4 color;
+    Vec2 texCoords;
 } GLWVertexData;
 
-typedef struct {
+typedef struct GLWVertex4Data {
     GLWVertexData topLeft;
     GLWVertexData topRight;
     GLWVertexData bottomLeft;

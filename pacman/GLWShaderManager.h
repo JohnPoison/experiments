@@ -14,7 +14,7 @@
 enum {
     kAttributeIndexPosition,
     kAttributeIndexColor,
-    kAttributeIndexTexCoord,
+    kAttributeIndexTexCoords,
 } DefaultShaderIndexes;
 
 extern NSString* const kGLWDefaultProgram;

@@ -9,6 +9,8 @@
 #import "GLWTypes.h"
 
 @class GLWSpriteGroup;
+@class GLWTexture;
+@class GLWTextureRect;
 
 @interface GLWSprite : GLWObject {
     GLWVertex4Data _vertices;
@@ -17,6 +19,8 @@
 }
 
 @property (nonatomic, assign) GLWSpriteGroup *group;
+@property (nonatomic, strong) GLWTextureRect* textureRect;
+@property (nonatomic, readonly) GLWTexture* texture;
 
 -(GLWVertex4Data) vertices;
 

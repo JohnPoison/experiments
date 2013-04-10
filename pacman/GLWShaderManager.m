@@ -16,7 +16,7 @@
 NSString* const kGLWDefaultProgram  = @"GLWDefaultProgram";
 NSString* const kAttributePosition  = @"a_position";
 NSString* const kAttributeColor     = @"a_color";
-NSString* const kAttributeTexCoord  = @"a_texCoord";
+NSString* const kAttributeTexCoords = @"a_texCoord";
 NSString* const kUniformViewMatrix  = @"u_MVP";
 NSString* const kUniformTexture     = @"u_texture";
 
@@ -39,6 +39,7 @@ NSString* const kUniformTexture     = @"u_texture";
         GLWShaderProgram *defaultProgram = [[GLWShaderProgram alloc] initWithVertexSource: glwVertex fragmentSource: glwFragment];
         [defaultProgram bindAttribute:kAttributePosition toIndex:kAttributeIndexPosition];
         [defaultProgram bindAttribute:kAttributeColor toIndex:kAttributeIndexColor];
+        [defaultProgram bindAttribute:kAttributeTexCoords toIndex:kAttributeIndexTexCoords];
         [defaultProgram link];
         [defaultProgram use];
 

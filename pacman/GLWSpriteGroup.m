@@ -41,8 +41,10 @@ static const int VertexSize = sizeof(GLWVertexData);
     if (isDirty) {
         [self sortChildren];
 
-        free(vertices);
-        free(indices);
+        if (vertices)
+            free(vertices);
+        if (indices)
+            free(indices);
 
         uint capacity = children.count;
 
@@ -90,6 +92,8 @@ static const int VertexSize = sizeof(GLWVertexData);
     if (!children.count)
         return;
 
+    [GLWTexture bindTexture: self.texture];
+
     [self bindData];
 
     glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
@@ -99,6 +103,9 @@ static const int VertexSize = sizeof(GLWVertexData);
 
     glEnableVertexAttribArray(kAttributeIndexColor);
     glVertexAttribPointer(kAttributeIndexColor, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) offsetof( GLWVertexData, color));
+
+    glEnableVertexAttribArray(kAttributeIndexTexCoords);
+    glVertexAttribPointer(kAttributeIndexTexCoords, 2, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) offsetof( GLWVertexData, texCoords));
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 

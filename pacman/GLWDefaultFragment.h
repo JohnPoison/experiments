@@ -10,14 +10,14 @@
 precision lowp float;						\n\
                                             \n\
 varying vec4 v_fragmentColor;				\n\
-//varying vec2 v_texCoord;					\n\
+varying vec2 v_texCoord;					\n\
 uniform sampler2D u_texture;				\n\
                                             \n\
 void main()									\n\
 {											\n\
-    vec4 texColor = texture2D(u_texture, vec2(1,1));			\n\
-    //gl_FragColor = v_fragmentColor * texture2D(u_texture, vec2(1,1));			\n\
-    //gl_FragColor = vec4(1,0,0,1);			\n\
-    gl_FragColor = v_fragmentColor;			\n\
+    //vec4 texColor = texture2D(u_texture, vec2(1,1));			\n\
+    gl_FragColor = texture2D(u_texture, v_texCoord);			\n\
+    //gl_FragColor = texColor;			\n\
+    //gl_FragColor = v_fragmentColor;			\n\
 }											\n\
 ";

@@ -9,9 +9,31 @@
 #import "GLWTypes.h"
 #import "GLWMath.h"
 #import "GLWSpriteGroup.h"
+#import "GLWTexture.h"
+#import "GLWTextureRect.h"
 
 
 @implementation GLWSprite {
+}
+
+- (void)dealloc {
+    self.textureRect = nil;
+}
+
+- (void)setTextureRect:(GLWTextureRect *)textureRect {
+    isDirty = YES;
+    [self.group childIsDirty];
+
+    _textureRect = textureRect;
+    _texture = textureRect.texture;
+
+    self.size = textureRect.rect.size;
+
+    _vertices.bottomLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: textureRect.rect.origin];
+    _vertices.bottomRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y)];
+    _vertices.topLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: CGPointMake(textureRect.rect.origin.x, textureRect.rect.origin.y + textureRect.rect.size.height)];
+    _vertices.topRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y + textureRect.rect.size.height)];
+
 }
 
 - (id)init {

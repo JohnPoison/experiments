@@ -6,6 +6,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class GLWTexture;
 
-@interface GLWTextureCache : NSObject
+
+@interface GLWTextureCache : NSObject {
+    NSMutableDictionary *textures;
+}
+
++(GLWTextureCache *) sharedTextureCache;
+-(GLWTexture *) textureWithFile: (NSString *) filename;
+
 @end
