@@ -29,13 +29,17 @@
     _textureRect = textureRect;
     _texture = textureRect.texture;
 
-    self.size = CGSizeMake(textureRect.rect.size.width / SCALE(), textureRect.rect.size.height / SCALE());
+    self.size = CGSizeMake(textureRect.rect.size.width, textureRect.rect.size.height);
 
 
-    _vertices.topLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: textureRect.rect.origin];
-    _vertices.topRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y)];
-    _vertices.bottomLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: CGPointMake(textureRect.rect.origin.x, textureRect.rect.origin.y + textureRect.rect.size.height)];
-    _vertices.bottomRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y + textureRect.rect.size.height)];
+//    _vertices.bottomLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: textureRect.rect.origin];
+//    _vertices.bottomRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y)];
+//    _vertices.topLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: CGPointMake(textureRect.rect.origin.x, textureRect.rect.origin.y + textureRect.rect.size.height)];
+//    _vertices.topRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y + textureRect.rect.size.height)];
+    _vertices.topLeft.texCoords  = (Vec2){0,0};
+    _vertices.topRight.texCoords = (Vec2){1,0};
+    _vertices.bottomLeft.texCoords  = (Vec2){0,1};
+    _vertices.bottomRight.texCoords = (Vec2){1,1};
 
 }
 

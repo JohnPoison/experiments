@@ -18,6 +18,7 @@
 #import "GLWSpriteGroup.h"
 #import "GLWLayer.h"
 #import "GLWObject.h"
+#import "GLWMacro.h"
 
 
 @implementation GLWRenderManager {
@@ -119,9 +120,9 @@
     [program use];
 
 //    GLWMatrix *projection = [GLWMatrix identityMatrix];
-    GLWMatrix *projection = [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight:view.frame.size.width andBottom:0 andTop:view.frame.size.height andNear:0 andFar:0];
+    GLWMatrix *projection = [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight:view.frame.size.width * SCALE() andBottom:0 andTop:view.frame.size.height * SCALE() andNear:0 andFar:0];
 //    [projection translate:Vec3Make(-1, -1, 0)];
-    CGSize size = view.frame.size;
+    CGSize size = [UIScreen mainScreen].bounds.size;
 //    [projection scale:Vec3Make(1 / (0.5 * view.frame.size.width), 1 / (0.5 *view.frame.size.height), 0)];
 //    [projection scale:Vec3Make(1 / (view.frame.size.width), 1 / (view.frame.size.height), 0)];
 
@@ -152,7 +153,8 @@
     [self updateDeltaTime];
 
     glClear(GL_COLOR_BUFFER_BIT);
-    glViewport(0, 0, view.frame.size.width, view.frame.size.height);
+    glViewport(0, 0, view.frame.size.width * SCALE(), view.frame.size.height * SCALE());
+//    glViewport(0, 0, 640, 960);
 
     [self.currentScene touch:(float)deltaTime];
     [self.currentScene draw: (float)deltaTime];

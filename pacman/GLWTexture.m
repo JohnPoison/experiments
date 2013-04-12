@@ -46,15 +46,20 @@ static GLuint currentTexture = 0;
         GLubyte* imageData = malloc(_width * _height * 4 * sizeof(GLubyte));
         CGImageAlphaInfo alpha = CGImageGetAlphaInfo(image.CGImage);
         CGContextRef imageContext = CGBitmapContextCreate(imageData, _width, _height, 8, _width * 4, CGImageGetColorSpace(image.CGImage), alpha);
+//        CGContextTranslateCTM (imageContext, 0, _height);
+//        CGContextScaleCTM (imageContext, 1.0, -1.0);
         CGContextDrawImage(imageContext, CGRectMake(0.0, 0.0, _width, _height), image.CGImage);
         CGContextRelease(imageContext);
 
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+
+        free(imageData);
+
 
     }
 
@@ -67,11 +72,10 @@ static GLuint currentTexture = 0;
 
 - (void) bindTexture {
     [GLWTexture bindTexture: self];
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
 + (void)bindTexture:(GLWTexture *)texture {
-    if (currentTexture != texture.textureId)
+    if (currentTexture == texture.textureId)
         return;
 
     currentTexture = texture.textureId;

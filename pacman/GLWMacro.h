@@ -5,7 +5,7 @@ static inline float SCALE() {
     static float displayPixelFactor = 0.f;
 
     if (!displayPixelFactor) {
-        displayPixelFactor = 2.f;
+        displayPixelFactor = [UIScreen mainScreen].scale;
     }
 
     return displayPixelFactor;

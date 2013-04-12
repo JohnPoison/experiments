@@ -7,6 +7,7 @@
 //
 
 "													\n\
+precision highp float;						\n\
 attribute vec4 a_position;							\n\
 attribute vec2 a_texCoord;							\n\
 attribute vec4 a_color;								\n\
@@ -14,7 +15,7 @@ attribute vec4 a_color;								\n\
 uniform		mat4 u_projection;                             \n\
 uniform		mat4 u_transformation;                             \n\
                                                     \n\
-varying lowp vec4 v_fragmentColor;                  \n\
+varying highp vec4 v_fragmentColor;                  \n\
 varying highp vec2 v_texCoord;                    \n\
                                                     \n\
 void main()											\n\

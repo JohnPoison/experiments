@@ -7,15 +7,15 @@
             <key>spaceship</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{404,551}}</string>
+                <string>{{2,2},{404,552}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{404,551}}</string>
+                <string>{{0,0},{404,552}}</string>
                 <key>sourceSize</key>
-                <string>{404,551}</string>
+                <string>{404,552}</string>
             </dict>
         </dict>
         <key>metadata</key>
