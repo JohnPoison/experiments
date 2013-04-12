@@ -20,13 +20,17 @@
 - (id)init {
     self = [super init];
     if (self) {
-        GLWSpriteGroup *group = [[GLWSpriteGroup alloc] init];
-        GLWTexture *texture = [[GLWTextureCache sharedTextureCache] textureWithFile: @"test2.png"];
-        GLWTextureRect *textureRect = [GLWTextureRect textureRectWithTexture: texture rect:CGRectMake(0, 0, 200, 200)];
 
-        sprite = [[GLWSprite alloc] init];
-        sprite.position = CGPointMake(0.f, 150.f);
-        sprite.textureRect = textureRect;
+        [[GLWTextureCache sharedTextureCache] cacheFile: @"retina-spaceship"];
+
+        GLWSpriteGroup *group = [[GLWSpriteGroup alloc] init];
+
+//        GLWTexture *texture = [[GLWTextureCache sharedTextureCache] textureWithFile: @"test2.png"];
+//        GLWTextureRect *textureRect = [GLWTextureRect textureRectWithTexture:texture rect:CGRectMake(0, 0, 200, 200) name:nil];
+//
+        sprite = [GLWSprite spriteWithRectName: @"spaceship"];
+//        sprite.position = CGPointMake(0.f, 150.f);
+//        sprite.textureRect = textureRect;
         [group addChild: sprite];
 //        sprite = [[GLWSprite alloc] init];
 //        sprite.position = CGPointMake(30.f, 250.f);
@@ -41,7 +45,7 @@
 
         [self addChild: group];
 
-        group.texture = texture;
+        group.texture = sprite.texture;
 
         [self setUpdateSelector:@selector(update:)];
     }
@@ -50,7 +54,7 @@
 }
 
 - (void) update: (float) dt {
-    sprite.position = CGPointMake(sprite.position.x + 30.f * dt, sprite.position.y);
+//    sprite.position = CGPointMake(sprite.position.x + 30.f * dt, sprite.position.y);
 }
 
 @end

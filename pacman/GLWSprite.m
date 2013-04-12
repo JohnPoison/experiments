@@ -11,6 +11,8 @@
 #import "GLWSpriteGroup.h"
 #import "GLWTexture.h"
 #import "GLWTextureRect.h"
+#import "GLWTextureCache.h"
+#import "GLWMacro.h"
 
 
 @implementation GLWSprite {
@@ -27,12 +29,13 @@
     _textureRect = textureRect;
     _texture = textureRect.texture;
 
-    self.size = textureRect.rect.size;
+    self.size = CGSizeMake(textureRect.rect.size.width / SCALE(), textureRect.rect.size.height / SCALE());
 
-    _vertices.bottomLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: textureRect.rect.origin];
-    _vertices.bottomRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y)];
-    _vertices.topLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: CGPointMake(textureRect.rect.origin.x, textureRect.rect.origin.y + textureRect.rect.size.height)];
-    _vertices.topRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y + textureRect.rect.size.height)];
+
+    _vertices.topLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: textureRect.rect.origin];
+    _vertices.topRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y)];
+    _vertices.bottomLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: CGPointMake(textureRect.rect.origin.x, textureRect.rect.origin.y + textureRect.rect.size.height)];
+    _vertices.bottomRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y + textureRect.rect.size.height)];
 
 }
 
@@ -73,15 +76,27 @@
 - (GLWVertex4Data)vertices {
 
     if (isDirty) {
+//        CGSize size = [GLWRenderManager sharedManager].windowSize;
         _vertices.bottomLeft.vertex     = Vec3Make(self.position.x, self.position.y, z);
         _vertices.bottomRight.vertex    = Vec3Make(self.position.x + self.size.width, self.position.y, z);
-        _vertices.topLeft.vertex        = Vec3Make(self.position.x, self.position.y + self.size.height, z);
+        _vertices.topLeft.vertex        = Vec3Make(self.position.x, self.position.y + self.size.height , z);
         _vertices.topRight.vertex       = Vec3Make(self.position.x + self.size.width, self.position.y + self.size.height, z);
+//        _vertices.bottomLeft.vertex     = Vec3Make(self.position.x / size.width, self.position.y  / size.height, z);
+//        _vertices.bottomRight.vertex    = Vec3Make((self.position.x + self.size.width) / size.width, self.position.y / size.height, z);
+//        _vertices.topLeft.vertex        = Vec3Make(self.position.x / size.width, (self.position.y + self.size.height) / size.height, z);
+//        _vertices.topRight.vertex       = Vec3Make((self.position.x + self.size.width) / size.width, (self.position.y + self.size.height) / size.height, z);
 
         isDirty = NO;
     }
 
     return _vertices;
+}
+
++ (GLWSprite *) spriteWithRectName: (NSString *) name {
+    GLWSprite *sprite = [[GLWSprite alloc] init];
+    sprite.textureRect = [[GLWTextureCache sharedTextureCache] rectWithName: name];
+
+    return sprite;
 }
 
 @end

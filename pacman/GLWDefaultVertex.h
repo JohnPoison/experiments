@@ -15,7 +15,7 @@ uniform		mat4 u_projection;                             \n\
 uniform		mat4 u_transformation;                             \n\
                                                     \n\
 varying lowp vec4 v_fragmentColor;                  \n\
-varying mediump vec2 v_texCoord;                    \n\
+varying highp vec2 v_texCoord;                    \n\
                                                     \n\
 void main()											\n\
 {													\n\

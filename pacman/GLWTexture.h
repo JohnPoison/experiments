@@ -13,8 +13,8 @@
 }
 
 @property (nonatomic, readonly) GLuint textureId;
-@property (nonatomic, readonly) CGFloat width;
-@property (nonatomic, readonly) CGFloat height;
+@property (nonatomic, readonly) NSUInteger width;
+@property (nonatomic, readonly) NSUInteger height;
 
 
 -(id) initWithFile: (NSString *)filename;

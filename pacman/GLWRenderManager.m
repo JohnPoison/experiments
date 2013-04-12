@@ -6,6 +6,7 @@
 
 #import <OpenGLES/EAGLDrawable.h>
 #import <QuartzCore/QuartzCore.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import "GLWRenderManager.h"
 #import "OpenGLView.h"
 #import "GLWShaderProgram.h"
@@ -58,12 +59,14 @@
 
         glGenRenderbuffers(1, &colorBuffer);
         glBindRenderbuffer(GL_RENDERBUFFER, colorBuffer);
+        GL_ERROR();
 //        [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];
 
         glGenFramebuffers(1, &frameBuffer);
         glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                 GL_RENDERBUFFER, colorBuffer);
+        GL_ERROR();
 
 
         GL_ERROR();
@@ -115,9 +118,12 @@
     [program link];
     [program use];
 
-    GLWMatrix *projection = [GLWMatrix identityMatrix];
-    [projection translate:Vec3Make(-1, -1, 0)];
-    [projection scale:Vec3Make(1 / (0.5 * view.frame.size.width), 1 / (0.5 *view.frame.size.height), 0)];
+//    GLWMatrix *projection = [GLWMatrix identityMatrix];
+    GLWMatrix *projection = [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight:view.frame.size.width andBottom:0 andTop:view.frame.size.height andNear:0 andFar:0];
+//    [projection translate:Vec3Make(-1, -1, 0)];
+    CGSize size = view.frame.size;
+//    [projection scale:Vec3Make(1 / (0.5 * view.frame.size.width), 1 / (0.5 *view.frame.size.height), 0)];
+//    [projection scale:Vec3Make(1 / (view.frame.size.width), 1 / (view.frame.size.height), 0)];
 
     GLWMatrix *transformation = [GLWMatrix identityMatrix];
     [transformation translate:Vec3Make(0.5, 0, 0)];
@@ -154,6 +160,10 @@
     [context presentRenderbuffer:GL_RENDERBUFFER];
 
     GL_ERROR();
+}
+
+- (CGSize)windowSize {
+    return [UIScreen mainScreen].bounds.size;
 }
 
 @end

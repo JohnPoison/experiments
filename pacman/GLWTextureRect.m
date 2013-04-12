@@ -16,19 +16,20 @@
     self.texture = nil;
 }
 
-- (id)initWithTexture:(GLWTexture *)texture rect:(CGRect)rect {
+- (id)initWithTexture:(GLWTexture *)texture rect:(CGRect)rect name:(NSString *)name {
     self = [super init];
 
     if (self) {
         self.texture = texture;
+        _name = name;
         _rect = rect;
     }
 
     return self;
 }
 
-+ (id)textureRectWithTexture:(GLWTexture *)texture rect:(CGRect)rect {
-    return [[self alloc] initWithTexture:texture rect:rect];
++ (id)textureRectWithTexture:(GLWTexture *)texture rect:(CGRect)rect name:(NSString *)name {
+    return [[self alloc] initWithTexture:texture rect:rect name:name];
 }
 
 @end

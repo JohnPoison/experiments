@@ -23,5 +23,6 @@
 @property (nonatomic, readonly) GLWTexture* texture;
 
 -(GLWVertex4Data) vertices;
++(GLWSprite *) spriteWithRectName: (NSString *) name;
 
 @end

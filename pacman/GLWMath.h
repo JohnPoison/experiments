@@ -39,3 +39,7 @@ static inline Vec4 Vec4Make(float x, float y, float z, float w) {
 
     return v;
 }
+
+static inline Vec2 Vec2Add(Vec2 a, Vec2 b) {
+    return Vec2Make(a.x + b.x, a.y + b.y);
+}

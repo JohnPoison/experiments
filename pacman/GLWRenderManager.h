@@ -29,6 +29,7 @@
 - (id) initWithView: (OpenGLView *) openGLView;
 - (void) startRender;
 - (void) stopRender;
+- (CGSize) windowSize;
 
 + (GLWRenderManager *) sharedManager;
 

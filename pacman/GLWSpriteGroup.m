@@ -92,28 +92,38 @@ static const int VertexSize = sizeof(GLWVertexData);
     if (!children.count)
         return;
 
+    GL_ERROR();
     [GLWTexture bindTexture: self.texture];
+    GL_ERROR();
 
     [self bindData];
 
     glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
+    GL_ERROR();
 
     glEnableVertexAttribArray(kAttributeIndexPosition);
     glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) offsetof( GLWVertexData, vertex));
+    GL_ERROR();
 
     glEnableVertexAttribArray(kAttributeIndexColor);
     glVertexAttribPointer(kAttributeIndexColor, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) offsetof( GLWVertexData, color));
+    GL_ERROR();
 
     glEnableVertexAttribArray(kAttributeIndexTexCoords);
     glVertexAttribPointer(kAttributeIndexTexCoords, 2, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) offsetof( GLWVertexData, texCoords));
+    GL_ERROR();
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    GL_ERROR();
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIds[1]);
+    GL_ERROR();
 
     glDrawElements(GL_TRIANGLES, [children count] * 6, GL_UNSIGNED_SHORT, 0);
+    GL_ERROR();
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    GL_ERROR();
 
 }
 

@@ -82,6 +82,44 @@ static const GLfloat _zeroMatrix[] = {
     matrix[15] = 0.0f;
 }
 
+-(void) orthoMatrix: (GLfloat*)m
+      fromFrustumLeft: (GLfloat) left
+             andRight: (GLfloat) right
+            andBottom: (GLfloat) bottom
+               andTop: (GLfloat) top
+              andNear: (GLfloat) near
+               andFar: (GLfloat) far {
+
+    m[0]  = 2.0 / (right - left);
+    m[1]  = 0.0;
+    m[2]  = 0.0;
+    m[3] = 0.0;
+
+    m[4]  = 0.0;
+    m[5]  = 2.0 / (top - bottom);
+    m[6]  = 0.0;
+    m[7] = 0.0;
+
+    m[8]  = 0.0;
+    m[9]  = 0.0;
+    m[10]  = -2.0 / (far - near);
+    m[11] = 0.0;
+
+    m[12]  = -(right + left) / (right - left);
+    m[13]  = -(top + bottom) / (top - bottom);
+    m[14] = -(far + near) / (far - near);
+    m[15] = 1.0;
+
+}
+
++ (GLWMatrix *)orthoMatrixFromFrustumLeft:(GLfloat)left andRight:(GLfloat)right andBottom:(GLfloat)bottom andTop:(GLfloat)top andNear:(GLfloat)near andFar:(GLfloat)far {
+    GLWMatrix *m = [[GLWMatrix alloc] init];
+    [self copyMatrix:(GLfloat *) _zeroMatrix into:m.matrix];
+    [m orthoMatrix: m.matrix fromFrustumLeft: left andRight:right andBottom:bottom andTop:top andNear:near andFar:far];
+    return m;
+}
+
+
 +(void) translateMatrix: (GLfloat*)m vector: (Vec3)v {
     m[12] = v.x * m[0] + v.y * m[4] + v.z * m[8] + m[12];
     m[13] = v.x * m[1] + v.y * m[5] + v.z * m[9] + m[13];

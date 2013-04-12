@@ -14,7 +14,8 @@
 @property (nonatomic, readonly) CGRect rect;
 @property (nonatomic, strong) GLWTexture* texture;
 
-- (id) initWithTexture: (GLWTexture *) texture rect: (CGRect) rect;
-+ (id) textureRectWithTexture: (GLWTexture *) texture rect: (CGRect) rect;
+- (id)initWithTexture:(GLWTexture *)texture rect:(CGRect)rect name:(NSString *)name;
+
++ (id)textureRectWithTexture:(GLWTexture *)texture rect:(CGRect)rect name:(NSString *)name;
 
 @end

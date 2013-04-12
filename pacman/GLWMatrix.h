@@ -15,6 +15,7 @@
 +(GLWMatrix *)identityMatrix;
 +(GLWMatrix *) zeroMatrix;
 
++ (GLWMatrix *)orthoMatrixFromFrustumLeft:(GLfloat)left andRight:(GLfloat)right andBottom:(GLfloat)bottom andTop:(GLfloat)top andNear:(GLfloat)near andFar:(GLfloat)far;
 +(void) frustumMatrix: (GLfloat*)matrix left: (GLfloat) left right: (GLfloat) right bottom: (GLfloat) bottom top: (GLfloat) top near: (GLfloat) near far: (GLfloat) far;
 +(void) scaleMatrix: (GLfloat*)m vector: (Vec3) v;
 +(void) translateMatrix: (GLfloat*)m vector: (Vec3)v;

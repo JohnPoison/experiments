@@ -8,6 +8,7 @@
 #import "GLWTexture.h"
 #import "GLWTypes.h"
 #import "GLWMath.h"
+#import "GLWMacro.h"
 
 @implementation GLWTexture {
 
@@ -30,6 +31,7 @@ static GLuint currentTexture = 0;
     self = [self init];
 
     if (self) {
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
         [self bindTexture];
 
         UIImage* image = [UIImage imageNamed: filename];
@@ -38,20 +40,21 @@ static GLuint currentTexture = 0;
             @throw [NSException exceptionWithName: @"texture error" reason: @"texture file not found" userInfo:nil];
         }
 
-        _width = image.size.width;
-        _height = image.size.height;
+        _width = CGImageGetWidth(image.CGImage);
+        _height = CGImageGetHeight(image.CGImage);
 
-        GLubyte* imageData = malloc((size_t)(image.size.width * image.size.height * sizeof(GLubyte) * 4));
-        CGContextRef imageContext = CGBitmapContextCreate(imageData, (size_t)image.size.width, (size_t)image.size.height, 8, (size_t)image.size.width * 4, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaPremultipliedLast);
-        CGContextDrawImage(imageContext, CGRectMake(0.0, 0.0, image.size.width, image.size.height), image.CGImage);
+        GLubyte* imageData = malloc(_width * _height * 4 * sizeof(GLubyte));
+        CGImageAlphaInfo alpha = CGImageGetAlphaInfo(image.CGImage);
+        CGContextRef imageContext = CGBitmapContextCreate(imageData, _width, _height, 8, _width * 4, CGImageGetColorSpace(image.CGImage), alpha);
+        CGContextDrawImage(imageContext, CGRectMake(0.0, 0.0, _width, _height), image.CGImage);
         CGContextRelease(imageContext);
 
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)image.size.width, (GLsizei)image.size.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
     }
 
@@ -64,6 +67,7 @@ static GLuint currentTexture = 0;
 
 - (void) bindTexture {
     [GLWTexture bindTexture: self];
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
 + (void)bindTexture:(GLWTexture *)texture {
