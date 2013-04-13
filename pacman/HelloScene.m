@@ -23,14 +23,13 @@
 
         [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
 
-        GLWSpriteGroup *group = [[GLWSpriteGroup alloc] init];
 
         sprite = [GLWSprite spriteWithRectName: @"spaceship"];
-        [group addChild: sprite];
 
+        GLWSpriteGroup *group = [GLWSpriteGroup spriteGroupWithTexture: sprite.texture];
+        [group addChild: sprite];
         [self addChild: group];
 
-        group.texture = sprite.texture;
 
         [self setUpdateSelector:@selector(update:)];
     }

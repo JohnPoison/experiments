@@ -23,5 +23,6 @@
 
 - (void)draw:(float)dt;
 -(void) childIsDirty;
++(GLWSpriteGroup *) spriteGroupWithTexture: (GLWTexture *) texture;
 
 @end
