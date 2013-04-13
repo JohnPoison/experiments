@@ -83,7 +83,6 @@
 - (void) startRender {
     if (self.isRendering)
         return;
-
     [displayLink addToRunLoop: [NSRunLoop currentRunLoop] forMode: NSDefaultRunLoopMode];
     self.isRendering = YES;
 }
@@ -111,6 +110,11 @@
 
 - (void) setupView {
 
+    viewportSize = (CGSize){view.frame.size.width * SCALE(), view.frame.size.height * SCALE()};
+    CAEAGLLayer *glLayer = (CAEAGLLayer *)view.layer;
+    [view setContentScaleFactor: SCALE()];
+    glLayer.opaque = YES;
+
     [GLWMatrix identityMatrix];
 
     GLWShaderProgram *program = [[GLWShaderManager sharedManager] getProgram: kGLWDefaultProgram];
@@ -119,15 +123,9 @@
     [program link];
     [program use];
 
-//    GLWMatrix *projection = [GLWMatrix identityMatrix];
-    GLWMatrix *projection = [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight:view.frame.size.width * SCALE() andBottom:0 andTop:view.frame.size.height * SCALE() andNear:0 andFar:0];
-//    [projection translate:Vec3Make(-1, -1, 0)];
-    CGSize size = [UIScreen mainScreen].bounds.size;
-//    [projection scale:Vec3Make(1 / (0.5 * view.frame.size.width), 1 / (0.5 *view.frame.size.height), 0)];
-//    [projection scale:Vec3Make(1 / (view.frame.size.width), 1 / (view.frame.size.height), 0)];
+    GLWMatrix *projection = [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight: viewportSize.width / SCALE()  andBottom:0 andTop: viewportSize.height / SCALE() andNear:0 andFar:0];
 
     GLWMatrix *transformation = [GLWMatrix identityMatrix];
-    [transformation translate:Vec3Make(0.5, 0, 0)];
 
     // todo: move uniforms update to default shader program
     [program updateUniformLocation: @"u_projection" withMatrix4fv: projection.matrix count: 1];
@@ -152,9 +150,10 @@
 
     [self updateDeltaTime];
 
+    CGSize size = viewportSize;
+
     glClear(GL_COLOR_BUFFER_BIT);
-    glViewport(0, 0, view.frame.size.width * SCALE(), view.frame.size.height * SCALE());
-//    glViewport(0, 0, 640, 960);
+    glViewport(0, 0, (GLsizei)size.width , (GLsizei)size.height );
 
     [self.currentScene touch:(float)deltaTime];
     [self.currentScene draw: (float)deltaTime];
@@ -162,10 +161,6 @@
     [context presentRenderbuffer:GL_RENDERBUFFER];
 
     GL_ERROR();
-}
-
-- (CGSize)windowSize {
-    return [UIScreen mainScreen].bounds.size;
 }
 
 @end

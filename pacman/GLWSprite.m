@@ -29,17 +29,14 @@
     _textureRect = textureRect;
     _texture = textureRect.texture;
 
-    self.size = CGSizeMake(textureRect.rect.size.width, textureRect.rect.size.height);
+    // size should be in points according to ortho projection
+    self.size = CGSizeMake(textureRect.rect.size.width / SCALE(), textureRect.rect.size.height / SCALE());
 
 
-//    _vertices.bottomLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: textureRect.rect.origin];
-//    _vertices.bottomRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y)];
-//    _vertices.topLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: CGPointMake(textureRect.rect.origin.x, textureRect.rect.origin.y + textureRect.rect.size.height)];
-//    _vertices.topRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y + textureRect.rect.size.height)];
-    _vertices.topLeft.texCoords  = (Vec2){0,0};
-    _vertices.topRight.texCoords = (Vec2){1,0};
-    _vertices.bottomLeft.texCoords  = (Vec2){0,1};
-    _vertices.bottomRight.texCoords = (Vec2){1,1};
+    _vertices.topLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: textureRect.rect.origin];
+    _vertices.topRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y)];
+    _vertices.bottomLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: CGPointMake(textureRect.rect.origin.x, textureRect.rect.origin.y + textureRect.rect.size.height)];
+    _vertices.bottomRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y + textureRect.rect.size.height)];
 
 }
 
@@ -80,15 +77,10 @@
 - (GLWVertex4Data)vertices {
 
     if (isDirty) {
-//        CGSize size = [GLWRenderManager sharedManager].windowSize;
         _vertices.bottomLeft.vertex     = Vec3Make(self.position.x, self.position.y, z);
         _vertices.bottomRight.vertex    = Vec3Make(self.position.x + self.size.width, self.position.y, z);
         _vertices.topLeft.vertex        = Vec3Make(self.position.x, self.position.y + self.size.height , z);
         _vertices.topRight.vertex       = Vec3Make(self.position.x + self.size.width, self.position.y + self.size.height, z);
-//        _vertices.bottomLeft.vertex     = Vec3Make(self.position.x / size.width, self.position.y  / size.height, z);
-//        _vertices.bottomRight.vertex    = Vec3Make((self.position.x + self.size.width) / size.width, self.position.y / size.height, z);
-//        _vertices.topLeft.vertex        = Vec3Make(self.position.x / size.width, (self.position.y + self.size.height) / size.height, z);
-//        _vertices.topRight.vertex       = Vec3Make((self.position.x + self.size.width) / size.width, (self.position.y + self.size.height) / size.height, z);
 
         isDirty = NO;
     }

@@ -26,6 +26,9 @@
 - (void)setView:(OpenGLView *)view {
     [_view.renderer stopRender];
     _view = view;
+    [view setContentScaleFactor: 2];
+    [view.layer setContentsScale: 2];
+//    float s = view.contentScaleFactor;
 }
 
 - (void) runScene: (GLWObject *) scene {

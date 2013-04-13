@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 JohnPoison. All rights reserved.
 //
 
+#import <CoreGraphics/CoreGraphics.h>
 #import "AppDelegate.h"
 #import "GLWRenderManager.h"
 #import "HelloScene.h"

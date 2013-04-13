@@ -25,14 +25,14 @@
 
         GLWSpriteGroup *group = [[GLWSpriteGroup alloc] init];
 
-        GLWTexture *texture = [[GLWTextureCache sharedTextureCache] textureWithFile: @"spaceship2.png"];
-        GLWTextureRect *textureRect = [GLWTextureRect textureRectWithTexture:texture rect:CGRectMake(0, 0, 202, 276) name:nil];
+//        GLWTexture *texture = [[GLWTextureCache sharedTextureCache] textureWithFile: @"spaceshipPOT.png"];
+//        GLWTextureRect *textureRect = [GLWTextureRect textureRectWithTexture:texture rect:CGRectMake(0, 0, 128, 128) name:nil];
 //
-//        sprite = [GLWSprite spriteWithRectName: @"spaceship"];
-        sprite = [[GLWSprite alloc] init];
+        sprite = [GLWSprite spriteWithRectName: @"spaceship"];
+//        sprite = [[GLWSprite alloc] init];
 //        sprite.textureRect = textureRect;
-//        sprite.position = CGPointMake(0.f, 150.f);
-        sprite.textureRect = textureRect;
+//        sprite.position = CGPointMake(0.5f, 0.5f);
+//        sprite.textureRect = textureRect;
         [group addChild: sprite];
 //        sprite = [[GLWSprite alloc] init];
 //        sprite.position = CGPointMake(30.f, 250.f);

@@ -7,6 +7,7 @@
 #import "GLWTextureCache.h"
 #import "GLWTexture.h"
 #import "GLWTextureRect.h"
+#import "GLWMacro.h"
 
 
 @implementation GLWTextureCache
@@ -29,7 +30,8 @@
         textures = [NSMutableDictionary dictionary];
         texturesRects = [NSMutableDictionary dictionary];
         cachedFiles = [NSMutableArray array];
-        filePrefix = @"";
+        // prefix files for retina
+        filePrefix =  SCALE() == 2.f ? @"retina-" : @"";
     }
 
     return self;

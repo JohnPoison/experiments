@@ -17,6 +17,7 @@
         CFTimeInterval  deltaTime;
         CFTimeInterval  lastTime;
         float           fps;
+        CGSize          viewportSize;
     @public
         EAGLContext*    context;
         GLuint          frameBuffer;
@@ -29,7 +30,6 @@
 - (id) initWithView: (OpenGLView *) openGLView;
 - (void) startRender;
 - (void) stopRender;
-- (CGSize) windowSize;
 
 + (GLWRenderManager *) sharedManager;
 
