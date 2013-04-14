@@ -31,6 +31,9 @@ static GLuint currentTexture = 0;
     self = [self init];
 
     if (self) {
+        self.texParams = (GLWTexParams){GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT};
+        _filename = filename;
+
         [self bindTexture];
 
         UIImage* image = [UIImage imageNamed: filename];
@@ -50,10 +53,6 @@ static GLuint currentTexture = 0;
         CGContextDrawImage(imageContext, CGRectMake(0.0, 0.0, _width, _height), image.CGImage);
         CGContextRelease(imageContext);
 
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
@@ -63,6 +62,13 @@ static GLuint currentTexture = 0;
     }
 
     return self;
+}
+
+- (void) updateTexParams {
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, self.texParams.minFilter);
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, self.texParams.magFilter);
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, self.texParams.wrapS);
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, self.texParams.wrapT);
 }
 
 - (void)dealloc {
@@ -79,6 +85,8 @@ static GLuint currentTexture = 0;
 
     currentTexture = texture.textureId;
     glBindTexture(GL_TEXTURE_2D, texture.textureId);
+    [texture updateTexParams];
+
 }
 
 - (Vec2)normalizedCoordsForPoint:(CGPoint)p {
@@ -91,5 +99,10 @@ static GLuint currentTexture = 0;
     return [[self alloc] initWithFile: filename];
 }
 
+- (void)setTexParams:(GLWTexParams)texParams {
+    _texParams = texParams;
+    [self bindTexture];
+    [self updateTexParams];
+}
 
 @end

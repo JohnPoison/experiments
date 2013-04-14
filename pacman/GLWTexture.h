@@ -15,6 +15,8 @@
 @property (nonatomic, readonly) GLuint textureId;
 @property (nonatomic, readonly) NSUInteger width;
 @property (nonatomic, readonly) NSUInteger height;
+@property (nonatomic, readonly) NSString* filename;
+@property (nonatomic, assign) GLWTexParams texParams;
 
 
 -(id) initWithFile: (NSString *)filename;

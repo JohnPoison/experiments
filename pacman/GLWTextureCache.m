@@ -37,11 +37,16 @@
     return self;
 }
 
-- (GLWTexture *)textureWithFile:(NSString *)filename {
+- (GLWTexture *)textureWithFile: (NSString *)file {
+    return [self textureWithFullFilename: [NSString stringWithFormat: @"%@%@", filePrefix, file]];
+}
+
+- (GLWTexture *)textureWithFullFilename:(NSString *)filename {
     if ([textures objectForKey: filename] == nil) {
         GLWTexture* texture = [GLWTexture textureWithFile: filename];
         [textures setObject: texture forKey: filename];
     }
+
     return [textures objectForKey: filename];
 }
 
@@ -64,7 +69,7 @@
     NSString *textureFile = [[spritesheetDict objectForKey: @"metadata"] objectForKey: @"textureFileName"];
 
     for (NSString *frameName in frames) {
-        GLWTexture* texture = [[GLWTextureCache sharedTextureCache] textureWithFile: textureFile];
+        GLWTexture* texture = [[GLWTextureCache sharedTextureCache] textureWithFullFilename:textureFile];
         GLWTextureRect* rect = [GLWTextureRect textureRectWithTexture:texture rect:CGRectFromString([[frames objectForKey:frameName] objectForKey:@"frame"]) name: frameName];
         [texturesRects setObject: rect forKey: frameName];
     }

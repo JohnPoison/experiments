@@ -10,6 +10,8 @@
 #import "GLWSprite.h"
 #import "GLWTexture.h"
 #import "GLWTextureCache.h"
+#import "AnimationComponent.h"
+#import "Animation.h"
 
 
 @implementation Spaceship {
@@ -27,7 +29,8 @@
         [layer addChild:spaceship];
 
         GLWSprite *fire = [GLWSprite spriteWithRectName: @"fire1"];
-        fire.position = CGPointMake(41.f, -56.f);
+        fire.position = CGPointMake(38.f, -32.f);
+        [fire runAnimation:[Animation animationWithFrameNames:@[@"fire1", @"fire2"] delay:0.08f repeat:0]];
         [layer addChild:fire];
 
         self.layer = layer;

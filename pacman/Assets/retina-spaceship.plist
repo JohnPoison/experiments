@@ -4,10 +4,36 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>drop25</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{100,100}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{100,100}}</string>
+                <key>sourceSize</key>
+                <string>{100,100}</string>
+            </dict>
+            <key>drop50</key>
+            <dict>
+                <key>frame</key>
+                <string>{{104,2},{100,100}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{100,100}}</string>
+                <key>sourceSize</key>
+                <string>{100,100}</string>
+            </dict>
             <key>fire1</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{46,112}}</string>
+                <string>{{206,2},{46,112}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +46,7 @@
             <key>fire2</key>
             <dict>
                 <key>frame</key>
-                <string>{{50,2},{46,112}}</string>
+                <string>{{2,116},{46,112}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +59,7 @@
             <key>spaceship</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,116},{202,276}}</string>
+                <string>{{50,116},{202,276}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -53,7 +79,7 @@
             <key>size</key>
             <string>{256,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:271bf9baa1fc866a5604b76d529fdbc7$</string>
+            <string>$TexturePacker:SmartUpdate:9e9120b3e511f2d34e80d73b6bc5fcd8$</string>
             <key>textureFileName</key>
             <string>retina-spaceship.png</string>
         </dict>

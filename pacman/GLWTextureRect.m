@@ -32,4 +32,9 @@
     return [[self alloc] initWithTexture:texture rect:rect name:name];
 }
 
++ (id)textureRectWithTexture:(GLWTexture *)texture  {
+    return [GLWTextureRect textureRectWithTexture: texture rect:CGRectMake(0.f, 0.f, texture.width, texture.height) name:texture.filename];
+}
+
+
 @end

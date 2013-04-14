@@ -49,6 +49,14 @@
     child.parent = self;
 }
 
+- (void)touch:(float)dt {
+    [super touch:dt];
+
+    for (GLWObject *object in children) {
+        [object touch: dt];
+    }
+}
+
 - (void)draw:(float)dt {
     if (isDirty) {
         [self sortChildren];

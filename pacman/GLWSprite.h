@@ -11,6 +11,7 @@
 @class GLWSpriteGroup;
 @class GLWTexture;
 @class GLWTextureRect;
+@class Animation;
 
 @interface GLWSprite : GLWObject {
     GLWVertex4Data _vertices;
@@ -20,10 +21,15 @@
 
 @property (nonatomic, assign) GLWSpriteGroup *group;
 @property (nonatomic, strong) GLWTextureRect* textureRect;
+@property (nonatomic, assign) CGPoint textureOffset;
+@property (nonatomic, strong) Animation* animation;
 @property (nonatomic, readonly) GLWTexture* texture;
 
+-(void) runAnimation: (Animation *) animation;
 -(GLWVertex4Data) vertices;
 +(GLWSprite *) spriteWithRectName: (NSString *) name;
-+ (void) enableAttribs;
++(GLWSprite *) spriteWithFile: (NSString *)filename;
++(GLWSprite *) spriteWithFile: (NSString *)filename rect: (CGRect) rect;
++(void) enableAttribs;
 
 @end

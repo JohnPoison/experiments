@@ -40,3 +40,10 @@ typedef struct GLWVertex4Data {
     GLWVertexData bottomLeft;
     GLWVertexData bottomRight;
 } GLWVertex4Data;
+
+typedef struct GLWTexParams {
+    GLuint minFilter;
+    GLuint magFilter;
+    GLuint wrapS;
+    GLuint wrapT;
+} GLWTexParams;

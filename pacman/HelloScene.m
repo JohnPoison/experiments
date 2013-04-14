@@ -24,10 +24,13 @@
     self = [super init];
     if (self) {
 
+        GLWSprite* space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
+        [self addChild: space];
         self.spaceship = [[Spaceship alloc] init];
         float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2 - self.spaceship.spaceship.size.width / 2;
         self.spaceship.layer.position = CGPointMake(centeredX, 50);
         [self addChild: self.spaceship.layer];
+
 
 //        [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
 //

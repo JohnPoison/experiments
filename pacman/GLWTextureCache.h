@@ -18,7 +18,8 @@
 }
 
 +(GLWTextureCache *) sharedTextureCache;
--(GLWTexture *) textureWithFile: (NSString *) filename;
+-(GLWTexture *)textureWithFile: (NSString *)file;
+-(GLWTexture *)textureWithFullFilename: (NSString *) filename;
 -(void) cacheFile: (NSString *) filename;
 -(GLWTextureRect *) rectWithName: (NSString *) name;
 

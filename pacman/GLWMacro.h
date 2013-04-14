@@ -1,3 +1,4 @@
+#import <CoreGraphics/CoreGraphics.h>
 #import "GLWRenderManager.h"
 
 // display pixel factor
@@ -9,4 +10,8 @@ static inline float SCALE() {
     }
 
     return displayPixelFactor;
+}
+
+static inline CGRect CGRectInPixels(CGRect rect) {
+    return (CGRect){rect.origin.x * SCALE(), rect.origin.y * SCALE(), rect.size.width * SCALE(), rect.size.height * SCALE()};
 }

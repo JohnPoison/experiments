@@ -13,6 +13,7 @@
 #import "GLWTextureCache.h"
 #import "GLWMacro.h"
 #import "GLWShaderManager.h"
+#import "Animation.h"
 
 static const int VertexSize = sizeof(GLWVertexData);
 
@@ -28,6 +29,24 @@ static const int VertexSize = sizeof(GLWVertexData);
     [super setParent: parent];
 }
 
+- (void) updateTexCoords {
+    float left      = _textureRect.rect.origin.x + self.textureOffset.x;
+    float right     = _textureRect.rect.origin.x + _textureRect.rect.size.width + self.textureOffset.x;
+    float bottom    = _textureRect.rect.origin.y + self.textureOffset.y;
+    float top       = _textureRect.rect.origin.y + _textureRect.rect.size.height + self.textureOffset.y;
+
+    Vec2 tl = [_textureRect.texture normalizedCoordsForPoint:CGPointMake(left, top)];
+    Vec2 tr = [_textureRect.texture normalizedCoordsForPoint:CGPointMake(right, top)];
+    Vec2 bl = [_textureRect.texture normalizedCoordsForPoint:CGPointMake(left, bottom)];
+    Vec2 br = [_textureRect.texture normalizedCoordsForPoint:CGPointMake(right, bottom)];
+
+    // inverted y-axis due to iOS coordinates system
+    _vertices.topLeft.texCoords  = bl;
+    _vertices.topRight.texCoords = br;
+    _vertices.bottomLeft.texCoords = tl;
+    _vertices.bottomRight.texCoords = tr;
+}
+
 - (void)setTextureRect:(GLWTextureRect *)textureRect {
     if (self.group && textureRect.texture != self.texture)
         @throw [NSException exceptionWithName: @"Can't change texture rect" reason:@"texture rect and group has different textures" userInfo:nil];
@@ -41,11 +60,7 @@ static const int VertexSize = sizeof(GLWVertexData);
     // size should be in points according to ortho projection
     self.size = CGSizeMake(textureRect.rect.size.width / SCALE(), textureRect.rect.size.height / SCALE());
 
-
-    _vertices.topLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: textureRect.rect.origin];
-    _vertices.topRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y)];
-    _vertices.bottomLeft.texCoords  = [textureRect.texture normalizedCoordsForPoint: CGPointMake(textureRect.rect.origin.x, textureRect.rect.origin.y + textureRect.rect.size.height)];
-    _vertices.bottomRight.texCoords = [textureRect.texture normalizedCoordsForPoint:CGPointMake(textureRect.rect.origin.x + textureRect.rect.size.width, textureRect.rect.origin.y + textureRect.rect.size.height)];
+    [self updateTexCoords];
 
 }
 
@@ -53,11 +68,12 @@ static const int VertexSize = sizeof(GLWVertexData);
     self = [super init];
 
     if (self) {
-        self.position   = CGPointMake(0.f, 0.f);
-        self.size       = CGSizeMake(0.f, 0.f);
-        isDirty         = YES;
-        z               = 0;
-        self.group      = nil;
+        self.textureOffset  = CGPointZero;
+        self.position       = CGPointMake(0.f, 0.f);
+        self.size           = CGSizeMake(0.f, 0.f);
+        isDirty             = YES;
+        z                   = 0;
+        self.group          = nil;
 
         _vertices.topRight.color    =
         _vertices.topLeft.color     =
@@ -95,6 +111,8 @@ static const int VertexSize = sizeof(GLWVertexData);
         _vertices.topLeft.vertex        = Vec3Make(left, top, z);
         _vertices.topRight.vertex       = Vec3Make(right, top, z);
 
+        [self updateTexCoords];
+
         isDirty = NO;
     }
 }
@@ -104,7 +122,17 @@ static const int VertexSize = sizeof(GLWVertexData);
     return _vertices;
 }
 
+- (void)touch:(float)dt {
+    [self.animation update: dt];
+    [super touch:dt];
+}
+
 - (void)draw:(float)dt {
+    // if we are using VBO this method shouldn't be involved
+    if (self.group)
+        return;
+
+    [self.animation update: dt];
 
     [self updateVertices];
     [GLWTexture bindTexture: self.texture];
@@ -132,10 +160,40 @@ static const int VertexSize = sizeof(GLWVertexData);
     return sprite;
 }
 
++ (GLWSprite *) spriteWithFile: (NSString *)filename {
+    GLWSprite *sprite = [[GLWSprite alloc] init];
+    sprite.textureRect = [GLWTextureRect textureRectWithTexture:[[GLWTextureCache sharedTextureCache] textureWithFile:filename]];
+
+    return sprite;
+}
+
++ (GLWSprite *) spriteWithFile: (NSString *)filename rect: (CGRect) rect {
+    GLWSprite *sprite = [[GLWSprite alloc] init];
+    sprite.textureRect = [GLWTextureRect textureRectWithTexture:[[GLWTextureCache sharedTextureCache] textureWithFile:filename] rect: CGRectInPixels(rect) name: filename];
+
+    return sprite;
+}
+
 + (void) enableAttribs {
     glEnableVertexAttribArray(kAttributeIndexPosition);
     glEnableVertexAttribArray(kAttributeIndexColor);
     glEnableVertexAttribArray(kAttributeIndexTexCoords);
+}
+
+- (void)setAnimation:(Animation *)animation {
+    [_animation stop];
+    _animation = animation;
+}
+
+- (void)runAnimation:(Animation *)animation {
+    self.animation = animation;
+    self.animation.target = self;
+    [self.animation start];
+}
+
+- (void)setTextureOffset:(CGPoint)textureOffset {
+    isDirty = YES;
+    _textureOffset = textureOffset;
 }
 
 @end

@@ -11,11 +11,12 @@
 
 @interface GLWTextureRect : NSObject
 @property (nonatomic, readonly) NSString* name;
-@property (nonatomic, readonly) CGRect rect;
+@property (nonatomic, assign) CGRect rect;
 @property (nonatomic, strong) GLWTexture* texture;
 
 - (id)initWithTexture:(GLWTexture *)texture rect:(CGRect)rect name:(NSString *)name;
 
 + (id)textureRectWithTexture:(GLWTexture *)texture rect:(CGRect)rect name:(NSString *)name;
++ (id)textureRectWithTexture:(GLWTexture *)texture;
 
 @end
