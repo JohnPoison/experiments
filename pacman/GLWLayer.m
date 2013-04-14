@@ -11,6 +11,8 @@
 
 }
 
+@synthesize position = _position;
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -22,6 +24,9 @@
 }
 
 - (void) sortChildren {
+    if (!self.isDirty)
+        return;
+
     NSArray *sortedArray;
     children = [[children sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         if (((GLWObject *) a).z > ((GLWObject *) b).z)
@@ -58,14 +63,20 @@
 }
 
 - (void)draw:(CFTimeInterval)dt {
-    if (isDirty) {
-        [self sortChildren];
-        isDirty = NO;
-    }
+    [self sortChildren];
 
     for (uint i = 0; i < children.count; i++) {
-        [(GLWObject *)[children objectAtIndex: i] draw:0];
+        [(GLWObject *)[children objectAtIndex: i] draw: dt];
     }
+
+    if (self.isDirty) {
+        isDirty = NO;
+    }
+}
+
+- (void)setPosition:(CGPoint)position {
+    isDirty = YES;
+    _position = position;
 }
 
 @end

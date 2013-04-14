@@ -9,8 +9,16 @@
 
 
 @implementation ComponentLayer
+- (id)init {
+    self = [super init];
+    if (self) {
+        _systems = [NSMutableArray array];
+    }
 
-- (void) updateSystemsWithDelta: (float) dt {
+    return self;
+}
+
+- (void)updateSystemsWithDelta: (CFTimeInterval) dt {
     for (System* theSystem in _systems) {
         [theSystem update: dt];
     }

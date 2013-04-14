@@ -5,13 +5,13 @@
 
 
 #import <Foundation/Foundation.h>
-#import "GLWLayer.h"
+#import "ComponentLayer.h"
 
 @class Spaceship;
 @class GLWSprite;
 
 
-@interface HelloScene : GLWLayer
+@interface HelloScene : ComponentLayer
 
 @property (nonatomic, strong) Spaceship *spaceship;
 @property (nonatomic, assign) GLWSprite *space;

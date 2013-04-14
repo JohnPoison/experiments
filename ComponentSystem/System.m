@@ -26,11 +26,11 @@
     return nil;
 }
 
-- (void) updateEntity: (Entity *) entity delta: (float) dt {
+- (void)updateEntity:(Entity *)entity delta: (CFTimeInterval) dt {
 
 }
 
-- (void) updateEntities: (float) dt {
+- (void)updateEntities: (CFTimeInterval) dt {
     NSArray* entities = [[EntityManager sharedManager] getAllEntitiesPosessingComponentOfClass:[self systemComponentClass]];
 
     for (Entity* entity in entities) {
@@ -39,7 +39,7 @@
 
 }
 
-- (void)update:(float)dt {
+- (void)update:(CFTimeInterval)dt {
     [self updateEntities: dt];
 }
 

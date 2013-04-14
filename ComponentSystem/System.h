@@ -16,9 +16,9 @@
 
 - (id)initWithEntityManager:(EntityManager *)entityManager;
 
-- (void) update:(float)dt;
-- (void) updateEntities: (float) dt;
-- (void) updateEntity: (Entity *) entity delta: (float) dt;
+- (void)update:(CFTimeInterval)dt;
+- (void)updateEntities: (CFTimeInterval) dt;
+- (void)updateEntity:(Entity *)entity delta: (CFTimeInterval) dt;
 - (Class) systemComponentClass;
 
 @end

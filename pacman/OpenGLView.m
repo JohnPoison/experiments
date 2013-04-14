@@ -23,7 +23,7 @@
     frame = (CGRect){frame.origin.x * SCALE(), frame.origin.y * SCALE(), frame.size.width * SCALE(), frame.size.height * SCALE()};
     self = [super initWithFrame:frame];
     if (self) {
-        renderManager = [[[GLWRenderManager alloc] initWithView: self] autorelease];
+        renderManager = [[GLWRenderManager alloc] initWithView: self];
     }
     return self;
 }

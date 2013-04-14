@@ -11,4 +11,5 @@
 @interface ComponentLayer : GLWLayer {
     NSMutableArray *_systems;
 }
+- (void)requireSystem:(Class)systemClass ;
 @end

@@ -99,7 +99,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 }
 
 - (void) updateVertices {
-    if (isDirty) {
+    if (self.isDirty) {
 
         float left   = self.position.x;
         float right  = self.position.x + self.size.width;

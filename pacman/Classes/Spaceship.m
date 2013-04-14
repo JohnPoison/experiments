@@ -31,16 +31,25 @@
 
         GLWSprite *fire = [GLWSprite spriteWithRectName: @"fire1"];
         fire.position = CGPointMake(38.f, -32.f);
-        [fire runAnimation:[GLWAnimation animationWithFrameNames:@[@"fire1", @"fire2"] delay:0.08f repeat:0]];
+        [fire runAnimation:[GLWAnimation animationWithFrameNames:@[@"fire1", @"fire2"] delay:0.15f repeat:0]];
         [layer addChild:fire];
 
         self.layer = layer;
 
         [self addComponent: [RenderComponent componentWithObject: layer ]];
-        [self addComponent: [PhysicsComponent componentWithBody: [[PhysicalBody alloc] init]]];
+        PhysicalBody *body = [[PhysicalBody alloc] init];
+        body.maxVelocity = CGPointMake(1.f, 1.f);
+        PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
+        component.updatePosition = NO;
+        [self addComponent: component];
     }
 
     return self;
+}
+
+- (CGPoint)velocity {
+    PhysicsComponent *component = (PhysicsComponent *)[self getComponentOfClass: [PhysicsComponent class]];
+    return component.physicalBody.velocity;
 }
 
 @end

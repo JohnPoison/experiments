@@ -10,7 +10,9 @@
 
 
 @interface GLWObject : NSObject {
-    SEL updateSelector;
+    @protected
+        BOOL isDirty;
+        SEL updateSelector;
 }
 
 @property (nonatomic, strong) GLWShaderProgram *shaderProgram;
@@ -21,8 +23,9 @@
 @property (nonatomic, assign) GLWObject *parent;
 
 // use this method to update object before draw
-- (void)touch: (CFTimeInterval)dt;
-- (void)draw:(CFTimeInterval)dt;
-- (void)setUpdateSelector: (SEL) sel;
+-(void)touch: (CFTimeInterval)dt;
+-(void)draw:(CFTimeInterval)dt;
+-(void)setUpdateSelector: (SEL) sel;
+-(BOOL)isDirty;
 
 @end

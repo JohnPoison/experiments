@@ -17,4 +17,6 @@
 @property (nonatomic, weak) GLWLayer* layer;
 @property (nonatomic, weak) GLWSprite* spaceship;
 
+- (CGPoint) velocity;
+
 @end

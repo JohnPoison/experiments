@@ -7,6 +7,7 @@
 #import "EntityManager.h"
 #import "System.h"
 #import "DependencyNotFoundException.h"
+#import "PhysicsSystem.h"
 
 
 @interface EntityManager (Private)
@@ -30,17 +31,19 @@ static EntityManager* _sharedManager = nil;
         _lowestUnassignedEid = 1;
         [self initSystems];
     }
+
     return self;
 }
 
 - (System *)getSystemOfClass:(Class)systemClass {
     NSString* key = NSStringFromClass(systemClass);
+
     return [_systemsByClass objectForKey: key];
 }
 
 // register all systems here
 - (void) initSystems {
-//    [self registerSystem: []];
+    [self registerSystem: [[PhysicsSystem alloc] init]];
 }
 
 - (uint32_t) generateNewEid {
@@ -52,7 +55,7 @@ static EntityManager* _sharedManager = nil;
                 return i;
             }
         }
-        NSLog(@"ERROR: No available EIDs!");
+        DebugLog(@"ERROR: No available EIDs!");
         return 0;
     }
 }
@@ -62,12 +65,6 @@ static EntityManager* _sharedManager = nil;
     entity.eid = eid;
     [_entities setObject:entity forKey: @(entity.eid)];
 }
-
-//- (Entity *)createEntity {
-//    uint32_t eid = [self generateNewEid];
-//    [_entities addObject:[NSNumber numberWithInt: eid]];
-//    return [[Entity alloc] initWithEid:eid];
-//}
 
 - (void)registerSystem:(System *)theSystem {
     [_systemsByClass setObject: theSystem forKey: NSStringFromClass([theSystem class])];

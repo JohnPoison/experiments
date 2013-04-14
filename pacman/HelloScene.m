@@ -10,6 +10,7 @@
 #import "GLWSprite.h"
 #import "Spaceship.h"
 #import "GLWMath.h"
+#import "PhysicsSystem.h"
 
 
 @implementation HelloScene {
@@ -36,6 +37,8 @@
 //        sprite.position = CGPointMake(100, 50);
 //        [self addChild: group];
 
+        [self requireSystem: [PhysicsSystem class]];
+
         [self setUpdateSelector:@selector(update:)];
     }
 
@@ -44,7 +47,9 @@
 
 - (void) update: (CFTimeInterval) dt {
 //    sprite.position = CGPointMake(sprite.position.x + 30.f * dt, sprite.position.y);
-    self.space.textureOffset = CGPointAdd(self.space.textureOffset, CGPointMake(0, -100 * dt));
+    CGPoint v = self.spaceship.velocity;
+    self.space.textureOffset = CGPointAdd(self.space.textureOffset, CGPointMake(-v.x, -v.y));
+//    self.spaceship.layer.position = CGPointAdd(self.spaceship.layer.position, CGPointMake(0, 10.f * dt));
 }
 
 @end

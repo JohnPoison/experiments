@@ -10,12 +10,11 @@
 
 @interface GLWLayer : GLWObject {
     @protected
-        BOOL isDirty;
         NSMutableArray *children;
 }
 
-- (void) sortChildren;
-- (NSArray *) children;
-- (void) addChild: (GLWObject *) child;
+-(void) sortChildren;
+-(NSArray *) children;
+-(void) addChild: (GLWObject *) child;
 
 @end

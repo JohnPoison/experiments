@@ -15,11 +15,14 @@
 
 }
 
+@synthesize position = _position;
+
 - (id)init {
     self = [super init];
     if (self) {
         self.shaderProgram = [[GLWShaderManager sharedManager] getProgram: kGLWDefaultProgram];
         self.z = 0;
+        isDirty = NO;
         updateSelector = nil;
     }
 
@@ -47,11 +50,19 @@
     updateSelector = sel;
 }
 
+- (void)setPosition:(CGPoint)position {
+    _position = CGPointMake(floorf(position.x), floorf(position.y));
+}
+
 - (CGPoint)position {
     if (!self.parent)
         return _position;
 
     return CGPointMake(_position.x + self.parent.position.x, _position.y + self.parent.position.y);
+}
+
+- (BOOL)isDirty {
+    return isDirty || self.parent.isDirty;
 }
 
 @end

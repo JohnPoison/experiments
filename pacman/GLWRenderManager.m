@@ -57,7 +57,7 @@
             exit(1);
         }
 
-        displayLink = [CADisplayLink displayLinkWithTarget: self selector:@selector(render)];
+        displayLink = [CADisplayLink displayLinkWithTarget: self selector:@selector(render:)];
         [displayLink setFrameInterval:(int)floor(60.0f / FRAME_RATE)];
 
         glGenRenderbuffers(1, &colorBuffer);
@@ -126,7 +126,7 @@
     [program link];
     [program use];
 
-    GLWMatrix *projection = [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight: viewportSize.width / SCALE()  andBottom:0 andTop: viewportSize.height / SCALE() andNear:0 andFar:0];
+    GLWMatrix *projection = [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight: viewportSize.width / SCALE()  andBottom:0 andTop: viewportSize.height / SCALE() andNear:-1024 andFar:1024];
 
     GLWMatrix *transformation = [GLWMatrix identityMatrix];
 
@@ -157,17 +157,17 @@
 //        deltaTime = 1 / FRAME_RATE;
 
 //    fps = FRAME_RATE + FRAME_RATE - (float)deltaTime / (1 / FRAME_RATE) * FRAME_RATE;
-//    DebugLog(@"fps %5.5f", fps);
+//    DebugLog(@"fps %5.5f", deltaTime);
 }
 
-- (void)render {
+- (void)render: (id) sender {
 
     [self updateDeltaTime];
 
     CGSize size = viewportSize;
 
     glClear(GL_COLOR_BUFFER_BIT);
-    glViewport(0, 0, (GLsizei)size.width , (GLsizei)size.height );
+    glViewport(0, 0, (GLsizei)size.width , (GLsizei)size.height);
 
     int accumulatedSteps = 1;
 
@@ -190,6 +190,11 @@
 
 - (CGSize)windowSize {
     return [UIScreen mainScreen].bounds.size;
+}
+
+- (void) dealloc {
+    
+    
 }
 
 

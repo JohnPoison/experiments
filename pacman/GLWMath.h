@@ -47,3 +47,7 @@ static inline Vec2 Vec2Add(Vec2 a, Vec2 b) {
 static inline CGPoint CGPointAdd(CGPoint a, CGPoint b) {
     return CGPointMake(a.x + b.x, a.y + b.y);
 }
+
+static inline CGPoint CGPointMultNumber(CGPoint a, float number) {
+    return CGPointMake(a.x * number, a.y * number);
+}

@@ -13,6 +13,7 @@
 @interface PhysicsComponent : Component
 
 @property (nonatomic, strong) PhysicalBody *physicalBody;
+@property (nonatomic, assign) BOOL updatePosition;
 
 + (PhysicsComponent *) componentWithBody: (PhysicalBody *) body;
 

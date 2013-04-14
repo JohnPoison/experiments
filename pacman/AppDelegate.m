@@ -34,8 +34,6 @@
     [OpenGLManager sharedManager].view = self.glView;
     [[OpenGLManager sharedManager] startRender];
     [[OpenGLManager sharedManager] runScene: [[[HelloScene alloc] init] autorelease]];
-//    [GLWRenderManager sharedManager].currentScene = ;
-//    [[GLWRenderManager sharedManager] startRender];
 
     return YES;
 }

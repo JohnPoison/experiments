@@ -14,6 +14,7 @@
 - (id)init {
     self = [super init];
     if (self) {
+        self.updatePosition = YES;
         [requiredComponents addObject: @"RenderComponent"];
     }
 
