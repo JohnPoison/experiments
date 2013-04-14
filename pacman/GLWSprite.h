@@ -24,5 +24,6 @@
 
 -(GLWVertex4Data) vertices;
 +(GLWSprite *) spriteWithRectName: (NSString *) name;
++ (void) enableAttribs;
 
 @end

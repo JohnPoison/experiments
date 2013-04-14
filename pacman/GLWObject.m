@@ -4,9 +4,11 @@
 
 
 
+#import <CoreGraphics/CoreGraphics.h>
 #import "GLWObject.h"
 #import "GLWShaderProgram.h"
 #import "GLWShaderManager.h"
+#import "GLWMath.h"
 
 
 @implementation GLWObject {
@@ -43,6 +45,13 @@
 
 - (void)setUpdateSelector:(SEL)sel {
     updateSelector = sel;
+}
+
+- (CGPoint)position {
+    if (!self.parent)
+        return _position;
+
+    return CGPointMake(_position.x + self.parent.position.x, _position.y + self.parent.position.y);
 }
 
 @end

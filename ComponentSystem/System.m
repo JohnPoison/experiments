@@ -43,9 +43,5 @@
     [self updateEntities: dt];
 }
 
-- (void)draw {
-
-}
-
 
 @end

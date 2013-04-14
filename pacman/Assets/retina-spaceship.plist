@@ -4,18 +4,44 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>spaceship</key>
+            <key>fire1</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{404,552}}</string>
+                <string>{{2,2},{46,112}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{404,552}}</string>
+                <string>{{0,0},{46,112}}</string>
                 <key>sourceSize</key>
-                <string>{404,552}</string>
+                <string>{46,112}</string>
+            </dict>
+            <key>fire2</key>
+            <dict>
+                <key>frame</key>
+                <string>{{50,2},{46,112}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{46,112}}</string>
+                <key>sourceSize</key>
+                <string>{46,112}</string>
+            </dict>
+            <key>spaceship</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,116},{202,276}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{202,276}}</string>
+                <key>sourceSize</key>
+                <string>{202,276}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -25,9 +51,9 @@
             <key>realTextureFileName</key>
             <string>retina-spaceship.png</string>
             <key>size</key>
-            <string>{512,1024}</string>
+            <string>{256,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4ee60b2a1db19b5ad7b7b15a5eb1503f$</string>
+            <string>$TexturePacker:SmartUpdate:271bf9baa1fc866a5604b76d529fdbc7$</string>
             <key>textureFileName</key>
             <string>retina-spaceship.png</string>
         </dict>

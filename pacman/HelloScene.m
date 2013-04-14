@@ -9,9 +9,12 @@
 #import "GLWRenderManager.h"
 #import "GLWSpriteGroup.h"
 #import "GLWSprite.h"
+#import "Spaceship.h"
 #import "GLWTexture.h"
 #import "GLWTextureRect.h"
 #import "GLWTextureCache.h"
+#import "Spaceship.h"
+#import "RenderComponent.h"
 
 
 @implementation HelloScene {
@@ -21,15 +24,19 @@
     self = [super init];
     if (self) {
 
-        [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
+        self.spaceship = [[Spaceship alloc] init];
+        float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2 - self.spaceship.spaceship.size.width / 2;
+        self.spaceship.layer.position = CGPointMake(centeredX, 50);
+        [self addChild: self.spaceship.layer];
 
-
-        sprite = [GLWSprite spriteWithRectName: @"spaceship"];
-
-        GLWSpriteGroup *group = [GLWSpriteGroup spriteGroupWithTexture: sprite.texture];
-        [group addChild: sprite];
-        [self addChild: group];
-
+//        [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
+//
+//        sprite = [GLWSprite spriteWithRectName: @"spaceship"];
+//
+//        GLWSpriteGroup *group = [GLWSpriteGroup spriteGroupWithTexture: sprite.texture];
+//        [group addChild: sprite];
+//        sprite.position = CGPointMake(100, 50);
+//        [self addChild: group];
 
         [self setUpdateSelector:@selector(update:)];
     }

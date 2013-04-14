@@ -19,6 +19,7 @@
 #import "GLWLayer.h"
 #import "GLWObject.h"
 #import "GLWMacro.h"
+#import "OpenGLManager.h"
 
 
 @implementation GLWRenderManager {
@@ -26,13 +27,14 @@
 }
 
 + (GLWRenderManager *)sharedManager {
-    static GLWRenderManager *sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedManager = [[GLWRenderManager alloc] init];
-    });
-
-    return sharedManager;
+    return [OpenGLManager sharedManager].view.renderer;
+//    static GLWRenderManager *sharedManager = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        sharedManager = [[GLWRenderManager alloc] init];
+//    });
+//
+//    return sharedManager;
 }
 
 - (id)init {
@@ -110,7 +112,8 @@
 
 - (void) setupView {
 
-    viewportSize = (CGSize){view.frame.size.width * SCALE(), view.frame.size.height * SCALE()};
+    viewportSize = (CGSize){view.frame.size.width , view.frame.size.height };
+    windowSize = (CGSize){viewportSize.width / SCALE(), viewportSize.height / SCALE()};
     CAEAGLLayer *glLayer = (CAEAGLLayer *)view.layer;
     [view setContentScaleFactor: SCALE()];
     glLayer.opaque = YES;
@@ -162,5 +165,10 @@
 
     GL_ERROR();
 }
+
+- (CGSize)windowSize {
+    return [UIScreen mainScreen].bounds.size;
+}
+
 
 @end

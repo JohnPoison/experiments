@@ -48,7 +48,7 @@
 - (GLWTextureRect *) rectWithName: (NSString *) name {
 
     if (![texturesRects objectForKey: name])
-        @throw [NSException exceptionWithName: @"texture rect not found" reason:nil userInfo:nil];
+        @throw [NSException exceptionWithName: @"texture rect not found" reason: [NSString stringWithFormat: @"there is no rect with name %@", name] userInfo:nil];
 
     return [texturesRects objectForKey: name];
 }

@@ -46,12 +46,12 @@ static const int VertexSize = sizeof(GLWVertexData);
         if (indices)
             free(indices);
 
-        uint capacity = children.count;
+        uint childrenCount = children.count;
 
-        vertices = malloc(sizeof(GLWVertex4Data) * capacity);
-        indices = malloc(sizeof(GLushort) * 6 * capacity);
+        vertices = malloc(sizeof(GLWVertex4Data) * childrenCount);
+        indices = malloc(sizeof(GLushort) * 6 * childrenCount);
 
-        for (uint i = 0; i < capacity; i++) {
+        for (uint i = 0; i < childrenCount; i++) {
             GLWSprite *child = [children objectAtIndex: i];
             vertices[i] = child.vertices;
 
@@ -64,10 +64,10 @@ static const int VertexSize = sizeof(GLWVertexData);
         }
 
         glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * capacity, vertices, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * childrenCount, vertices, GL_DYNAMIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIds[1]);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * 6 * capacity, indices, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * 6 * childrenCount, indices, GL_STATIC_DRAW);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
         isDirty = NO;
@@ -98,13 +98,10 @@ static const int VertexSize = sizeof(GLWVertexData);
 
     glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
 
-    glEnableVertexAttribArray(kAttributeIndexPosition);
+    [GLWSprite enableAttribs];
+
     glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) offsetof( GLWVertexData, vertex));
-
-    glEnableVertexAttribArray(kAttributeIndexColor);
     glVertexAttribPointer(kAttributeIndexColor, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) offsetof( GLWVertexData, color));
-
-    glEnableVertexAttribArray(kAttributeIndexTexCoords);
     glVertexAttribPointer(kAttributeIndexTexCoords, 2, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) offsetof( GLWVertexData, texCoords));
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -31,7 +31,6 @@ static GLuint currentTexture = 0;
     self = [self init];
 
     if (self) {
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
         [self bindTexture];
 
         UIImage* image = [UIImage imageNamed: filename];

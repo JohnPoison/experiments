@@ -17,6 +17,8 @@
 @property (nonatomic, assign) NSInteger z;
 @property (nonatomic, assign) CGPoint position;
 @property (nonatomic, assign) CGSize size;
+// if set this will be used to determine relative position
+@property (nonatomic, assign) GLWObject *parent;
 
 // use this method to update object before draw
 - (void)touch: (float)dt;

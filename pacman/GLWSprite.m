@@ -6,14 +6,15 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 #import "GLWSprite.h"
-#import "GLWTypes.h"
 #import "GLWMath.h"
 #import "GLWSpriteGroup.h"
 #import "GLWTexture.h"
 #import "GLWTextureRect.h"
 #import "GLWTextureCache.h"
 #import "GLWMacro.h"
+#import "GLWShaderManager.h"
 
+static const int VertexSize = sizeof(GLWVertexData);
 
 @implementation GLWSprite {
 }
@@ -22,7 +23,15 @@
     self.textureRect = nil;
 }
 
+- (void)setParent:(GLWObject *)parent {
+    isDirty = YES;
+    [super setParent: parent];
+}
+
 - (void)setTextureRect:(GLWTextureRect *)textureRect {
+    if (self.group && textureRect.texture != self.texture)
+        @throw [NSException exceptionWithName: @"Can't change texture rect" reason:@"texture rect and group has different textures" userInfo:nil];
+
     isDirty = YES;
     [self.group childIsDirty];
 
@@ -73,19 +82,47 @@
     [super setPosition:position];
 }
 
-
-- (GLWVertex4Data)vertices {
-
+- (void) updateVertices {
     if (isDirty) {
-        _vertices.bottomLeft.vertex     = Vec3Make(self.position.x, self.position.y, z);
-        _vertices.bottomRight.vertex    = Vec3Make(self.position.x + self.size.width, self.position.y, z);
-        _vertices.topLeft.vertex        = Vec3Make(self.position.x, self.position.y + self.size.height , z);
-        _vertices.topRight.vertex       = Vec3Make(self.position.x + self.size.width, self.position.y + self.size.height, z);
+
+        float left   = self.position.x;
+        float right  = self.position.x + self.size.width;
+        float bottom = self.position.y;
+        float top    = self.position.y + self.size.height;
+
+        _vertices.bottomLeft.vertex     = Vec3Make(left, bottom, z);
+        _vertices.bottomRight.vertex    = Vec3Make(right, bottom, z);
+        _vertices.topLeft.vertex        = Vec3Make(left, top, z);
+        _vertices.topRight.vertex       = Vec3Make(right, top, z);
 
         isDirty = NO;
     }
+}
 
+- (GLWVertex4Data)vertices {
+    [self updateVertices];
     return _vertices;
+}
+
+- (void)draw:(float)dt {
+
+    [self updateVertices];
+    [GLWTexture bindTexture: self.texture];
+    [GLWSprite enableAttribs];
+
+    long v = (long)&_vertices;
+    NSInteger diff = offsetof( GLWVertexData, vertex);
+    glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)(v+diff));
+    diff = offsetof( GLWVertexData, color);
+    glVertexAttribPointer(kAttributeIndexColor, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) (v+diff));
+    diff = offsetof( GLWVertexData, texCoords);
+    glVertexAttribPointer(kAttributeIndexTexCoords, 2, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) (v+diff));
+
+
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    GL_ERROR();
+
 }
 
 + (GLWSprite *) spriteWithRectName: (NSString *) name {
@@ -93,6 +130,12 @@
     sprite.textureRect = [[GLWTextureCache sharedTextureCache] rectWithName: name];
 
     return sprite;
+}
+
++ (void) enableAttribs {
+    glEnableVertexAttribArray(kAttributeIndexPosition);
+    glEnableVertexAttribArray(kAttributeIndexColor);
+    glEnableVertexAttribArray(kAttributeIndexTexCoords);
 }
 
 @end

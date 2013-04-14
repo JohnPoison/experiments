@@ -7,6 +7,11 @@
 #import <Foundation/Foundation.h>
 #import "GLWLayer.h"
 
+@class Spaceship;
+
 
 @interface HelloScene : GLWLayer
+
+@property (nonatomic, strong) Spaceship *spaceship;
+
 @end

@@ -35,4 +35,8 @@
 
 }
 
+- (Component *)getComponentOfClass:(Class)componentClass  {
+    return [[EntityManager sharedManager] getComponentOfClass: componentClass forEntity: self];
+}
+
 @end

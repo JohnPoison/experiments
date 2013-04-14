@@ -7,30 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36EBC033B3260C70A83C8171 /* retina-spaceship.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC23CCD3DF434123D2F37 /* retina-spaceship.plist */; };
 		36EBC0457C648A4FFEE07126 /* GLWTextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC4BAE876DE5620E580FD /* GLWTextureCache.m */; };
 		36EBC0B5685EB85E45A7313D /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCF6F9D8290B362F2A3D4 /* Entity.m */; };
-		36EBC0DFCDFBF1B1C917A044 /* retina-spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBCC4F2C65884926541CB7 /* retina-spaceship.png */; };
 		36EBC1EE6FF5F197649839D1 /* GLWShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCCCF0F52320DB7AA36DB /* GLWShaderProgram.m */; };
 		36EBC2D9109D20F6870944CD /* GLWSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC8873BA1C8021C29011D /* GLWSprite.m */; };
+		36EBC3E1C059B53FE581E5A1 /* ComponentLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC002C9B53BA10E8D93A0 /* ComponentLayer.m */; };
 		36EBC4481D79C4454E6DB4F9 /* GLWSpriteGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA2EA1157E8255DD9785 /* GLWSpriteGroup.m */; };
-		36EBC5ECFFE743C92A99411A /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBCEAF5707AE77506489D5 /* test.png */; };
 		36EBC5FC7258161F0819F296 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC6D36989989353E96FC8 /* Component.m */; };
-		36EBC677C14F0CAE74CC1C07 /* test2.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC4AC68B6FEB719B88DD5 /* test2.png */; };
 		36EBC719CD05132E664CF2CC /* GLWMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC75E5DC69D96CEB1C29F /* GLWMatrix.m */; };
-		36EBC8807A82799D134402FC /* spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBCB504C383937DFFACA9D /* spaceship.png */; };
+		36EBC7C0A2D48E050641C45F /* spaceship.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC93516BE948B6D6A23DE /* spaceship.plist */; };
+		36EBC86E7299897060D6E8F7 /* spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC7EADB31A68A4D71EA17 /* spaceship.png */; };
 		36EBC881859FBA327918831E /* GLWTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC8B470D73FB998996B17 /* GLWTexture.m */; };
 		36EBC8F21218705AD03CE986 /* GLWCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCF361CA36478BFD92F23 /* GLWCamera.m */; };
 		36EBC903009EA0D42EA36112 /* GLWRenderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCAFDD123BF106D283A78 /* GLWRenderManager.m */; };
+		36EBC93BEC889FE7242EC248 /* Spaceship.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC8F56D5C04BA9341FEF8 /* Spaceship.m */; };
 		36EBC9AA8C9FCFC2D57FAEE6 /* DependencyNotFoundException.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC78794ABEABE6A235309 /* DependencyNotFoundException.m */; };
+		36EBCB130CF3C7D32FEB8DE0 /* RenderComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC41213785419ADE08023 /* RenderComponent.m */; };
 		36EBCBB95F4E0D45AC31C3C1 /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCDC7324A448579D7CE83 /* System.m */; };
 		36EBCBC3D2DEAF75FA781C3A /* GLWTextureRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC40F25407A1B0CABE6CC /* GLWTextureRect.m */; };
 		36EBCBF80349C6569A4FB08B /* EntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA8BFBA91F7EA0A84152 /* EntityManager.m */; };
-		36EBCCCF7C9C4188FEB73F0D /* spaceship.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC03B7B5BE65E099DDAB8 /* spaceship.plist */; };
+		36EBCC41EBB82DDDA1FD9D1C /* SpriteComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC507D1E7216A34D3D252 /* SpriteComponent.m */; };
+		36EBCC83F7308125D2E0E269 /* retina-spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBCB3A9BB1CF8CB6771277 /* retina-spaceship.png */; };
+		36EBCC9CFA038E47A88674C5 /* retina-spaceship.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC5982AEF7688340A68BC /* retina-spaceship.plist */; };
 		36EBCDABC347C3EF1AAB1EFD /* GLWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC30A84ED9C32F07E3A18 /* GLWObject.m */; };
 		36EBCE753168CC535FCE48BC /* GLWLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC434350C587F2987652E /* GLWLayer.m */; };
 		36EBCE83138A06E84EE96AE7 /* HelloScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA0DD3551D10646D5D39 /* HelloScene.m */; };
-		36EBCFB5D25CFF2E579D67B1 /* spaceship2.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC59152E21C2F7EBE1E34 /* spaceship2.png */; };
 		CE3745F516F10AA20067396E /* GLWShaders.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3745F416F10AA20067396E /* GLWShaders.m */; };
 		CE3745FD16F10EE40067396E /* GLWShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3745FC16F10EE40067396E /* GLWShaderManager.m */; };
 		CE71619F16EE5EB400A32C9E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE71619E16EE5EB400A32C9E /* UIKit.framework */; };
@@ -49,16 +50,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36EBC03B7B5BE65E099DDAB8 /* spaceship.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = spaceship.plist; sourceTree = "<group>"; };
+		36EBC002C9B53BA10E8D93A0 /* ComponentLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentLayer.m; sourceTree = "<group>"; };
 		36EBC14963C46F27C681420B /* GLWRenderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWRenderManager.h; sourceTree = "<group>"; };
-		36EBC23CCD3DF434123D2F37 /* retina-spaceship.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = "retina-spaceship.plist"; sourceTree = "<group>"; };
 		36EBC30A84ED9C32F07E3A18 /* GLWObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWObject.m; sourceTree = "<group>"; };
 		36EBC40F25407A1B0CABE6CC /* GLWTextureRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTextureRect.m; sourceTree = "<group>"; };
+		36EBC41213785419ADE08023 /* RenderComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderComponent.m; sourceTree = "<group>"; };
 		36EBC434350C587F2987652E /* GLWLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWLayer.m; sourceTree = "<group>"; };
-		36EBC4AC68B6FEB719B88DD5 /* test2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test2.png; sourceTree = "<group>"; };
 		36EBC4BAE876DE5620E580FD /* GLWTextureCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTextureCache.m; sourceTree = "<group>"; };
 		36EBC4E7330BE55E4379220D /* GLWShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWShaderProgram.h; sourceTree = "<group>"; };
-		36EBC59152E21C2F7EBE1E34 /* spaceship2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship2.png; sourceTree = "<group>"; };
+		36EBC507D1E7216A34D3D252 /* SpriteComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteComponent.m; sourceTree = "<group>"; };
+		36EBC5982AEF7688340A68BC /* retina-spaceship.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = "retina-spaceship.plist"; sourceTree = "<group>"; };
 		36EBC5DC53E12C78FBC40576 /* GLWMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMacro.h; sourceTree = "<group>"; };
 		36EBC5FB9D9C2E77DE622FE7 /* GLWMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMath.h; sourceTree = "<group>"; };
 		36EBC61C19652B17820B8F14 /* GLWSpriteGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWSpriteGroup.h; sourceTree = "<group>"; };
@@ -67,13 +68,19 @@
 		36EBC694B8414852B53083CC /* GLWTextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTextureCache.h; sourceTree = "<group>"; };
 		36EBC6CE65D89614605DF931 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
 		36EBC6D36989989353E96FC8 /* Component.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Component.m; sourceTree = "<group>"; };
+		36EBC730F69FA15AB26069C9 /* ComponentLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentLayer.h; sourceTree = "<group>"; };
+		36EBC746EA660003F5B91147 /* Spaceship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spaceship.h; sourceTree = "<group>"; };
 		36EBC75E5DC69D96CEB1C29F /* GLWMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWMatrix.m; sourceTree = "<group>"; };
 		36EBC78794ABEABE6A235309 /* DependencyNotFoundException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DependencyNotFoundException.m; sourceTree = "<group>"; };
+		36EBC7EADB31A68A4D71EA17 /* spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship.png; sourceTree = "<group>"; };
 		36EBC804889BCB8DD4757DA9 /* GLWMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMatrix.h; sourceTree = "<group>"; };
 		36EBC818084647EB002DE223 /* GLWTextureRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTextureRect.h; sourceTree = "<group>"; };
 		36EBC8480D2E6094114D2EB6 /* GLWTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTexture.h; sourceTree = "<group>"; };
 		36EBC8873BA1C8021C29011D /* GLWSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWSprite.m; sourceTree = "<group>"; };
 		36EBC8B470D73FB998996B17 /* GLWTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTexture.m; sourceTree = "<group>"; };
+		36EBC8F56D5C04BA9341FEF8 /* Spaceship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spaceship.m; sourceTree = "<group>"; };
+		36EBC91F23814D7E2D934DF2 /* SpriteComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteComponent.h; sourceTree = "<group>"; };
+		36EBC93516BE948B6D6A23DE /* spaceship.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = spaceship.plist; sourceTree = "<group>"; };
 		36EBC939D5618E9A81090EDE /* GLWTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTypes.h; sourceTree = "<group>"; };
 		36EBC93D0612F052C1255447 /* DependencyNotFoundException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DependencyNotFoundException.h; sourceTree = "<group>"; };
 		36EBCA0DD3551D10646D5D39 /* HelloScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloScene.m; sourceTree = "<group>"; };
@@ -81,14 +88,13 @@
 		36EBCA8BFBA91F7EA0A84152 /* EntityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityManager.m; sourceTree = "<group>"; };
 		36EBCAFDD123BF106D283A78 /* GLWRenderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWRenderManager.m; sourceTree = "<group>"; };
 		36EBCB0184C830961CD38CA8 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
-		36EBCB504C383937DFFACA9D /* spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship.png; sourceTree = "<group>"; };
-		36EBCC4F2C65884926541CB7 /* retina-spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "retina-spaceship.png"; sourceTree = "<group>"; };
+		36EBCB3A9BB1CF8CB6771277 /* retina-spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "retina-spaceship.png"; sourceTree = "<group>"; };
 		36EBCCCF0F52320DB7AA36DB /* GLWShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWShaderProgram.m; sourceTree = "<group>"; };
 		36EBCCE8CFB470C0071B6739 /* GLWSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWSprite.h; sourceTree = "<group>"; };
 		36EBCD2B8D9581E7EB8EDE09 /* GLWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWCamera.h; sourceTree = "<group>"; };
 		36EBCD494D792A877D84448A /* GLWLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWLayer.h; sourceTree = "<group>"; };
 		36EBCDC7324A448579D7CE83 /* System.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = System.m; sourceTree = "<group>"; };
-		36EBCEAF5707AE77506489D5 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
+		36EBCE3FDFEDC01EF5EB6051 /* RenderComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderComponent.h; sourceTree = "<group>"; };
 		36EBCF21660E6F235CE8020C /* EntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
 		36EBCF361CA36478BFD92F23 /* GLWCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWCamera.m; sourceTree = "<group>"; };
 		36EBCF6F9D8290B362F2A3D4 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
@@ -138,6 +144,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36EBC0507E1B70D076BC3B8C /* Systems */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Systems;
+			sourceTree = "<group>";
+		};
 		36EBC099A50A649B4FA74AA6 /* Math */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,15 +165,30 @@
 		36EBC16D08A61AF6AF985222 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				36EBCEAF5707AE77506489D5 /* test.png */,
-				36EBC4AC68B6FEB719B88DD5 /* test2.png */,
-				36EBC03B7B5BE65E099DDAB8 /* spaceship.plist */,
-				36EBCB504C383937DFFACA9D /* spaceship.png */,
-				36EBC23CCD3DF434123D2F37 /* retina-spaceship.plist */,
-				36EBCC4F2C65884926541CB7 /* retina-spaceship.png */,
-				36EBC59152E21C2F7EBE1E34 /* spaceship2.png */,
+				36EBCB3A9BB1CF8CB6771277 /* retina-spaceship.png */,
+				36EBC5982AEF7688340A68BC /* retina-spaceship.plist */,
+				36EBC93516BE948B6D6A23DE /* spaceship.plist */,
+				36EBC7EADB31A68A4D71EA17 /* spaceship.png */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		36EBC24E7521E5D2246323F5 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				36EBC002C9B53BA10E8D93A0 /* ComponentLayer.m */,
+				36EBC730F69FA15AB26069C9 /* ComponentLayer.h */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		36EBC48D77D42D34A46BB798 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				36EBC8F56D5C04BA9341FEF8 /* Spaceship.m */,
+				36EBC746EA660003F5B91147 /* Spaceship.h */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		36EBC8E56FE8471A42B5B0E6 /* ComponentSystem */ = {
@@ -176,8 +204,22 @@
 				36EBCF811AF056C9C2FE150D /* System.h */,
 				36EBCF21660E6F235CE8020C /* EntityManager.h */,
 				36EBC6CE65D89614605DF931 /* Component.h */,
+				36EBC24E7521E5D2246323F5 /* Framework */,
+				36EBCA6A3940B2308C3F3A05 /* Components */,
+				36EBC0507E1B70D076BC3B8C /* Systems */,
 			);
 			path = ComponentSystem;
+			sourceTree = "<group>";
+		};
+		36EBCA6A3940B2308C3F3A05 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				36EBC507D1E7216A34D3D252 /* SpriteComponent.m */,
+				36EBC91F23814D7E2D934DF2 /* SpriteComponent.h */,
+				36EBC41213785419ADE08023 /* RenderComponent.m */,
+				36EBCE3FDFEDC01EF5EB6051 /* RenderComponent.h */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		CE3745F116F10A1E0067396E /* GLWrapper */ = {
@@ -268,6 +310,7 @@
 				36EBCA0DD3551D10646D5D39 /* HelloScene.m */,
 				36EBC6528B139F349D2DEECE /* HelloScene.h */,
 				36EBC16D08A61AF6AF985222 /* Assets */,
+				36EBC48D77D42D34A46BB798 /* Classes */,
 			);
 			path = pacman;
 			sourceTree = "<group>";
@@ -342,13 +385,10 @@
 				CE7161B516EE5EB400A32C9E /* Default.png in Resources */,
 				CE7161B716EE5EB400A32C9E /* Default@2x.png in Resources */,
 				CE7161B916EE5EB400A32C9E /* Default-568h@2x.png in Resources */,
-				36EBC5ECFFE743C92A99411A /* test.png in Resources */,
-				36EBC677C14F0CAE74CC1C07 /* test2.png in Resources */,
-				36EBCCCF7C9C4188FEB73F0D /* spaceship.plist in Resources */,
-				36EBC8807A82799D134402FC /* spaceship.png in Resources */,
-				36EBC033B3260C70A83C8171 /* retina-spaceship.plist in Resources */,
-				36EBC0DFCDFBF1B1C917A044 /* retina-spaceship.png in Resources */,
-				36EBCFB5D25CFF2E579D67B1 /* spaceship2.png in Resources */,
+				36EBCC83F7308125D2E0E269 /* retina-spaceship.png in Resources */,
+				36EBCC9CFA038E47A88674C5 /* retina-spaceship.plist in Resources */,
+				36EBC7C0A2D48E050641C45F /* spaceship.plist in Resources */,
+				36EBC86E7299897060D6E8F7 /* spaceship.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +422,10 @@
 				36EBC5FC7258161F0819F296 /* Component.m in Sources */,
 				36EBC9AA8C9FCFC2D57FAEE6 /* DependencyNotFoundException.m in Sources */,
 				36EBCBF80349C6569A4FB08B /* EntityManager.m in Sources */,
+				36EBC3E1C059B53FE581E5A1 /* ComponentLayer.m in Sources */,
+				36EBCC41EBB82DDDA1FD9D1C /* SpriteComponent.m in Sources */,
+				36EBC93BEC889FE7242EC248 /* Spaceship.m in Sources */,
+				36EBCB130CF3C7D32FEB8DE0 /* RenderComponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

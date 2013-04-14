@@ -38,8 +38,9 @@ static EntityManager* _sharedManager = nil;
     return [_systemsByClass objectForKey: key];
 }
 
+// register all systems here
 - (void) initSystems {
-
+//    [self registerSystem: []];
 }
 
 - (uint32_t) generateNewEid {
@@ -107,8 +108,8 @@ static EntityManager* _sharedManager = nil;
 }
 
 - (Component *)getComponentOfClass:(Class)componentClass forEntity:(Entity *)entity {
-//    return _componentsByClass[NSStringFromClass(class)][@(entity.eid)];
     NSString *className = NSStringFromClass(componentClass);
+
     if ([_componentsByClass objectForKey: className] != nil) {
         return [[_componentsByClass objectForKey: className] objectForKey:@(entity.eid)] ;
     }

@@ -12,11 +12,11 @@
 
 
 @interface EntityManager : NSObject {
-    NSMutableDictionary * _entities;
-    NSMutableDictionary * _componentsByClass;
-    NSMutableDictionary * _componentsByEid;
-    NSMutableDictionary * _systemsByClass;
-    uint32_t _lowestUnassignedEid;
+    NSMutableDictionary*   _entities;
+    NSMutableDictionary*   _componentsByClass;
+    NSMutableDictionary*   _componentsByEid;
+    NSMutableDictionary*   _systemsByClass;
+    uint32_t                _lowestUnassignedEid;
 }
 
 + (EntityManager *) sharedManager;

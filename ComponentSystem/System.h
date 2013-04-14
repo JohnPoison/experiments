@@ -20,6 +20,5 @@
 - (void) updateEntities: (float) dt;
 - (void) updateEntity: (Entity *) entity delta: (float) dt;
 - (Class) systemComponentClass;
-- (void) draw;
 
 @end

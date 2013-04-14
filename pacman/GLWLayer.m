@@ -45,6 +45,8 @@
 
     [children addObject: child];
     isDirty = YES;
+
+    child.parent = self;
 }
 
 - (void)draw:(float)dt {
