@@ -8,10 +8,12 @@
 #import "GLWLayer.h"
 
 @class Spaceship;
+@class GLWSprite;
 
 
 @interface HelloScene : GLWLayer
 
 @property (nonatomic, strong) Spaceship *spaceship;
+@property (nonatomic, assign) GLWSprite *space;
 
 @end

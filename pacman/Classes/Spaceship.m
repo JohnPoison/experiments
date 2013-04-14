@@ -10,8 +10,9 @@
 #import "GLWSprite.h"
 #import "GLWTexture.h"
 #import "GLWTextureCache.h"
-#import "AnimationComponent.h"
-#import "Animation.h"
+#import "GLWAnimation.h"
+#import "PhysicsComponent.h"
+#import "PhysicalBody.h"
 
 
 @implementation Spaceship {
@@ -30,12 +31,13 @@
 
         GLWSprite *fire = [GLWSprite spriteWithRectName: @"fire1"];
         fire.position = CGPointMake(38.f, -32.f);
-        [fire runAnimation:[Animation animationWithFrameNames:@[@"fire1", @"fire2"] delay:0.08f repeat:0]];
+        [fire runAnimation:[GLWAnimation animationWithFrameNames:@[@"fire1", @"fire2"] delay:0.08f repeat:0]];
         [layer addChild:fire];
 
         self.layer = layer;
 
         [self addComponent: [RenderComponent componentWithObject: layer ]];
+        [self addComponent: [PhysicsComponent componentWithBody: [[PhysicalBody alloc] init]]];
     }
 
     return self;

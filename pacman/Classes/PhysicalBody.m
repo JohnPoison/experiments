@@ -4,17 +4,15 @@
 
 
 
-#import "AnimationComponent.h"
-#import "Animation.h"
+#import "PhysicalBody.h"
 
 
-@implementation AnimationComponent {
+@implementation PhysicalBody {
 
 }
 - (id)init {
     self = [super init];
     if (self) {
-        [requiredComponents addObject: @"RenderComponent"];
     }
 
     return self;

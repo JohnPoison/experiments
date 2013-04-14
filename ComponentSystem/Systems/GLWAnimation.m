@@ -4,14 +4,14 @@
 
 
 
-#import "Animation.h"
+#import "GLWAnimation.h"
 #import "GLWTextureRect.h"
 #import "GLWSprite.h"
 #import "GLWTexture.h"
 #import "GLWTextureCache.h"
 
 
-@implementation Animation {
+@implementation GLWAnimation {
 
 }
 - (id)init {
@@ -25,12 +25,12 @@
     return self;
 }
 
-+ (Animation *)animationWithFrameNames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat {
++ (GLWAnimation *)animationWithFrameNames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat {
     return [[self alloc] initWithFrameNames:framesArr delay:delay repeat:repeat];
 }
 
 
-- (Animation *)initWithFrameNames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat {
+- (GLWAnimation *)initWithFrameNames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat {
     NSMutableArray *array = [NSMutableArray array];
 
     for (NSString *frameName in framesArr) {
@@ -40,7 +40,7 @@
     return [self initWithFrames:array delay:delay repeat:repeat];
 }
 
-- (Animation *)initWithFrames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat {
+- (GLWAnimation *)initWithFrames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat {
     self = [self init];
 
     if (self) {
@@ -76,13 +76,13 @@
     startFrame = target.textureRect;
 }
 
-- (void)update:(float)dt {
+- (void)update:(CFTimeInterval)dt {
     if (!running)
         return;
 
     timeElapsed += dt;
 
-    int frameIndex = ((int)floorf(timeElapsed / self.delay) % frames.count);
+    int frameIndex = ((int)floor(timeElapsed / self.delay) % frames.count);
 
     // in case of very first frame
     if (frameIndex < 0)

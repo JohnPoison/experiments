@@ -7,14 +7,9 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "HelloScene.h"
 #import "GLWRenderManager.h"
-#import "GLWSpriteGroup.h"
 #import "GLWSprite.h"
 #import "Spaceship.h"
-#import "GLWTexture.h"
-#import "GLWTextureRect.h"
-#import "GLWTextureCache.h"
-#import "Spaceship.h"
-#import "RenderComponent.h"
+#import "GLWMath.h"
 
 
 @implementation HelloScene {
@@ -24,8 +19,8 @@
     self = [super init];
     if (self) {
 
-        GLWSprite* space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
-        [self addChild: space];
+        self.space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
+        [self addChild: self.space];
         self.spaceship = [[Spaceship alloc] init];
         float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2 - self.spaceship.spaceship.size.width / 2;
         self.spaceship.layer.position = CGPointMake(centeredX, 50);
@@ -47,8 +42,9 @@
     return self;
 }
 
-- (void) update: (float) dt {
+- (void) update: (CFTimeInterval) dt {
 //    sprite.position = CGPointMake(sprite.position.x + 30.f * dt, sprite.position.y);
+    self.space.textureOffset = CGPointAdd(self.space.textureOffset, CGPointMake(0, -100 * dt));
 }
 
 @end

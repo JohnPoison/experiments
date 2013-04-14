@@ -26,7 +26,7 @@
     return self;
 }
 
-- (void)touch: (float)dt {
+- (void)touch: (CFTimeInterval)dt {
     if (updateSelector != nil) {
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         NSMethodSignature *sig = [self methodSignatureForSelector: updateSelector];
@@ -39,7 +39,7 @@
 }
 
 // this method will be called by GLWRenderer
-- (void)draw:(float)dt {
+- (void)draw:(CFTimeInterval)dt {
     DebugLog(@"override me!");
 }
 

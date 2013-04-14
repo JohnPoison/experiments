@@ -20,6 +20,8 @@
         CGSize          viewportSize;
         // in points
         CGSize          windowSize;
+        // accumulates delta time. when reaches 1 / FRAME_RATE it means we should draw once more
+        CFTimeInterval  accumulator;
     @public
         EAGLContext*    context;
         GLuint          frameBuffer;

@@ -21,7 +21,7 @@
 @property (nonatomic, assign) CGPoint position;
 @property (nonatomic, retain) GLWTexture *texture;
 
-- (void)draw:(float)dt;
+- (void)draw:(CFTimeInterval)dt;
 -(void) childIsDirty;
 +(GLWSpriteGroup *) spriteGroupWithTexture: (GLWTexture *) texture;
 

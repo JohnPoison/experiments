@@ -13,7 +13,7 @@
 #import "GLWTextureCache.h"
 #import "GLWMacro.h"
 #import "GLWShaderManager.h"
-#import "Animation.h"
+#import "GLWAnimation.h"
 
 static const int VertexSize = sizeof(GLWVertexData);
 
@@ -122,12 +122,12 @@ static const int VertexSize = sizeof(GLWVertexData);
     return _vertices;
 }
 
-- (void)touch:(float)dt {
+- (void)touch:(CFTimeInterval)dt {
     [self.animation update: dt];
     [super touch:dt];
 }
 
-- (void)draw:(float)dt {
+- (void)draw:(CFTimeInterval)dt {
     // if we are using VBO this method shouldn't be involved
     if (self.group)
         return;
@@ -180,12 +180,12 @@ static const int VertexSize = sizeof(GLWVertexData);
     glEnableVertexAttribArray(kAttributeIndexTexCoords);
 }
 
-- (void)setAnimation:(Animation *)animation {
+- (void)setAnimation:(GLWAnimation *)animation {
     [_animation stop];
     _animation = animation;
 }
 
-- (void)runAnimation:(Animation *)animation {
+- (void)runAnimation:(GLWAnimation *)animation {
     self.animation = animation;
     self.animation.target = self;
     [self.animation start];

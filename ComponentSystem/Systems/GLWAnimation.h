@@ -10,11 +10,11 @@
 @class GLWSprite;
 
 
-@interface Animation : NSObject {
+@interface GLWAnimation : NSObject {
     GLWTextureRect  *startFrame;
     NSMutableArray  *frames;
     BOOL            running;
-    float           timeElapsed;
+    CFTimeInterval  timeElapsed;
 }
 // delay between frames
 @property (nonatomic, readonly) float delay;
@@ -25,10 +25,10 @@
 - (void) start;
 - (void) pause;
 - (void) stop;
-- (void) update: (float) dt;
+- (void)update: (CFTimeInterval) dt;
 
-- (Animation *)initWithFrames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat;
-- (Animation *)initWithFrameNames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat;
-+ (Animation *)animationWithFrameNames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat;
+- (GLWAnimation *)initWithFrames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat;
+- (GLWAnimation *)initWithFrameNames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat;
++ (GLWAnimation *)animationWithFrameNames:(NSArray *)framesArr delay:(float)delay repeat:(NSUInteger)repeat;
 
 @end

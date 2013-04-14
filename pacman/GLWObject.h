@@ -21,8 +21,8 @@
 @property (nonatomic, assign) GLWObject *parent;
 
 // use this method to update object before draw
-- (void)touch: (float)dt;
-- (void)draw:(float)dt;
+- (void)touch: (CFTimeInterval)dt;
+- (void)draw:(CFTimeInterval)dt;
 - (void)setUpdateSelector: (SEL) sel;
 
 @end

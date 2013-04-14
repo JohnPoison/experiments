@@ -49,7 +49,7 @@
     child.parent = self;
 }
 
-- (void)touch:(float)dt {
+- (void)touch:(CFTimeInterval)dt {
     [super touch:dt];
 
     for (GLWObject *object in children) {
@@ -57,7 +57,7 @@
     }
 }
 
-- (void)draw:(float)dt {
+- (void)draw:(CFTimeInterval)dt {
     if (isDirty) {
         [self sortChildren];
         isDirty = NO;

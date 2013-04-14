@@ -16,7 +16,7 @@
     }
 }
 
-- (void)touch:(float)dt {
+- (void)touch:(CFTimeInterval)dt {
     [self updateSystemsWithDelta: dt];
     [super touch:dt];
 }

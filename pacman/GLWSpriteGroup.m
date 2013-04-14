@@ -88,7 +88,7 @@ static const int VertexSize = sizeof(GLWVertexData);
     isDirty = YES;
 }
 
-- (void)draw:(float)dt {
+- (void)draw:(CFTimeInterval)dt {
     if (!children.count)
         return;
 

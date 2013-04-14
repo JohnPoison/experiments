@@ -146,7 +146,18 @@
         lastTime = displayLink.timestamp;
     }
 
-    fps = (float)deltaTime / (1 / FRAME_RATE) * FRAME_RATE;
+//    deltaTime = displayLink.duration * displayLink.frameInterval;
+//    if (deltaTime > 1 / FRAME_RATE) {
+//        accumulator += deltaTime - 1.f / FRAME_RATE;
+//    }
+
+//    deltaTime = 1 / FRAME_RATE;
+
+//    if (deltaTime < 1 / FRAME_RATE)
+//        deltaTime = 1 / FRAME_RATE;
+
+//    fps = FRAME_RATE + FRAME_RATE - (float)deltaTime / (1 / FRAME_RATE) * FRAME_RATE;
+//    DebugLog(@"fps %5.5f", fps);
 }
 
 - (void)render {
@@ -158,8 +169,19 @@
     glClear(GL_COLOR_BUFFER_BIT);
     glViewport(0, 0, (GLsizei)size.width , (GLsizei)size.height );
 
-    [self.currentScene touch:(float)deltaTime];
-    [self.currentScene draw: (float)deltaTime];
+    int accumulatedSteps = 1;
+
+//    if (accumulator >= 1 / FRAME_RATE) {
+//        accumulatedSteps += (int)floor(accumulator / (1 / FRAME_RATE));
+////        accumulator = fmod(accumulator, 1 / FRAME_RATE);
+//        accumulator = 0;
+//    }
+
+    for (int i = 0 ; i < accumulatedSteps ; i++) {
+        [self.currentScene touch:deltaTime];
+        [self.currentScene draw: deltaTime];
+    }
+
 
     [context presentRenderbuffer:GL_RENDERBUFFER];
 
