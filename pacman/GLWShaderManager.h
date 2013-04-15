@@ -18,6 +18,7 @@ enum {
 } DefaultShaderIndexes;
 
 extern NSString* const kGLWDefaultProgram;
+extern NSString* const kGLWPositionColorProgram;
 
 @interface GLWShaderManager : NSObject {
     NSMutableDictionary* shaders;

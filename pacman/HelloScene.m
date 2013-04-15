@@ -11,6 +11,7 @@
 #import "Spaceship.h"
 #import "GLWMath.h"
 #import "PhysicsSystem.h"
+#import "GLWLinesPrimitive.h"
 
 
 @implementation HelloScene {
@@ -27,6 +28,15 @@
         self.spaceship.layer.position = CGPointMake(centeredX, 50);
         [self addChild: self.spaceship.layer];
 
+
+        NSArray *v = @[
+                [NSValue valueWithCGPoint:CGPointMake(0, 0)],
+                [NSValue valueWithCGPoint:CGPointMake(100, 0)],
+                [NSValue valueWithCGPoint:CGPointMake(100, 100)],
+                [NSValue valueWithCGPoint:CGPointMake(0, 100)],
+        ];
+        GLWLinesPrimitive *primitive = [[GLWLinesPrimitive alloc] initWithVertices: v];
+        [self addChild:primitive];
 
 //        [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
 //

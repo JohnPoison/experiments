@@ -5,6 +5,7 @@
 
 
 #import "GLWShaderProgram.h"
+#import "GLWShaderManager.h"
 
 
 @implementation GLWShaderProgram {
@@ -30,6 +31,8 @@ static GLWShaderProgram *currentProgram = nil;
 
         if(fragmentShader)
             glAttachShader(program, fragmentShader);
+
+        self.automaticallyUpdatedUniforms = kGLWUniformNone;
     }
 
     return self;
@@ -101,6 +104,7 @@ static GLWShaderProgram *currentProgram = nil;
         glUseProgram(program);
         GL_ERROR();
         currentProgram = self;
+        [[GLWShaderManager sharedManager] updateDefaultUniforms];
     }
 }
 
@@ -115,10 +119,9 @@ static GLWShaderProgram *currentProgram = nil;
         int tmpLoc = glGetUniformLocation(program, [location UTF8String]);
         if (tmpLoc == -1) {
             DebugLog(@"Uniform location %@ wasn't found", location);
-            exit(1);
-        } else{
-            [uniformLocations setObject: @(tmpLoc) forKey: location];
+            return tmpLoc;
         }
+        [uniformLocations setObject: @(tmpLoc) forKey: location];
     }
 
     GL_ERROR();
@@ -127,12 +130,18 @@ static GLWShaderProgram *currentProgram = nil;
 }
 
 -(void) updateUniformLocation: (NSString *)location withMatrix4fv:(GLvoid*)m count:(NSUInteger)count {
-    glUniformMatrix4fv( [self uniformLocation: location], (GLsizei) count, GL_FALSE, m);
-    GL_ERROR();
+    int loc = [self uniformLocation: location];
+    if (loc >= 0) {
+        glUniformMatrix4fv( [self uniformLocation: location], (GLsizei) count, GL_FALSE, m);
+        GL_ERROR();
+    }
 }
 
 -(void) updateUniformLocation: (NSString *)location withInt:(GLint)value {
-    glUniform1i([self uniformLocation: location], value);
+    int loc = [self uniformLocation: location];
+    if (loc >= 0) {
+        glUniform1i(loc, value);
+    }
     GL_ERROR();
 }
 

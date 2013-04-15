@@ -13,6 +13,7 @@
 #import "GLWMatrix.h"
 
 NSString* const kGLWDefaultProgram              = @"GLWDefaultProgram";
+NSString* const kGLWPositionColorProgram = @"GLWColorPositionProgram";
 NSString* const kAttributePosition              = @"a_position";
 NSString* const kAttributeColor                 = @"a_color";
 NSString* const kAttributeTexCoords             = @"a_texCoord";
@@ -41,14 +42,21 @@ NSString* const kUniformTexture                 = @"u_texture";
         [defaultProgram bindAttribute:kAttributeColor toIndex:kAttributeIndexColor];
         [defaultProgram bindAttribute:kAttributeTexCoords toIndex:kAttributeIndexTexCoords];
         [defaultProgram link];
-        [defaultProgram use];
+        defaultProgram.automaticallyUpdatedUniforms = kGLWUniformProjection | kGLWUniformTransformation | kGLWUniformTexture;
 
-//        [defaultProgram updateUniformLocation: kUniformProjectionMatrix withMatrix4fv: [GLWCamera sharedCamera].viewMatrix.matrix count: 1];
-//        [defaultProgram bindAttribute:kAttributeColor toIndex:kAttributeIndexColor];
-//        [defaultProgram bindAttribute:kAttributeTexCoord toIndex:kAttributeIndexTexCoord];
         GL_ERROR();
 
         [self cacheProgram: defaultProgram withName: kGLWDefaultProgram];
+        
+        GLWShaderProgram *colorPositionProgram = [[GLWShaderProgram alloc] initWithVertexSource: glwPositionColorVertex fragmentSource: glwPositionColorFragment];
+        [colorPositionProgram bindAttribute:kAttributePosition toIndex:kAttributeIndexPosition];
+        [colorPositionProgram bindAttribute:kAttributeColor toIndex:kAttributeIndexColor];
+        [colorPositionProgram link];
+        colorPositionProgram.automaticallyUpdatedUniforms = kGLWUniformProjection | kGLWUniformTransformation;
+
+        GL_ERROR();
+
+        [self cacheProgram:colorPositionProgram withName:kGLWPositionColorProgram];
     }
 
     return self;
@@ -65,10 +73,16 @@ NSString* const kUniformTexture                 = @"u_texture";
 - (void)updateDefaultUniforms {
     GLWShaderProgram* program = [GLWShaderProgram currentProgram];
 
-    [program updateUniformLocation:kUniformProjectionMatrix withMatrix4fv:[GLWCamera sharedCamera].projection.matrix count:1];
-    [program updateUniformLocation: kUniformTransformationMatrix withMatrix4fv: [GLWCamera sharedCamera].transformation.matrix count: 1];
-    // default texture is at 0 position
-    [program updateUniformLocation: kUniformTexture withInt: 0];
+    if (program.automaticallyUpdatedUniforms & kGLWUniformProjection) {
+        [program updateUniformLocation:kUniformProjectionMatrix withMatrix4fv:[GLWCamera sharedCamera].projection.matrix count:1];
+    }
+    if (program.automaticallyUpdatedUniforms & kGLWUniformTransformation) {
+        [program updateUniformLocation: kUniformTransformationMatrix withMatrix4fv: [GLWCamera sharedCamera].transformation.matrix count: 1];
+    }
+    if (program.automaticallyUpdatedUniforms & kGLWUniformTexture) {
+        // default texture is at 0 position
+        [program updateUniformLocation: kUniformTexture withInt: 0];
+    }
 }
 
 

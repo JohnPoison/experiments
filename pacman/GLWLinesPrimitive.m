@@ -22,7 +22,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 - (id)init {
     self = [super init];
     if (self) {
-//        self.shaderProgram = [[GLWShaderManager sharedManager] getProgram: kGLWPositionColorProgram];
+        self.shaderProgram = [[GLWShaderManager sharedManager] getProgram: kGLWPositionColorProgram];
     }
 
     return self;
@@ -61,6 +61,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 
 - (void)draw:(CFTimeInterval)dt {
     [self.shaderProgram use];
+//    [[GLWShaderManager sharedManager] updateDefaultUniforms];
 
     if (self.isDirty) {
         [self updateVertices];

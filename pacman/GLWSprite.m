@@ -134,6 +134,7 @@ static const int VertexSize = sizeof(GLWVertexData);
         return;
 
     [self.shaderProgram use];
+//    [[GLWShaderManager sharedManager] updateDefaultUniforms];
 
     [self.animation update: dt];
 

@@ -120,14 +120,11 @@
 
     [GLWMatrix identityMatrix];
 
-    GLWShaderProgram *program = [[GLWShaderManager sharedManager] getProgram: kGLWDefaultProgram];
-
-
     [GLWMatrix copyMatrix: [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight: viewportSize.width / SCALE()  andBottom:0 andTop: viewportSize.height / SCALE() andNear:-1024 andFar:1024].matrix
                      into:[GLWCamera sharedCamera].projection.matrix
     ];
 
-    [[GLWShaderManager sharedManager] updateDefaultUniforms];
+//    [[GLWShaderManager sharedManager] updateDefaultUniforms];
 
 }
 

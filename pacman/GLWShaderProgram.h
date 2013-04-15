@@ -6,6 +6,14 @@
 
 #import <Foundation/Foundation.h>
 
+// indicates what uniforms to update automatically
+typedef enum GLWShaderUniforms {
+    kGLWUniformNone             = 1 << 1,
+    kGLWUniformProjection       = 1 << 2,
+    kGLWUniformTransformation   = 1 << 3,
+    kGLWUniformTexture          = 1 << 4,
+} GLWShaderUniforms;
+
 
 @interface GLWShaderProgram : NSObject {
 
@@ -16,6 +24,8 @@
         GLuint vertexShader;
         GLuint fragmentShader;
 }
+
+@property (nonatomic, assign) GLWShaderUniforms automaticallyUpdatedUniforms;
 
 - (GLWShaderProgram *) initWithVertexSource: (const GLchar*) vertexSource fragmentSource: (const GLchar*) fragmentSource;
 - (void) bindAttribute: (NSString *) attribute toIndex: (uint) i;
