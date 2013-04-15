@@ -15,7 +15,8 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _viewMatrix = [GLWMatrix identityMatrix];
+        _transformation = [GLWMatrix identityMatrix];
+        _projection = [GLWMatrix identityMatrix];
     }
 
     return self;
@@ -32,7 +33,8 @@
 }
 
 - (void)resetToDefault {
-    [self.viewMatrix identityMatrix];
+    [self.transformation identityMatrix];
+    [self.projection identityMatrix];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 @class OpenGLView;
 @class GLWObject;
+@class GLWMatrix;
 
 
 @interface GLWRenderManager : NSObject {
@@ -30,6 +31,8 @@
 
 @property (assign) BOOL isRendering;
 @property (nonatomic, strong) GLWObject *currentScene;
+@property (nonatomic, strong) GLWMatrix *projection;
+@property (nonatomic, strong) GLWMatrix *transformation;
 
 - (id) initWithView: (OpenGLView *) openGLView;
 - (void) startRender;

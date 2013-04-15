@@ -11,7 +11,8 @@
 
 @interface GLWCamera : NSObject
 
-@property (nonatomic, readonly) GLWMatrix *viewMatrix;
+@property (nonatomic, readonly) GLWMatrix *transformation;
+@property (nonatomic, readonly) GLWMatrix *projection;
 
 +(GLWCamera *) sharedCamera;
 

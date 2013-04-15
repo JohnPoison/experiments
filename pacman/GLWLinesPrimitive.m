@@ -61,7 +61,6 @@ static const int VertexSize = sizeof(GLWVertexData);
 
 - (void)draw:(CFTimeInterval)dt {
     [self.shaderProgram use];
-    [self updateUniforms];
 
     if (self.isDirty) {
         [self updateVertices];

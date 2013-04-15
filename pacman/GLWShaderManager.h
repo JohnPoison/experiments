@@ -27,5 +27,6 @@ extern NSString* const kGLWDefaultProgram;
 
 - (void)cacheProgram:(GLWShaderProgram *)shader withName: (NSString *) name;
 - (GLWShaderProgram *) getProgram: (NSString *) name;
+- (void) updateDefaultUniforms;
 
 @end

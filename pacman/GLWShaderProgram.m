@@ -10,6 +10,9 @@
 @implementation GLWShaderProgram {
 
 }
+
+static GLWShaderProgram *currentProgram = nil;
+
 - (GLWShaderProgram *)initWithVertexSource:(GLchar const *)vertexSource fragmentSource:(GLchar const *)fragmentSource {
     self = [super init];
 
@@ -94,8 +97,11 @@
 }
 
 - (void)use {
-    glUseProgram(program);
-    GL_ERROR();
+    if (currentProgram != self) {
+        glUseProgram(program);
+        GL_ERROR();
+        currentProgram = self;
+    }
 }
 
 - (void)dealloc {
@@ -128,6 +134,10 @@
 -(void) updateUniformLocation: (NSString *)location withInt:(GLint)value {
     glUniform1i([self uniformLocation: location], value);
     GL_ERROR();
+}
+
++ (GLWShaderProgram *)currentProgram {
+    return currentProgram;
 }
 
 @end

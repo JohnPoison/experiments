@@ -123,18 +123,12 @@
     GLWShaderProgram *program = [[GLWShaderManager sharedManager] getProgram: kGLWDefaultProgram];
 
 
-    [program link];
-    [program use];
+    [GLWMatrix copyMatrix: [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight: viewportSize.width / SCALE()  andBottom:0 andTop: viewportSize.height / SCALE() andNear:-1024 andFar:1024].matrix
+                     into:[GLWCamera sharedCamera].projection.matrix
+    ];
 
-    GLWMatrix *projection = [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight: viewportSize.width / SCALE()  andBottom:0 andTop: viewportSize.height / SCALE() andNear:-1024 andFar:1024];
+    [[GLWShaderManager sharedManager] updateDefaultUniforms];
 
-    GLWMatrix *transformation = [GLWMatrix identityMatrix];
-
-    // todo: move uniforms update to default shader program
-    [program updateUniformLocation: @"u_projection" withMatrix4fv: projection.matrix count: 1];
-    [program updateUniformLocation: @"u_transformation" withMatrix4fv: transformation.matrix count: 1];
-    // default texture is at 0 position
-    [program updateUniformLocation: @"u_texture" withInt: 0];
 }
 
 - (void) updateDeltaTime {

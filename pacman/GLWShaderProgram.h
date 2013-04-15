@@ -23,5 +23,6 @@
 - (void) updateUniformLocation: (NSString *)location withMatrix4fv:(GLvoid*)m count:(NSUInteger)count;
 - (BOOL)link;
 - (void)use;
++ (GLWShaderProgram *)currentProgram;
 
 @end

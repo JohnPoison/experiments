@@ -14,6 +14,7 @@
 #import "GLWMacro.h"
 #import "GLWShaderManager.h"
 #import "GLWAnimation.h"
+#import "GLWShaderProgram.h"
 
 static const int VertexSize = sizeof(GLWVertexData);
 
@@ -131,6 +132,8 @@ static const int VertexSize = sizeof(GLWVertexData);
     // if we are using VBO this method shouldn't be involved
     if (self.group)
         return;
+
+    [self.shaderProgram use];
 
     [self.animation update: dt];
 

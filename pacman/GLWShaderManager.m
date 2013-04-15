@@ -11,14 +11,14 @@
 #import "GLWShaders.h"
 #import "GLWCamera.h"
 #import "GLWMatrix.h"
-#import "Debug.h"
 
-NSString* const kGLWDefaultProgram  = @"GLWDefaultProgram";
-NSString* const kAttributePosition  = @"a_position";
-NSString* const kAttributeColor     = @"a_color";
-NSString* const kAttributeTexCoords = @"a_texCoord";
-NSString* const kUniformViewMatrix  = @"u_MVP";
-NSString* const kUniformTexture     = @"u_texture";
+NSString* const kGLWDefaultProgram              = @"GLWDefaultProgram";
+NSString* const kAttributePosition              = @"a_position";
+NSString* const kAttributeColor                 = @"a_color";
+NSString* const kAttributeTexCoords             = @"a_texCoord";
+NSString* const kUniformProjectionMatrix = @"u_projection";
+NSString* const kUniformTransformationMatrix    = @"u_transformation";
+NSString* const kUniformTexture                 = @"u_texture";
 
 @implementation GLWShaderManager
 
@@ -36,14 +36,14 @@ NSString* const kUniformTexture     = @"u_texture";
     self = [super init];
     if (self) {
         shaders = [NSMutableDictionary dictionary];
-        GLWShaderProgram *defaultProgram = [[GLWShaderProgram alloc] initWithVertexSource: glwVertex fragmentSource: glwFragment];
+        GLWShaderProgram *defaultProgram = [[GLWShaderProgram alloc] initWithVertexSource: glwDefaultVertex fragmentSource: glwDefaultFragment];
         [defaultProgram bindAttribute:kAttributePosition toIndex:kAttributeIndexPosition];
         [defaultProgram bindAttribute:kAttributeColor toIndex:kAttributeIndexColor];
         [defaultProgram bindAttribute:kAttributeTexCoords toIndex:kAttributeIndexTexCoords];
         [defaultProgram link];
         [defaultProgram use];
 
-//        [defaultProgram updateUniformLocation: kUniformViewMatrix withMatrix4fv: [GLWCamera sharedCamera].viewMatrix.matrix count: 1];
+//        [defaultProgram updateUniformLocation: kUniformProjectionMatrix withMatrix4fv: [GLWCamera sharedCamera].viewMatrix.matrix count: 1];
 //        [defaultProgram bindAttribute:kAttributeColor toIndex:kAttributeIndexColor];
 //        [defaultProgram bindAttribute:kAttributeTexCoord toIndex:kAttributeIndexTexCoord];
         GL_ERROR();
@@ -61,5 +61,15 @@ NSString* const kUniformTexture     = @"u_texture";
 - (GLWShaderProgram *) getProgram: (NSString *) name {
     return [shaders objectForKey: name];
 }
+
+- (void)updateDefaultUniforms {
+    GLWShaderProgram* program = [GLWShaderProgram currentProgram];
+
+    [program updateUniformLocation:kUniformProjectionMatrix withMatrix4fv:[GLWCamera sharedCamera].projection.matrix count:1];
+    [program updateUniformLocation: kUniformTransformationMatrix withMatrix4fv: [GLWCamera sharedCamera].transformation.matrix count: 1];
+    // default texture is at 0 position
+    [program updateUniformLocation: kUniformTexture withInt: 0];
+}
+
 
 @end
