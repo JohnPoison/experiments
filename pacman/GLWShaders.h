@@ -6,5 +6,7 @@
 //  Copyright (c) 2013 JohnPoison. All rights reserved.
 //
 
-extern const GLchar * glwVertex;
-extern const GLchar * glwFragment;
+extern const GLchar *glwDefaultVertex;
+extern const GLchar *glwDefaultFragment;
+extern const GLchar *glwPositionColorVertex;
+extern const GLchar *glwPositionColorFragment;

@@ -8,8 +8,14 @@
 
 #import "GLWShaders.h"
 
-const GLchar * glwVertex =
+const GLchar *glwDefaultVertex =
 #import "GLWDefaultVertex.h"
 
-const GLchar * glwFragment =
+const GLchar *glwDefaultFragment =
 #import "GLWDefaultFragment.h"
+
+const GLchar *glwPositionColorVertex =
+#import "GLWPositionColorVertex.h"
+
+const GLchar *glwPositionColorFragment=
+#import "GLWPositionColorFragment.h"
