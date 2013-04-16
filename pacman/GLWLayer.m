@@ -11,8 +11,6 @@
 
 }
 
-@synthesize position = _position;
-
 - (id)init {
     self = [super init];
     if (self) {
@@ -55,28 +53,29 @@
 }
 
 - (void)touch:(CFTimeInterval)dt {
-    [super touch:dt];
+    if (!self.visible)
+        return;
 
     for (GLWObject *object in children) {
-        [object touch: dt];
+        if (object.visible)
+            [object touch: dt];
     }
 }
 
 - (void)draw:(CFTimeInterval)dt {
+    if (!self.visible)
+        return;
+
     [self sortChildren];
 
     for (uint i = 0; i < children.count; i++) {
-        [(GLWObject *)[children objectAtIndex: i] draw: dt];
+        if (((GLWObject *)[children objectAtIndex: i]).visible)
+            [(GLWObject *)[children objectAtIndex: i] draw: dt];
     }
 
     if (self.isDirty) {
         isDirty = NO;
     }
-}
-
-- (void)setPosition:(CGPoint)position {
-    isDirty = YES;
-    _position = position;
 }
 
 @end

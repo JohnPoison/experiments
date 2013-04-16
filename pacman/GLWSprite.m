@@ -15,6 +15,8 @@
 #import "GLWShaderManager.h"
 #import "GLWAnimation.h"
 #import "GLWShaderProgram.h"
+#import "GLWCamera.h"
+#import "GLWMatrix.h"
 
 static const int VertexSize = sizeof(GLWVertexData);
 
@@ -102,19 +104,26 @@ static const int VertexSize = sizeof(GLWVertexData);
 - (void) updateVertices {
     if (self.isDirty) {
 
-        CGPoint lb = [self transformedPoint:self.position];
-        CGPoint tr = [self transformedPoint:CGPointAdd(self.position, CGPointMake(self.size.width, self.size.height))];
-//        CGPoint lb = self.position;
-//        CGPoint tr = CGPointAdd(self.position, CGPointMake(self.size.width, self.size.height));
-        float left   = lb.x;
-        float right  = tr.x;
-        float bottom = lb.y;
-        float top    = tr.y;
+        [self updateTransform];
 
-        _vertices.bottomLeft.vertex     = Vec3Make(left, bottom, z);
-        _vertices.bottomRight.vertex    = Vec3Make(right, bottom, z);
-        _vertices.topLeft.vertex        = Vec3Make(left, top, z);
-        _vertices.topRight.vertex       = Vec3Make(right, top, z);
+        // rect edges
+        CGPoint origin = CGPointZero;
+        CGPoint rectEdge = CGPointMake(self.size.width, self.size.height);
+
+        float left   = origin.x;
+        float right  = rectEdge.x;
+        float bottom = origin.y;
+        float top    = rectEdge.y;
+
+        CGPoint bl = CGPointMake(left, bottom);
+        CGPoint br = CGPointMake(right, bottom);
+        CGPoint tl = CGPointMake(left, top);
+        CGPoint tr = CGPointMake(right, top);
+
+        _vertices.bottomLeft.vertex     = [self transformedCoordinate: bl];
+        _vertices.bottomRight.vertex    = [self transformedCoordinate: br];
+        _vertices.topLeft.vertex        = [self transformedCoordinate: tl];
+        _vertices.topRight.vertex       = [self transformedCoordinate: tr];
 
         [self updateTexCoords];
 
@@ -133,6 +142,8 @@ static const int VertexSize = sizeof(GLWVertexData);
 }
 
 - (void)draw:(CFTimeInterval)dt {
+    [super draw:dt];
+
     // if we are using VBO this method shouldn't be involved
     if (self.group)
         return;

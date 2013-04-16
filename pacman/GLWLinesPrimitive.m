@@ -33,7 +33,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 
     for (int i = 0; i < _points.count; i++) {
         CGPoint v =[[_points objectAtIndex:i] CGPointValue];
-        _vertices[i].vertex = Vec3Make(self.position.x + v.x, self.position.y + v.y, 0);
+        _vertices[i].vertex = [self transformedCoordinate:v];
         _vertices[i].color = normalizedColor;
         _vertices[i].texCoords = Vec2Make(0,0);
     }
@@ -60,6 +60,8 @@ static const int VertexSize = sizeof(GLWVertexData);
 }
 
 - (void)draw:(CFTimeInterval)dt {
+    [super draw: dt];
+
     [self.shaderProgram use];
 //    [[GLWShaderManager sharedManager] updateDefaultUniforms];
 
