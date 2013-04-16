@@ -21,7 +21,8 @@
     self = [super init];
     if (self) {
 
-        self.space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
+//        self.space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
+        self.space = [GLWSprite spriteWithFile: @"space.png"];
         [self addChild: self.space];
         self.spaceship = [[Spaceship alloc] init];
         float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2 - self.spaceship.spaceship.size.width / 2;
@@ -31,11 +32,14 @@
 
         NSArray *v = @[
                 [NSValue valueWithCGPoint:CGPointMake(0, 0)],
+                [NSValue valueWithCGPoint:CGPointMake(50, 100)],
+                [NSValue valueWithCGPoint:CGPointMake(50, 100)],
                 [NSValue valueWithCGPoint:CGPointMake(100, 0)],
-                [NSValue valueWithCGPoint:CGPointMake(100, 100)],
-                [NSValue valueWithCGPoint:CGPointMake(0, 100)],
+                [NSValue valueWithCGPoint:CGPointMake(10, 19)],
+                [NSValue valueWithCGPoint:CGPointMake(90, 19)],
         ];
-        GLWLinesPrimitive *primitive = [[GLWLinesPrimitive alloc] initWithVertices: v];
+        GLWLinesPrimitive *primitive = [[GLWLinesPrimitive alloc] initWithVertices:v lineWidth:3 color:Vec4Make(255, 255, 0, 1)];
+        primitive.position = CGPointMake(50, 30);
         [self addChild:primitive];
 
 //        [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];

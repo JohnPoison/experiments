@@ -3,8 +3,12 @@
 
 #define DegToRadF  0.017453292519943f
 #define RadToDegF  57.29577951308232f
-#define DegToRad (D) ((D) * DegToRadF)
+//#define DegToRad (D) ((D) * DegToRadF)
 #define RadToDeg (R) ((R) * RadToDegF)
+
+static inline double DegToRad(float d) {
+    return d * DegToRadF;
+}
 
 static inline BOOL Vec3AreEqual(Vec3 v1, Vec3 v2) {
     return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z;

@@ -13,7 +13,7 @@ varying vec4 v_fragmentColor;				\n\
                                             \n\
 void main()									\n\
 {											\n\
-    //gl_FragColor = v_fragmentColor;			\n\
-    gl_FragColor = vec4(1,0,0,1);			\n\
+    gl_FragColor = v_fragmentColor;			\n\
+    //gl_FragColor = vec4(1,0,0,1);			\n\
 }											\n\
 ";

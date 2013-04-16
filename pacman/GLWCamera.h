@@ -9,10 +9,13 @@
 @class GLWMatrix;
 
 
-@interface GLWCamera : NSObject
+@interface GLWCamera : NSObject {
+    NSMutableArray* _matricesStack;
+}
 
-@property (nonatomic, readonly) GLWMatrix *transformation;
 @property (nonatomic, readonly) GLWMatrix *projection;
+
+-(GLWMatrix *)transformation;
 
 +(GLWCamera *) sharedCamera;
 

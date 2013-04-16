@@ -120,10 +120,15 @@
 
     [GLWMatrix identityMatrix];
 
-    [GLWMatrix copyMatrix: [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight: viewportSize.width / SCALE()  andBottom:0 andTop: viewportSize.height / SCALE() andNear:-1024 andFar:1024].matrix
-                     into:[GLWCamera sharedCamera].projection.matrix
-    ];
+//    [GLWMatrix copyMatrix:
+//                     into:[GLWCamera sharedCamera].projection.matrix
+//    ];
 
+    [[GLWCamera sharedCamera].projection translate:Vec3Make(-1, -1, 0)];
+    [[GLWCamera sharedCamera].projection multiply: [GLWMatrix orthoMatrixFromFrustumLeft:0.f andRight: viewportSize.width / SCALE()  andBottom:0 andTop: viewportSize.height / SCALE() andNear:-1024 andFar:1024]];
+
+    [[GLWCamera sharedCamera].projection translate:Vec3Make(50, 100, 0)];
+//    [[GLWCamera sharedCamera].projection rotate:Vec3Make(DegToRad(0),DegToRad(0), DegToRad(40))];
 //    [[GLWShaderManager sharedManager] updateDefaultUniforms];
 
 }

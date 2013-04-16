@@ -102,10 +102,14 @@ static const int VertexSize = sizeof(GLWVertexData);
 - (void) updateVertices {
     if (self.isDirty) {
 
-        float left   = self.position.x;
-        float right  = self.position.x + self.size.width;
-        float bottom = self.position.y;
-        float top    = self.position.y + self.size.height;
+        CGPoint lb = [self transformedPoint:self.position];
+        CGPoint tr = [self transformedPoint:CGPointAdd(self.position, CGPointMake(self.size.width, self.size.height))];
+//        CGPoint lb = self.position;
+//        CGPoint tr = CGPointAdd(self.position, CGPointMake(self.size.width, self.size.height));
+        float left   = lb.x;
+        float right  = tr.x;
+        float bottom = lb.y;
+        float top    = tr.y;
 
         _vertices.bottomLeft.vertex     = Vec3Make(left, bottom, z);
         _vertices.bottomRight.vertex    = Vec3Make(right, bottom, z);

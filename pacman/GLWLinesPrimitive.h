@@ -10,11 +10,14 @@
 
 
 @interface GLWLinesPrimitive : GLWObject {
-    NSArray *       points;
-    GLWVertexData*  vertices;
-    uint*           indices;
+    NSArray*        _points;
+    GLWVertexData*  _vertices;
+    float           _lineWidth;
+    Vec4            normalizedColor;
 }
 
--(GLWLinesPrimitive *) initWithVertices: (NSArray *)vArr;
+@property (nonatomic, assign) Vec4 color;
+
+- (GLWLinesPrimitive *)initWithVertices:(NSArray *)vArr lineWidth:(float)lineWidth color:(Vec4)color;
 
 @end

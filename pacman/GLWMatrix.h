@@ -20,9 +20,13 @@
 +(void) scaleMatrix: (GLfloat*)m vector: (Vec3) v;
 +(void) translateMatrix: (GLfloat*)m vector: (Vec3)v;
 +(void) copyMatrix: (GLfloat*) srcGLMatrix into: (GLfloat*) destGLMatrix ;
++(GLWMatrix *)rotationMatrix: (Vec3) v;
++(Vec4) multiplyVec: (Vec4) v toMatrix: (GLWMatrix *) matrix;
+-(void) multiply: (GLWMatrix *)otherMatrix;
 
 -(void) frustumLeft: (GLfloat) left right: (GLfloat) right bottom: (GLfloat) bottom top: (GLfloat) top near: (GLfloat) near far: (GLfloat) far;
 -(void) scale: (Vec3) v;
+-(void) rotate: (Vec3) v;
 -(void) translate: (Vec3)v;
 -(void) zeroMatrix;
 -(void) identityMatrix;

@@ -9,6 +9,8 @@
 #import "GLWShaderProgram.h"
 #import "GLWShaderManager.h"
 #import "GLWMath.h"
+#import "GLWMatrix.h"
+#import "GLWTypes.h"
 
 
 @implementation GLWObject {
@@ -22,8 +24,14 @@
     if (self) {
         self.shaderProgram = [[GLWShaderManager sharedManager] getProgram: kGLWDefaultProgram];
         self.z = 0;
+        zCoordinate = 0;
         isDirty = NO;
         updateSelector = nil;
+        transformation = [GLWMatrix identityMatrix];
+//        [transformation rotate:Vec3Make(1, 1, 1)];
+
+//        [transformation translate:Vec3Make(100, 10, 0)];
+//        [transformation scale:Vec3Make(0.5, 1, 1)];
     }
 
     return self;
@@ -52,6 +60,7 @@
 
 - (void)setPosition:(CGPoint)position {
     _position = CGPointMake(floorf(position.x), floorf(position.y));
+    isDirty = YES;
 }
 
 - (CGPoint)position {
@@ -63,6 +72,15 @@
 
 - (BOOL)isDirty {
     return isDirty || self.parent.isDirty;
+}
+
+- (CGPoint) transformedPoint: (CGPoint) p {
+    Vec4 v = [self transformedCoordinate:Vec4Make(p.x, p.y, zCoordinate, 1)];
+    return CGPointMake(v.x, v.y);
+}
+
+- (Vec4) transformedCoordinate: (Vec4) v {
+    return [GLWMatrix multiplyVec:Vec4Make(v.x, v.y, v.w, v.z) toMatrix: transformation];
 }
 
 @end

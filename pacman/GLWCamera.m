@@ -15,8 +15,10 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _transformation = [GLWMatrix identityMatrix];
+
         _projection = [GLWMatrix identityMatrix];
+        _matricesStack = [NSMutableArray array];
+        [_matricesStack addObject:[GLWMatrix identityMatrix]];
     }
 
     return self;
@@ -35,6 +37,21 @@
 - (void)resetToDefault {
     [self.transformation identityMatrix];
     [self.projection identityMatrix];
+}
+
+- (GLWMatrix *)transformation {
+    return [_matricesStack lastObject];
+}
+
+- (void) popMatrix {
+    [_matricesStack removeLastObject];
+}
+
+- (void) pushMatrix {
+    GLWMatrix *newMatrix = [GLWMatrix identityMatrix];
+    [GLWMatrix copyMatrix: self.transformation.matrix into: newMatrix.matrix];
+
+    [_matricesStack addObject: newMatrix];
 }
 
 @end
