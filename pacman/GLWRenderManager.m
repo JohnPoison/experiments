@@ -28,13 +28,6 @@
 
 + (GLWRenderManager *)sharedManager {
     return [OpenGLManager sharedManager].view.renderer;
-//    static GLWRenderManager *sharedManager = nil;
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        sharedManager = [[GLWRenderManager alloc] init];
-//    });
-//
-//    return sharedManager;
 }
 
 - (id)init {

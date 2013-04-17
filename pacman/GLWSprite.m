@@ -28,7 +28,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 }
 
 - (void)setParent:(GLWObject *)parent {
-    isDirty = YES;
+    [self setDirty];
     [super setParent: parent];
 }
 
@@ -54,7 +54,7 @@ static const int VertexSize = sizeof(GLWVertexData);
     if (self.group && textureRect.texture != self.texture)
         @throw [NSException exceptionWithName: @"Can't change texture rect" reason:@"texture rect and group has different textures" userInfo:nil];
 
-    isDirty = YES;
+    [self setDirty];
     [self.group childIsDirty];
 
     _textureRect = textureRect;
@@ -90,13 +90,12 @@ static const int VertexSize = sizeof(GLWVertexData);
 }
 
 - (void)setSize:(CGSize)size {
-    isDirty = YES;
+    [self setDirty];
     [self.group childIsDirty];
     [super setSize:size];
 }
 
 - (void)setPosition:(CGPoint)position {
-    isDirty = YES;
     [self.group childIsDirty];
     [super setPosition:position];
 }
@@ -211,7 +210,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 }
 
 - (void)setTextureOffset:(CGPoint)textureOffset {
-    isDirty = YES;
+    [self setDirty];
     _textureOffset = textureOffset;
 }
 

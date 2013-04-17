@@ -10,6 +10,7 @@
 #import "OpenGLView.h"
 #import "GLWRenderManager.h"
 #import "GLWMacro.h"
+#import "GLWTouchDispatcher.h"
 
 @implementation OpenGLView
 
@@ -21,10 +22,14 @@
 - (id)initWithFrame:(CGRect)frame
 {
     frame = (CGRect){frame.origin.x * SCALE(), frame.origin.y * SCALE(), frame.size.width * SCALE(), frame.size.height * SCALE()};
+
     self = [super initWithFrame:frame];
+
     if (self) {
         renderManager = [[GLWRenderManager alloc] initWithView: self];
+        [GLWTouchDispatcher sharedDispatcher].delegate = self;
     }
+
     return self;
 }
 
@@ -34,6 +39,22 @@
 
 + (Class)layerClass {
     return [CAEAGLLayer class];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [[GLWTouchDispatcher sharedDispatcher] touchesCancelled: touches withEvent: event];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [[GLWTouchDispatcher sharedDispatcher] touchesBegan: touches withEvent: event];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [[GLWTouchDispatcher sharedDispatcher] touchesMoved: touches withEvent: event];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [[GLWTouchDispatcher sharedDispatcher] touchesEnded:touches withEvent: event];
 }
 
 @end

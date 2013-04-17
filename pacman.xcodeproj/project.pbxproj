@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		36EBC0457C648A4FFEE07126 /* GLWTextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC4BAE876DE5620E580FD /* GLWTextureCache.m */; };
+		36EBC048A3CC0BADC7830F67 /* SpaceshipControlSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCEA168E36944662AC3E2 /* SpaceshipControlSystem.m */; };
 		36EBC08CCB15F9E08BC8A2B9 /* space.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC982D0377BFA73101CD9 /* space.png */; };
 		36EBC0B5685EB85E45A7313D /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCF6F9D8290B362F2A3D4 /* Entity.m */; };
 		36EBC0C559D869BCF387C30D /* PhysicalBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA14029C260167A445B9 /* PhysicalBody.m */; };
 		36EBC1D26C01A324B9329DFC /* PhysicsSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC159AB799D0DEAC6EB7F /* PhysicsSystem.m */; };
+		36EBC1DA096F917F0C815EEB /* SpaceshipEngineComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCE8A9AE69AB2A2D28851 /* SpaceshipEngineComponent.m */; };
 		36EBC1EE6FF5F197649839D1 /* GLWShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCCCF0F52320DB7AA36DB /* GLWShaderProgram.m */; };
 		36EBC2D9109D20F6870944CD /* GLWSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC8873BA1C8021C29011D /* GLWSprite.m */; };
 		36EBC3E1C059B53FE581E5A1 /* ComponentLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC002C9B53BA10E8D93A0 /* ComponentLayer.m */; };
@@ -27,11 +29,11 @@
 		36EBC9AA8C9FCFC2D57FAEE6 /* DependencyNotFoundException.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC78794ABEABE6A235309 /* DependencyNotFoundException.m */; };
 		36EBCADEB93978E893ECD319 /* PhysicsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCD25926BC77B8E2A859B /* PhysicsComponent.m */; };
 		36EBCB130CF3C7D32FEB8DE0 /* RenderComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC41213785419ADE08023 /* RenderComponent.m */; };
+		36EBCB1DFE58FCABA4AC38C6 /* GLWTouchDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC8E5ECB9973EFEA4629D /* GLWTouchDispatcher.m */; };
 		36EBCBB95F4E0D45AC31C3C1 /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCDC7324A448579D7CE83 /* System.m */; };
 		36EBCBC3D2DEAF75FA781C3A /* GLWTextureRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC40F25407A1B0CABE6CC /* GLWTextureRect.m */; };
 		36EBCBC97E011CD30E5C3DA6 /* retina-space.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBCCC90D9BC935EA9DB3CE /* retina-space.png */; };
 		36EBCBF80349C6569A4FB08B /* EntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA8BFBA91F7EA0A84152 /* EntityManager.m */; };
-		36EBCC41EBB82DDDA1FD9D1C /* SpriteComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC507D1E7216A34D3D252 /* SpriteComponent.m */; };
 		36EBCCD0CC9AA5A5693D3B6A /* retina-spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC3B1F5F0F3D283224C96 /* retina-spaceship.png */; };
 		36EBCDABC347C3EF1AAB1EFD /* GLWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC30A84ED9C32F07E3A18 /* GLWObject.m */; };
 		36EBCDEF2206B322110DC5EB /* GLWLinesPrimitive.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC6AB01FC494D331E6973 /* GLWLinesPrimitive.m */; };
@@ -58,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		36EBC002C9B53BA10E8D93A0 /* ComponentLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentLayer.m; sourceTree = "<group>"; };
+		36EBC1110C915493192CA27C /* SpaceshipControlSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceshipControlSystem.h; sourceTree = "<group>"; };
 		36EBC14963C46F27C681420B /* GLWRenderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWRenderManager.h; sourceTree = "<group>"; };
 		36EBC159AB799D0DEAC6EB7F /* PhysicsSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsSystem.m; sourceTree = "<group>"; };
 		36EBC1B68A9F23DC3B69E0A8 /* PhysicalBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalBody.h; sourceTree = "<group>"; };
@@ -70,7 +73,6 @@
 		36EBC4B6A60DE088C88C70B4 /* GLWAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLWAnimation.m; path = ComponentSystem/Systems/GLWAnimation.m; sourceTree = SOURCE_ROOT; };
 		36EBC4BAE876DE5620E580FD /* GLWTextureCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTextureCache.m; sourceTree = "<group>"; };
 		36EBC4E7330BE55E4379220D /* GLWShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWShaderProgram.h; sourceTree = "<group>"; };
-		36EBC507D1E7216A34D3D252 /* SpriteComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteComponent.m; sourceTree = "<group>"; };
 		36EBC5DC53E12C78FBC40576 /* GLWMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMacro.h; sourceTree = "<group>"; };
 		36EBC5FB9D9C2E77DE622FE7 /* GLWMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMath.h; sourceTree = "<group>"; };
 		36EBC604204156C4DCD06C8F /* GLWPositionColorVertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWPositionColorVertex.h; sourceTree = "<group>"; };
@@ -86,13 +88,15 @@
 		36EBC746EA660003F5B91147 /* Spaceship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spaceship.h; sourceTree = "<group>"; };
 		36EBC75E5DC69D96CEB1C29F /* GLWMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWMatrix.m; sourceTree = "<group>"; };
 		36EBC78794ABEABE6A235309 /* DependencyNotFoundException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DependencyNotFoundException.m; sourceTree = "<group>"; };
+		36EBC7D211BD583AE57AA834 /* GLWTouchDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTouchDispatcher.h; sourceTree = "<group>"; };
 		36EBC804889BCB8DD4757DA9 /* GLWMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWMatrix.h; sourceTree = "<group>"; };
 		36EBC818084647EB002DE223 /* GLWTextureRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTextureRect.h; sourceTree = "<group>"; };
 		36EBC8480D2E6094114D2EB6 /* GLWTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTexture.h; sourceTree = "<group>"; };
 		36EBC8873BA1C8021C29011D /* GLWSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWSprite.m; sourceTree = "<group>"; };
 		36EBC8B470D73FB998996B17 /* GLWTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTexture.m; sourceTree = "<group>"; };
+		36EBC8E5ECB9973EFEA4629D /* GLWTouchDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTouchDispatcher.m; sourceTree = "<group>"; };
 		36EBC8F56D5C04BA9341FEF8 /* Spaceship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spaceship.m; sourceTree = "<group>"; };
-		36EBC91F23814D7E2D934DF2 /* SpriteComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteComponent.h; sourceTree = "<group>"; };
+		36EBC90B04F20672F3261F90 /* SpaceshipEngineComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceshipEngineComponent.h; sourceTree = "<group>"; };
 		36EBC924488CA1205ABF3530 /* GLWLinesPrimitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWLinesPrimitive.h; sourceTree = "<group>"; };
 		36EBC939D5618E9A81090EDE /* GLWTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTypes.h; sourceTree = "<group>"; };
 		36EBC93D0612F052C1255447 /* DependencyNotFoundException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DependencyNotFoundException.h; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 		36EBCE1F8F8AA88D0E413C98 /* GLWAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLWAnimation.h; path = ComponentSystem/Systems/GLWAnimation.h; sourceTree = SOURCE_ROOT; };
 		36EBCE32AF292D64E6D95FC2 /* retina-spaceship.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = "retina-spaceship.plist"; sourceTree = "<group>"; };
 		36EBCE3FDFEDC01EF5EB6051 /* RenderComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderComponent.h; sourceTree = "<group>"; };
+		36EBCE8A9AE69AB2A2D28851 /* SpaceshipEngineComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceshipEngineComponent.m; sourceTree = "<group>"; };
+		36EBCEA168E36944662AC3E2 /* SpaceshipControlSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceshipControlSystem.m; sourceTree = "<group>"; };
 		36EBCF21660E6F235CE8020C /* EntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
 		36EBCF361CA36478BFD92F23 /* GLWCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWCamera.m; sourceTree = "<group>"; };
 		36EBCF6F9D8290B362F2A3D4 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
@@ -170,6 +176,8 @@
 			children = (
 				36EBC159AB799D0DEAC6EB7F /* PhysicsSystem.m */,
 				36EBC9FB4FB93CEBBA23DCDE /* PhysicsSystem.h */,
+				36EBCEA168E36944662AC3E2 /* SpaceshipControlSystem.m */,
+				36EBC1110C915493192CA27C /* SpaceshipControlSystem.h */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -241,12 +249,12 @@
 		36EBCA6A3940B2308C3F3A05 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				36EBC507D1E7216A34D3D252 /* SpriteComponent.m */,
-				36EBC91F23814D7E2D934DF2 /* SpriteComponent.h */,
 				36EBC41213785419ADE08023 /* RenderComponent.m */,
 				36EBCE3FDFEDC01EF5EB6051 /* RenderComponent.h */,
 				36EBCD25926BC77B8E2A859B /* PhysicsComponent.m */,
 				36EBC68F53DB1ECD07991788 /* PhysicsComponent.h */,
+				36EBCE8A9AE69AB2A2D28851 /* SpaceshipEngineComponent.m */,
+				36EBC90B04F20672F3261F90 /* SpaceshipEngineComponent.h */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -279,6 +287,8 @@
 				36EBC4B6A60DE088C88C70B4 /* GLWAnimation.m */,
 				36EBC6AB01FC494D331E6973 /* GLWLinesPrimitive.m */,
 				36EBC924488CA1205ABF3530 /* GLWLinesPrimitive.h */,
+				36EBC8E5ECB9973EFEA4629D /* GLWTouchDispatcher.m */,
+				36EBC7D211BD583AE57AA834 /* GLWTouchDispatcher.h */,
 			);
 			name = GLWrapper;
 			sourceTree = "<group>";
@@ -460,7 +470,6 @@
 				36EBC9AA8C9FCFC2D57FAEE6 /* DependencyNotFoundException.m in Sources */,
 				36EBCBF80349C6569A4FB08B /* EntityManager.m in Sources */,
 				36EBC3E1C059B53FE581E5A1 /* ComponentLayer.m in Sources */,
-				36EBCC41EBB82DDDA1FD9D1C /* SpriteComponent.m in Sources */,
 				36EBC93BEC889FE7242EC248 /* Spaceship.m in Sources */,
 				36EBCB130CF3C7D32FEB8DE0 /* RenderComponent.m in Sources */,
 				36EBCE403AF6093243390DD6 /* GLWAnimation.m in Sources */,
@@ -468,6 +477,9 @@
 				36EBC0C559D869BCF387C30D /* PhysicalBody.m in Sources */,
 				36EBC1D26C01A324B9329DFC /* PhysicsSystem.m in Sources */,
 				36EBCDEF2206B322110DC5EB /* GLWLinesPrimitive.m in Sources */,
+				36EBCB1DFE58FCABA4AC38C6 /* GLWTouchDispatcher.m in Sources */,
+				36EBC1DA096F917F0C815EEB /* SpaceshipEngineComponent.m in Sources */,
+				36EBC048A3CC0BADC7830F67 /* SpaceshipControlSystem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

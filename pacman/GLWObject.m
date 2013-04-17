@@ -11,6 +11,7 @@
 #import "GLWMath.h"
 #import "GLWMatrix.h"
 #import "GLWTypes.h"
+#import "GLWLayer.h"
 
 
 @implementation GLWObject {
@@ -25,7 +26,7 @@
         self.shaderProgram = [[GLWShaderManager sharedManager] getProgram: kGLWDefaultProgram];
         self.z = 0;
         zCoordinate = 0;
-        isDirty = NO;
+        isDirty = YES;
         updateSelector = nil;
         transformation = [GLWMatrix identityMatrix];
         transformationAffine = CGAffineTransformIdentity;
@@ -68,8 +69,9 @@
 }
 
 - (void)setPosition:(CGPoint)position {
-    _position = CGPointMake(floorf(position.x), floorf(position.y));
-    isDirty = YES;
+//    _position = CGPointMake(floorf(position.x), floorf(position.y));
+    _position = position;
+    [self setDirty];
 }
 
 - (CGAffineTransform) positionTransformation {
@@ -80,8 +82,10 @@
 
     if (self.parent) {
 //        t = CGAffineTransformConcat(t ,CGAffineTransformMakeTranslation(parentLeftCorner.x, parentLeftCorner.y));
-        CGPoint p = [self.parent transformedPoint: posPointAnchorRelative];
-        t = CGAffineTransformConcat(t, CGAffineTransformMakeTranslation(p.x, p.y));
+        CGPoint pTransformed = [self.parent transformedPoint: CGPointMake(posPointAnchorRelative.x, posPointAnchorRelative.y )];
+        CGPoint pOrigin = [self.parent transformedPoint: CGPointZero];
+        t = CGAffineTransformConcat(t, CGAffineTransformMakeTranslation(-pOrigin.x, -pOrigin.y));
+        t = CGAffineTransformConcat(t, CGAffineTransformMakeTranslation(pTransformed.x, pTransformed.y));
     } else {
 
         t = CGAffineTransformConcat(t, CGAffineTransformMakeTranslation(posPointAnchorRelative.x, posPointAnchorRelative.y));
@@ -139,17 +143,17 @@
 
 - (void)setRotation:(float)rotation {
     _rotation = rotation;
-    isDirty = YES;
+    [self setDirty];
 }
 
 - (void)setScaleX:(float)scaleX {
     _scaleX = scaleX;
-    isDirty = YES;
+    [self setDirty];
 }
 
 - (void)setScaleY:(float)scaleY {
     _scaleY = scaleY;
-    isDirty = YES;
+    [self setDirty];
 }
 
 
@@ -187,6 +191,9 @@
 
 - (void)setAnchorPoint:(CGPoint)anchorPoint {
     _anchorPoint = anchorPoint;
+}
+
+- (void)setDirty {
     isDirty = YES;
 }
 

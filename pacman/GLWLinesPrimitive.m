@@ -30,13 +30,13 @@ static const int VertexSize = sizeof(GLWVertexData);
 
 - (void) updateVertices {
 
-
     for (int i = 0; i < _points.count; i++) {
         CGPoint v =[[_points objectAtIndex:i] CGPointValue];
         _vertices[i].vertex = [self transformedCoordinate:v];
         _vertices[i].color = normalizedColor;
         _vertices[i].texCoords = Vec2Make(0,0);
     }
+
 }
 
 
@@ -88,7 +88,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 - (void)setColor:(Vec4)color {
     _color = color;
     normalizedColor = Vec4Make(color.x / 255.f, color.y / 255.f, color.z / 255.f, color.w / 255.f);
-    isDirty = YES;
+    [self setDirty];
 }
 
 

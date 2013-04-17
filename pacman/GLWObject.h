@@ -40,6 +40,7 @@
 -(void)draw:(CFTimeInterval)dt;
 -(void)setUpdateSelector: (SEL) sel;
 -(BOOL)isDirty;
+-(void)setDirty;
 - (Vec3)transformedCoordinate: (CGPoint) p;
 - (CGPoint) transformedPoint: (CGPoint) p;
 - (void) updateTransform;

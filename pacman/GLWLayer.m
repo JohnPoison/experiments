@@ -47,12 +47,13 @@
         @throw [NSException exceptionWithName: @"can't add child" reason: @"child has already been added" userInfo: nil];
 
     [children addObject: child];
-    isDirty = YES;
+    [self setDirty];
 
     child.parent = self;
 }
 
 - (void)touch:(CFTimeInterval)dt {
+    [super touch: dt];
     if (!self.visible)
         return;
 

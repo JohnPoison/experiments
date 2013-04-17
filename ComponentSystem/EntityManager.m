@@ -8,6 +8,7 @@
 #import "System.h"
 #import "DependencyNotFoundException.h"
 #import "PhysicsSystem.h"
+#import "SpaceshipControlSystem.h"
 
 
 @interface EntityManager (Private)
@@ -44,6 +45,7 @@ static EntityManager* _sharedManager = nil;
 // register all systems here
 - (void) initSystems {
     [self registerSystem: [[PhysicsSystem alloc] init]];
+    [self registerSystem: [[SpaceshipControlSystem alloc] init]];
 }
 
 - (uint32_t) generateNewEid {
