@@ -8,6 +8,10 @@
 #import "SpaceshipEngineComponent.h"
 #import "PhysicsComponent.h"
 #import "PhysicalBody.h"
+#import "GLWTouchDispatcher.h"
+#import "RenderComponent.h"
+#import "GLWObject.h"
+#import "GLWMath.h"
 
 
 @implementation SpaceshipControlSystem {
@@ -20,12 +24,18 @@
 
 - (void)updateEntity:(Entity *)entity delta:(CFTimeInterval)dt {
     SpaceshipEngineComponent *engine = (SpaceshipEngineComponent *)[entity getComponentOfClass: [SpaceshipEngineComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass: [RenderComponent class]];
     PhysicsComponent *physics = (PhysicsComponent*)[entity getComponentOfClass: [PhysicsComponent class]];
 
+    render.object.rotation += engine.shouldRotateBy;
+
     if (engine.status == kEngineOn) {
-        physics.physicalBody.maxVelocity = CGPointMake(engine.maxSpeed, engine.maxSpeed);
-        [physics.physicalBody applyForce:CGPointMake(engine.power, engine.power)];
+        physics.physicalBody.maxVelocity = engine.maxSpeed;
+        CGPoint forceVector = CGPointMake(0, engine.power);
+        CGAffineTransform t = CGAffineTransformMakeRotation(-DegToRad(render.object.rotation));
+        forceVector = CGPointApplyAffineTransform(forceVector, t);
+
+        [physics.physicalBody applyForce: forceVector];
     }
 }
-
 @end

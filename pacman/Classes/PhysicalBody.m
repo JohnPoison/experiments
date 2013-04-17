@@ -17,7 +17,7 @@
     self = [super init];
     if (self) {
         _velocity = CGPointZero;
-        self.maxVelocity = CGPointZero;
+        _maxVelocity = 0.f;
     }
 
     return self;
@@ -28,10 +28,12 @@
     CGPoint acceleration = CGPointMake(forceVector.x * massFactor, forceVector.y * massFactor);
     _velocity = CGPointAdd(_velocity, acceleration);
 
-    if (self.maxVelocity.x && fabsf(_velocity.x) > self.maxVelocity.x)
-        _velocity.x = _velocity.x > 0 ? self.maxVelocity.x : -self.maxVelocity.x;
-    if (self.maxVelocity.y && fabsf(_velocity.y) > self.maxVelocity.y)
-        _velocity.y = _velocity.y > 0 ? self.maxVelocity.x : -self.maxVelocity.y;
+    float vectorVelocity = VectorLength(_velocity);
+
+    if (vectorVelocity > self.maxVelocity) {
+        float scaleFactor = self.maxVelocity / vectorVelocity;
+        _velocity = CGPointApplyAffineTransform(_velocity, CGAffineTransformMakeScale(scaleFactor, scaleFactor));
+    }
 }
 
 

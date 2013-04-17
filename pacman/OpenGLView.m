@@ -41,20 +41,20 @@
     return [CAEAGLLayer class];
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [[GLWTouchDispatcher sharedDispatcher] touchesCancelled: touches withEvent: event];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [[GLWTouchDispatcher sharedDispatcher] touchesBegan: touches withEvent: event];
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [[GLWTouchDispatcher sharedDispatcher] touchesMoved: touches withEvent: event];
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [[GLWTouchDispatcher sharedDispatcher] touchesEnded:touches withEvent: event];
-}
+//- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+//    [[GLWTouchDispatcher sharedDispatcher] touchesCancelled: touches withEvent: event];
+//}
+//
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    [[GLWTouchDispatcher sharedDispatcher] touchesBegan: touches withEvent: event];
+//}
+//
+//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+//    [[GLWTouchDispatcher sharedDispatcher] touchesMoved: touches withEvent: event];
+//}
+//
+//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+//    [[GLWTouchDispatcher sharedDispatcher] touchesEnded:touches withEvent: event];
+//}
 
 @end

@@ -17,6 +17,7 @@
 #import "GLWLinesPrimitive.h"
 #import "GLWMath.h"
 #import "SpaceshipEngineComponent.h"
+#import "GLWObject.h"
 
 
 @implementation Spaceship {
@@ -27,20 +28,19 @@
     if (self) {
         [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
 
-        GLWLayer *layer = [[GLWLayer alloc] init];
-        self.layer = layer;
-        self.layer.rotation = 45;
+        layer = [[GLWLayer alloc] init];
+        layer.rotation = 45;
 
-        GLWSprite*spaceship = [GLWSprite spriteWithRectName: @"spaceship"];
-        self.spaceship = spaceship;
+        spaceship = [GLWSprite spriteWithRectName: @"spaceship"];
 //        //center ship to make a proper rotation
 ////        self.spaceship.position = CGPointMake(-spaceship.size.width / 2, -spaceship.size.height / 2);
-        self.spaceship.anchorPoint = CGPointMake(0.5, 0.5);
+        spaceship.anchorPoint = CGPointMake(0.5, 0.5);
         [layer addChild:spaceship];
 //
-        GLWSprite *fire = [GLWSprite spriteWithRectName: @"fire1"];
+        fire = [GLWSprite spriteWithRectName: @"fire1"];
 //        fire.position = CGPointMake(38.f, -32.f);
         fire.position = CGPointMake(-fire.size.width / 2 - 2, -100.f);
+        fire.visible = NO;
         [fire runAnimation:[GLWAnimation animationWithFrameNames:@[@"fire1", @"fire2"] delay:0.15f repeat:0]];
         [layer addChild:fire];
 
@@ -56,18 +56,19 @@
 //        primitive.position = CGPointMake(-25, -100);
 //        primitive.rotation = 45;
 //        primitive.visible = NO;
-        [self.layer addChild:primitive];
+        [layer addChild:primitive];
+        [layer setScale:0.5];
 
 
         [self addComponent: [RenderComponent componentWithObject: layer ]];
 
         PhysicalBody *body = [[PhysicalBody alloc] init];
-        body.maxVelocity = CGPointMake(1.f, 1.f);
         PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
         [self addComponent: component];
 
-        SpaceshipEngineComponent *engine = [SpaceshipEngineComponent componentWithPower:100 maxSpeed:20];
-        engine.status = kEngineOn;
+        SpaceshipEngineComponent *engine = [SpaceshipEngineComponent componentWithPower:10 maxSpeed:100];
+//        engine.status = kEngineOn;
+        engine.delegate = self;
         [self addComponent: engine];
     }
 
@@ -80,11 +81,19 @@
 }
 
 - (CGPoint)position {
-    return self.layer.position;
+    return layer.position;
 }
 
 - (void)setPosition:(CGPoint)p {
-    self.layer.position = p;
+    layer.position = p;
+}
+
+- (void)engineStateChanged:(SpaceshipEngineComponent *)engine {
+    fire.visible = engine.status == kEngineOn ? YES : NO;
+}
+
+- (void)addToParent:(GLWLayer *)parent {
+    [parent addChild: layer];
 }
 
 @end

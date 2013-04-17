@@ -69,9 +69,10 @@
 }
 
 - (void)setPosition:(CGPoint)position {
-//    _position = CGPointMake(floorf(position.x), floorf(position.y));
-    _position = position;
-    [self setDirty];
+    if (_position.x != position.x || _position.y != position.y) {
+        _position = position;
+        [self setDirty];
+    }
 }
 
 - (CGAffineTransform) positionTransformation {
@@ -121,13 +122,6 @@
     return CGPointMake(_position.x + [self.parent absolutePosition].x, _position.y + [self.parent absolutePosition].y);
 }
 
-- (CGPoint)position {
-//    if (!self.parent)
-        return _position;
-
-//    return CGPointMake(_position.x + self.parent.position.x, _position.y + self.parent.position.y);
-}
-
 - (BOOL)isDirty {
     return isDirty || self.parent.isDirty;
 }
@@ -142,18 +136,24 @@
 }
 
 - (void)setRotation:(float)rotation {
-    _rotation = rotation;
-    [self setDirty];
+    if (_rotation != rotation) {
+        _rotation = rotation;
+        [self setDirty];
+    }
 }
 
 - (void)setScaleX:(float)scaleX {
-    _scaleX = scaleX;
-    [self setDirty];
+    if (_scaleX != scaleX) {
+        _scaleX = scaleX;
+        [self setDirty];
+    }
 }
 
 - (void)setScaleY:(float)scaleY {
-    _scaleY = scaleY;
-    [self setDirty];
+    if (_scaleY != scaleY) {
+        _scaleY = scaleY;
+        [self setDirty];
+    }
 }
 
 

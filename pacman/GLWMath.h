@@ -1,4 +1,4 @@
-
+#import <CoreGraphics/CoreGraphics.h>
 #import "GLWTypes.h"
 
 #define DegToRadF  0.017453292519943f
@@ -6,7 +6,7 @@
 //#define DegToRad (D) ((D) * DegToRadF)
 #define RadToDeg (R) ((R) * RadToDegF)
 
-static inline double DegToRad(float d) {
+static inline float DegToRad(float d) {
     return d * DegToRadF;
 }
 
@@ -54,6 +54,10 @@ static inline CGPoint CGPointAdd(CGPoint a, CGPoint b) {
 
 static inline CGPoint CGPointMultNumber(CGPoint a, float number) {
     return CGPointMake(a.x * number, a.y * number);
+}
+
+static inline float VectorLength(CGPoint v) {
+    return sqrtf(v.x * v.x + v.y * v.y);
 }
 
 static inline void CGAffineToGL(const CGAffineTransform *t, GLfloat *m)

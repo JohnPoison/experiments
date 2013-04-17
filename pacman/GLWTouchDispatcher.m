@@ -26,5 +26,9 @@
     [self.delegate addGestureRecognizer: gestureRecognizer];
 }
 
+- (void)removeGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
+    [self.delegate removeGestureRecognizer: gestureRecognizer];
+}
+
 
 @end

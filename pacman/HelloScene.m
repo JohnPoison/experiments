@@ -32,7 +32,7 @@
         self.spaceship = [[Spaceship alloc] init];
         self.spaceship.position = CGPointMake(centeredX, 100);
 
-        [self addChild: self.spaceship.layer];
+        [self.spaceship addToParent: self];
 
 
 //        self.space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];

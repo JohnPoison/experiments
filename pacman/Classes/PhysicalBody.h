@@ -14,7 +14,7 @@
 // velocity represented as a vector
 @property (nonatomic, readonly) CGPoint velocity;
 @property (nonatomic, assign) CGFloat mass;
-@property (nonatomic, assign) CGPoint maxVelocity;
+@property (nonatomic, assign) float maxVelocity;
 
 -(void) applyForce: (CGPoint) forceVector;
 

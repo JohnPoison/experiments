@@ -5,8 +5,8 @@
 
 
 #import <Foundation/Foundation.h>
+#import "OpenGLView.h"
 
-@class OpenGLView;
 
 
 @interface GLWTouchDispatcher : NSObject
@@ -15,10 +15,11 @@
 
 @property (nonatomic, assign) OpenGLView *delegate;
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+//- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)addGestureRecognizer: (UIGestureRecognizer *) gestureRecognizer;
+- (void)removeGestureRecognizer: (UIGestureRecognizer *) gestureRecognizer;
 
 @end

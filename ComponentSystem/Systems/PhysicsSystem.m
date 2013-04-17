@@ -19,7 +19,6 @@
 - (void)updateEntity:(Entity *)entity delta:(CFTimeInterval)dt {
 
     PhysicsComponent *physicsComponent = (PhysicsComponent *)[entity getComponentOfClass: [self systemComponentClass]];
-    [physicsComponent.physicalBody applyForce:CGPointMake(0, 0.05f)];
 
     if (!physicsComponent.updatePosition)
         return;

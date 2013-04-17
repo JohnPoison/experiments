@@ -6,19 +6,23 @@
 
 #import <Foundation/Foundation.h>
 #import "Entity.h"
+#import "SpaceshipEngineDelegate.h"
 
 @class GLWLayer;
 @class GLWSprite;
+@class GLWObject;
 
 
-@interface Spaceship : Entity
+@interface Spaceship : Entity <SpaceshipEngineDelegate> {
+    GLWLayer* layer;
+    GLWSprite* spaceship;
+    GLWSprite* fire;
+}
 
-// held by component
-@property (nonatomic, weak) GLWLayer* layer;
-@property (nonatomic, weak) GLWSprite* spaceship;
 
 -(CGPoint)velocity;
 -(CGPoint)position;
 -(void)setPosition: (CGPoint) p;
+-(void)addToParent: (GLWLayer *)parent;
 
 @end
