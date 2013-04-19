@@ -8,7 +8,7 @@
 #import "GLWTexture.h"
 #import "GLWTypes.h"
 #import "GLWMath.h"
-#import "GLWMacro.h"
+#import "GLWUtils.h"
 
 @implementation GLWTexture {
 

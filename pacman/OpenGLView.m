@@ -9,7 +9,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "OpenGLView.h"
 #import "GLWRenderManager.h"
-#import "GLWMacro.h"
+#import "GLWUtils.h"
 #import "GLWTouchDispatcher.h"
 
 @implementation OpenGLView

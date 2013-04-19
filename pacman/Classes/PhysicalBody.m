@@ -32,7 +32,9 @@
 
     if (vectorVelocity > self.maxVelocity) {
         float scaleFactor = self.maxVelocity / vectorVelocity;
-        _velocity = CGPointApplyAffineTransform(_velocity, CGAffineTransformMakeScale(scaleFactor, scaleFactor));
+//        _velocity = CGPointApplyAffineTransform(_velocity, CGAffineTransformMakeScale(scaleFactor, scaleFactor));
+        _velocity.x *= scaleFactor;
+        _velocity.y *= scaleFactor;
     }
 }
 

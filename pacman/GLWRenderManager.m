@@ -18,7 +18,7 @@
 #import "GLWSpriteGroup.h"
 #import "GLWLayer.h"
 #import "GLWObject.h"
-#import "GLWMacro.h"
+#import "GLWUtils.h"
 #import "OpenGLManager.h"
 
 

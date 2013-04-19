@@ -13,6 +13,8 @@
 #import "PhysicsSystem.h"
 #import "GLWLinesPrimitive.h"
 #import "SpaceshipControlSystem.h"
+#import "GLWUtils.h"
+#import "Asteroid.h"
 
 
 @implementation HelloScene {
@@ -27,17 +29,24 @@
     self = [super init];
     if (self) {
 
-        float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2;
 
-        self.spaceship = [[Spaceship alloc] init];
-        self.spaceship.position = CGPointMake(centeredX, 100);
+        for (int i = 0; i < 5; i++) {
+            Asteroid *asteroid = [[Asteroid alloc] init];
+            asteroid.position = CGPointMake(100, 20+60 * i);
+            [asteroid addToParent: self];
+        }
 
-        [self.spaceship addToParent: self];
-
-
+//        float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2;
+//
+//        self.spaceship = [[Spaceship alloc] init];
+//        self.spaceship.position = CGPointMake(centeredX, 100);
+//
+//
+//
 //        self.space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
 ////        self.space = [GLWSprite spriteWithFile: @"space.png"];
 //        [self addChild: self.space];
+//        [self.spaceship addToParent: self];
 
 
 
@@ -64,10 +73,11 @@
 - (void) update: (CFTimeInterval) dt {
 //    sprite.position = CGPointMake(sprite.position.x + 30.f * dt, sprite.position.y);
     CGPoint v = self.spaceship.velocity;
-//    self.space.textureOffset = CGPointAdd(self.space.textureOffset, CGPointMake(-v.x, -v.y));
+    float scaleFactor = 0.02f;
+    self.space.textureOffset = CGPointAdd(self.space.textureOffset, CGPointMake(-v.x * scaleFactor, -v.y * scaleFactor));
 //    self.spaceship.layer.rotation += 90 * dt;
 //    self.spaceship.layer.position = CGPointAdd(self.spaceship.layer.position, CGPointMake(0, 10.f * dt));
-    DebugLog(@"velocity: %5.5f %5.5f", v.x, v.y);
+//    DebugLog(@"velocity: %5.5f %5.5f", v.x, v.y);
 }
 
 - (void) handleTouch: (UIGestureRecognizer *) gestureRecognizer {

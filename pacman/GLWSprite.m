@@ -11,7 +11,7 @@
 #import "GLWTexture.h"
 #import "GLWTextureRect.h"
 #import "GLWTextureCache.h"
-#import "GLWMacro.h"
+#import "GLWUtils.h"
 #import "GLWShaderManager.h"
 #import "GLWAnimation.h"
 #import "GLWShaderProgram.h"

@@ -23,6 +23,7 @@ static const int VertexSize = sizeof(GLWVertexData);
     self = [super init];
     if (self) {
         self.shaderProgram = [[GLWShaderManager sharedManager] getProgram: kGLWPositionColorProgram];
+        self.drawMethod = kGLWLinesPrimitiveDrawLineStrip;
     }
 
     return self;
@@ -50,6 +51,7 @@ static const int VertexSize = sizeof(GLWVertexData);
         _vertices = malloc(sizeof(GLWVertexData) * vArr.count);
         _lineWidth = lineWidth;
         self.color = color;
+        self.drawMethod = kGLWLinesPrimitiveDrawLineStrip;
 
 
         isDirty = YES;
@@ -81,9 +83,23 @@ static const int VertexSize = sizeof(GLWVertexData);
     diff = offsetof( GLWVertexData, texCoords);
     glVertexAttribPointer(kAttributeIndexTexCoords, 2, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) (v+diff));
 
-    glDrawArrays(GL_LINES, 0, _points.count);
+    glDrawArrays(GL_LINE_STRIP, 0, _points.count);
     GL_ERROR();
 }
+
+- (void)setDrawMethod:(GLWLinesPrimitiveDrawMethod)drawMethod {
+    _drawMethod = drawMethod;
+
+    switch (drawMethod) {
+        case kGLWLinesPrimitiveDrawLines:
+            glDrawMethod = GL_LINES;
+
+        case kGLWLinesPrimitiveDrawLineStrip:
+        default:
+            glDrawMethod = GL_LINE_STRIP;
+    }
+}
+
 
 - (void)setColor:(Vec4)color {
     _color = color;

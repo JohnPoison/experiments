@@ -1,6 +1,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "GLWRenderManager.h"
 
+
+
 // display pixel factor
 static inline float SCALE() {
     static float displayPixelFactor = 0.f;
@@ -15,3 +17,8 @@ static inline float SCALE() {
 static inline CGRect CGRectInPixels(CGRect rect) {
     return (CGRect){rect.origin.x * SCALE(), rect.origin.y * SCALE(), rect.size.width * SCALE(), rect.size.height * SCALE()};
 }
+
+static inline int randomNumberInRange(int min, int max) {
+    return min + (arc4random() % (max - min + 1));
+}
+

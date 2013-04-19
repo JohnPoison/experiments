@@ -7,7 +7,7 @@
 #import "GLWTextureCache.h"
 #import "GLWTexture.h"
 #import "GLWTextureRect.h"
-#import "GLWMacro.h"
+#import "GLWUtils.h"
 
 
 @implementation GLWTextureCache

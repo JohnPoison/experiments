@@ -96,4 +96,11 @@
     [parent addChild: layer];
 }
 
+- (void)dealloc {
+    layer = nil;
+    spaceship = nil;
+    fire = nil;
+}
+
+
 @end
