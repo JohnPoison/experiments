@@ -15,7 +15,6 @@ typedef enum GLWLinesPrimitiveDrawMethod {
 
 @interface GLWLinesPrimitive : GLWObject {
     NSArray*        _points;
-    GLWVertexData*  _vertices;
     float           _lineWidth;
     Vec4            normalizedColor;
     GLenum          glDrawMethod;

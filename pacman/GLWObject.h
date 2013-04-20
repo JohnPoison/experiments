@@ -13,6 +13,7 @@
 
 @interface GLWObject : NSObject {
     @protected
+        GLWVertexData* vertices;
         BOOL isDirty;
         SEL updateSelector;
         GLWMatrix *transformation;
@@ -41,11 +42,14 @@
 -(void)setUpdateSelector: (SEL) sel;
 -(BOOL)isDirty;
 -(void)setDirty;
+-(void)updateDirtyObject;
 - (Vec3)transformedCoordinate: (CGPoint) p;
 - (CGPoint) transformedPoint: (CGPoint) p;
 - (void) updateTransform;
 - (CGPoint) absolutePosition;
 - (CGAffineTransform) transformation;
 - (void)setScale: (float) scale;
+- (GLWVertexData *) vertices;
+- (uint) verticesCount;
 
 @end

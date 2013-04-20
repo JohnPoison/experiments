@@ -53,7 +53,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 
         for (uint i = 0; i < childrenCount; i++) {
             GLWSprite *child = [children objectAtIndex: i];
-            vertices[i] = child.vertices;
+//            vertices[i] = child.vertices;
 
             indices[i*6]    = (GLushort)i*4;
             indices[i*6+1]  = (GLushort)i*4+1;

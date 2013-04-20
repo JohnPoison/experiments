@@ -24,6 +24,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 }
 
 - (void)dealloc {
+    free(vertices);
     self.textureRect = nil;
 }
 
@@ -44,10 +45,10 @@ static const int VertexSize = sizeof(GLWVertexData);
     Vec2 br = [_textureRect.texture normalizedCoordsForPoint:CGPointMake(right, bottom)];
 
     // inverted y-axis due to iOS coordinates system
-    _vertices.topLeft.texCoords  = bl;
-    _vertices.topRight.texCoords = br;
-    _vertices.bottomLeft.texCoords = tl;
-    _vertices.bottomRight.texCoords = tr;
+    vertices[3].texCoords = bl;
+    vertices[2].texCoords = br;
+    vertices[1].texCoords = tl;
+    vertices[0].texCoords = tr;
 }
 
 - (void)setTextureRect:(GLWTextureRect *)textureRect {
@@ -78,10 +79,12 @@ static const int VertexSize = sizeof(GLWVertexData);
         z                   = 0;
         self.group          = nil;
 
-        _vertices.topRight.color    =
-        _vertices.topLeft.color     =
-        _vertices.bottomRight.color =
-        _vertices.bottomLeft.color  =
+        vertices = malloc(sizeof(GLWVertexData) * 4);
+
+        vertices[0].color    =
+        vertices[1].color     =
+        vertices[2].color =
+        vertices[3].color  =
                 Vec4Make(255.f, 255.f, 255.f, 255.f);
 
     }
@@ -119,20 +122,14 @@ static const int VertexSize = sizeof(GLWVertexData);
         CGPoint tl = CGPointMake(left, top);
         CGPoint tr = CGPointMake(right, top);
 
-        _vertices.bottomLeft.vertex     = [self transformedCoordinate: bl];
-        _vertices.bottomRight.vertex    = [self transformedCoordinate: br];
-        _vertices.topLeft.vertex        = [self transformedCoordinate: tl];
-        _vertices.topRight.vertex       = [self transformedCoordinate: tr];
+        vertices[0].vertex     = [self transformedCoordinate: bl];
+        vertices[1].vertex    = [self transformedCoordinate: br];
+        vertices[2].vertex        = [self transformedCoordinate: tl];
+        vertices[3].vertex       = [self transformedCoordinate: tr];
 
         [self updateTexCoords];
 
-        isDirty = NO;
     }
-}
-
-- (GLWVertex4Data)vertices {
-    [self updateVertices];
-    return _vertices;
 }
 
 - (void)touch:(CFTimeInterval)dt {
@@ -152,11 +149,11 @@ static const int VertexSize = sizeof(GLWVertexData);
 
     [self.animation update: dt];
 
-    [self updateVertices];
+    [self updateDirtyObject];
     [GLWTexture bindTexture: self.texture];
     [GLWSprite enableAttribs];
 
-    long v = (long)&_vertices;
+    long v = (long)&vertices;
     NSInteger diff = offsetof( GLWVertexData, vertex);
     glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)(v+diff));
     diff = offsetof( GLWVertexData, color);
@@ -165,7 +162,7 @@ static const int VertexSize = sizeof(GLWVertexData);
     glVertexAttribPointer(kAttributeIndexTexCoords, 2, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) (v+diff));
 
 
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, [self verticesCount]);
 
     GL_ERROR();
 
@@ -212,6 +209,17 @@ static const int VertexSize = sizeof(GLWVertexData);
 - (void)setTextureOffset:(CGPoint)textureOffset {
     [self setDirty];
     _textureOffset = textureOffset;
+}
+
+- (void)updateDirtyObject {
+    if (self.isDirty) {
+        [self updateVertices];
+    }
+    [super updateDirtyObject];
+}
+
+- (uint)verticesCount {
+    return 4;
 }
 
 @end

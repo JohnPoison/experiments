@@ -140,7 +140,7 @@
 //        accumulator += deltaTime - 1.f / FRAME_RATE;
 //    }
 
-//    deltaTime = 1 / FRAME_RATE;
+    deltaTime = 1 / FRAME_RATE;
 
 //    if (deltaTime < 1 / FRAME_RATE)
 //        deltaTime = 1 / FRAME_RATE;

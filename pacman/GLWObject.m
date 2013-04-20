@@ -34,10 +34,6 @@
         self.anchorPoint = CGPointZero;
         self.scaleX = 1;
         self.scaleY = 1;
-//        [transformation rotate:Vec3Make(1, 1, 1)];
-
-//        [transformation translate:Vec3Make(100, 10, 0)];
-//        [transformation scale:Vec3Make(0.5, 1, 1)];
     }
 
     return self;
@@ -82,7 +78,6 @@
     CGPoint posPointAnchorRelative = (CGPoint){self.position.x - self.size.width * _anchorPoint.x, self.position.y - self.size.height * _anchorPoint.y};
 
     if (self.parent) {
-//        t = CGAffineTransformConcat(t ,CGAffineTransformMakeTranslation(parentLeftCorner.x, parentLeftCorner.y));
         CGPoint pTransformed = [self.parent transformedPoint: CGPointMake(posPointAnchorRelative.x, posPointAnchorRelative.y )];
         CGPoint pOrigin = [self.parent transformedPoint: CGPointZero];
         t = CGAffineTransformConcat(t, CGAffineTransformMakeTranslation(-pOrigin.x, -pOrigin.y));
@@ -105,14 +100,6 @@
     t = CGAffineTransformConcat(t, [self positionTransformation]);
 
     return t;
-}
-
-- (CGAffineTransform) absoluteTransform {
-
-    if (!self.parent)
-        return CGAffineTransformIdentity;
-
-    return CGAffineTransformConcat( transformationAffine, self.parent.transformation);
 }
 
 - (CGPoint)absolutePosition {
@@ -162,14 +149,6 @@
         return;
 
     CGAffineTransform t = CGAffineTransformIdentity;
-//    t = CGAffineTransformMakeTranslation(-self.size.width / 2, -self.size.height / 2);
-
-    CGPoint parentLeftCorner = [self.parent transformedPoint: CGPointZero];
-
-    if (self.parent) {
-//        t = CGAffineTransformConcat(t ,CGAffineTransformMakeTranslation(-self.position.x, -self.position.y));
-//        t = CGAffineTransformConcat(t ,CGAffineTransformMakeTranslation(-parentLeftCorner.x, -parentLeftCorner.y));
-    }
 
     t = CGAffineTransformConcat(t ,CGAffineTransformMakeTranslation(-self.size.width / 2, -self.size.height / 2));
     // should be inverted to rotate CW
@@ -180,8 +159,6 @@
 
 
     transformationAffine = t;
-
-    CGPoint abs = self.absolutePosition;
 
 }
 
@@ -195,6 +172,24 @@
 
 - (void)setDirty {
     isDirty = YES;
+}
+
+- (GLWVertexData *)vertices {
+    if (self.isDirty)
+        [self updateDirtyObject];
+
+    return vertices;
+}
+
+- (void)updateDirtyObject {
+    if (self.isDirty) {
+        [self updateTransform];
+        isDirty = NO;
+    }
+}
+
+- (uint)verticesCount {
+    return 0;
 }
 
 @end

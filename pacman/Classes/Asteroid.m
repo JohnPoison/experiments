@@ -9,6 +9,10 @@
 #import "GLWLayer.h"
 #import "GLWMath.h"
 #import "GLWUtils.h"
+#import "RenderComponent.h"
+#import "PhysicalBody.h"
+#import "PhysicsComponent.h"
+#import "CollisionComponent.h"
 
 
 @implementation Asteroid {
@@ -25,8 +29,8 @@
 //    CGAffineTransform t = CGAffineTransformMakeScale(0.8, 1);
 
     for (int i = 0; i < count; i ++) {
-        float x = self.position.x + cosf(DegToRad(alpha)) * radius;
-        float y = self.position.y + sinf(DegToRad(alpha)) * radius;
+        float x = cosf(DegToRad(alpha)) * radius;
+        float y = sinf(DegToRad(alpha)) * radius;
 
         float randomModificator = randomNumberInRange(0, radius / 2);
         y += randomModificator;
@@ -48,7 +52,7 @@
 
 -(NSArray *) generateRandomShapePoints {
     // generate circle first
-    return [self generateCircleWithRadius: 25 verticesCount: 20];
+    return [self generateCircleWithRadius: 25 verticesCount: 3];
 }
 
 - (id)init {
@@ -56,6 +60,18 @@
     if (self) {
         NSArray *arr = [self generateRandomShapePoints];
         primitive = [[GLWLinesPrimitive alloc] initWithVertices: arr lineWidth: 3.f color: (Vec4){255,0,0,255}];
+        primitive.rotation = randomNumberInRange(0, 360);
+
+
+        [self addComponent: [RenderComponent componentWithObject: primitive ]];
+
+        PhysicalBody *body = [[PhysicalBody alloc] initWithShape:[primitive vertices] verticesCount:[primitive verticesCount]];
+        PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
+        [self addComponent: component];
+
+        CollisionComponent *collisionComponent = [[CollisionComponent alloc] init];
+        [self addComponent:collisionComponent];
+
     }
 
     return self;

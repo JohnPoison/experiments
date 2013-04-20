@@ -18,13 +18,27 @@
     if (self) {
         _velocity = CGPointZero;
         _maxVelocity = 0.f;
+        shapeVerticesCount = 0;
     }
 
     return self;
 }
 
+- (PhysicalBody *)initWithShape:(GLWVertexData *)theShape verticesCount:(uint)count {
+    self = [self init];
+
+    if (self) {
+        shape = theShape;
+        shapeVerticesCount = count;
+    }
+
+    return self;
+}
+
+
 - (void)applyForce:(CGPoint)forceVector {
     float massFactor = self.mass < 1.f ? 1 : 1 / self.mass;
+
     CGPoint acceleration = CGPointMake(forceVector.x * massFactor, forceVector.y * massFactor);
     _velocity = CGPointAdd(_velocity, acceleration);
 
@@ -32,10 +46,21 @@
 
     if (vectorVelocity > self.maxVelocity) {
         float scaleFactor = self.maxVelocity / vectorVelocity;
-//        _velocity = CGPointApplyAffineTransform(_velocity, CGAffineTransformMakeScale(scaleFactor, scaleFactor));
         _velocity.x *= scaleFactor;
         _velocity.y *= scaleFactor;
     }
+}
+
+- (void)applyImpulse:(CGPoint)impulseVector {
+    _velocity = CGPointAdd(_velocity, impulseVector);
+}
+
+- (GLWVertexData *)shape {
+    return shape;
+}
+
+- (uint)shapeVerticesCount {
+    return shapeVerticesCount;
 }
 
 

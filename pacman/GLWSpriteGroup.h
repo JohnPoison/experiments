@@ -12,7 +12,6 @@
 
 
 @interface GLWSpriteGroup : GLWLayer {
-    GLWVertex4Data* vertices;
     GLushort* indices;
     GLuint vboIds[2];
 //    GLushort* indices;

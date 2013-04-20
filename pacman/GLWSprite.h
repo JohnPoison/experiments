@@ -14,7 +14,6 @@
 @class GLWAnimation;
 
 @interface GLWSprite : GLWObject {
-    GLWVertex4Data _vertices;
     GLfloat z;
 }
 
@@ -25,8 +24,6 @@
 @property (nonatomic, readonly) GLWTexture* texture;
 
 -(void) runAnimation: (GLWAnimation *) animation;
-// force update
--(GLWVertex4Data) vertices;
 +(GLWSprite *) spriteWithRectName: (NSString *) name;
 +(GLWSprite *) spriteWithFile: (NSString *)filename;
 +(GLWSprite *) spriteWithFile: (NSString *)filename rect: (CGRect) rect;

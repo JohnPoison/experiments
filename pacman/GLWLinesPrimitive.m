@@ -33,9 +33,9 @@ static const int VertexSize = sizeof(GLWVertexData);
 
     for (int i = 0; i < _points.count; i++) {
         CGPoint v =[[_points objectAtIndex:i] CGPointValue];
-        _vertices[i].vertex = [self transformedCoordinate:v];
-        _vertices[i].color = normalizedColor;
-        _vertices[i].texCoords = Vec2Make(0,0);
+        vertices[i].vertex = [self transformedCoordinate:v];
+        vertices[i].color = normalizedColor;
+        vertices[i].texCoords = Vec2Make(0,0);
     }
 
 }
@@ -48,7 +48,7 @@ static const int VertexSize = sizeof(GLWVertexData);
 
         _points = vArr;
 
-        _vertices = malloc(sizeof(GLWVertexData) * vArr.count);
+        vertices = malloc(sizeof(GLWVertexData) * vArr.count);
         _lineWidth = lineWidth;
         self.color = color;
         self.drawMethod = kGLWLinesPrimitiveDrawLineStrip;
@@ -65,17 +65,13 @@ static const int VertexSize = sizeof(GLWVertexData);
     [super draw: dt];
 
     [self.shaderProgram use];
-//    [[GLWShaderManager sharedManager] updateDefaultUniforms];
 
-    if (self.isDirty) {
-        [self updateVertices];
-        isDirty = NO;
-    }
+    [self updateDirtyObject];
 
     glLineWidth(_lineWidth);
 
     [GLWSprite enableAttribs];
-    long v = (long) _vertices;
+    long v = (long) vertices;
     NSInteger diff = offsetof( GLWVertexData, vertex);
     glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)(v+diff));
     diff = offsetof( GLWVertexData, color);
@@ -83,7 +79,7 @@ static const int VertexSize = sizeof(GLWVertexData);
     diff = offsetof( GLWVertexData, texCoords);
     glVertexAttribPointer(kAttributeIndexTexCoords, 2, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) (v+diff));
 
-    glDrawArrays(GL_LINE_STRIP, 0, _points.count);
+    glDrawArrays(GL_LINE_STRIP, 0, [self verticesCount]);
     GL_ERROR();
 }
 
@@ -107,10 +103,22 @@ static const int VertexSize = sizeof(GLWVertexData);
     [self setDirty];
 }
 
+- (void)updateDirtyObject {
+    if (self.isDirty) {
+        [self updateVertices];
+    }
+
+    [super updateDirtyObject];
+}
+
 
 - (void)dealloc {
-    if (_vertices)
-        free(_vertices);
+    if (vertices)
+        free(vertices);
+}
+
+- (uint)verticesCount {
+    return _points.count;
 }
 
 @end
