@@ -192,4 +192,22 @@
     return 0;
 }
 
+- (void)removeChild:(GLWObject *)child {
+    [children removeObject: child];
+}
+
+- (void)removeFromParent {
+    [self.parent removeChild: self];
+}
+
+- (void)addChild:(GLWObject *)child {
+    if ([children containsObject: child])
+        @throw [NSException exceptionWithName: @"can't add child" reason: @"child has already been added" userInfo: nil];
+
+    [children addObject: child];
+    [self setDirty];
+
+    child.parent = self;
+}
+
 @end

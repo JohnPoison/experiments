@@ -5,6 +5,7 @@
 
 
 #import "GLWLayer.h"
+#import "GLWObject.h"
 
 
 @implementation GLWLayer {
@@ -25,15 +26,16 @@
     if (!self.isDirty)
         return;
 
-    NSArray *sortedArray;
-    children = [[children sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        if (((GLWObject *) a).z > ((GLWObject *) b).z)
-            return NSOrderedAscending;
-        else if (((GLWObject *) a).z < ((GLWObject *) b).z)
-            return NSOrderedDescending;
-        else
-            return NSOrderedSame;
-    }] mutableCopy];
+    if (children.count > 1) {
+        children = [[children sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            if (((GLWObject *) a).z > ((GLWObject *) b).z)
+                return NSOrderedAscending;
+            else if (((GLWObject *) a).z < ((GLWObject *) b).z)
+                return NSOrderedDescending;
+            else
+                return NSOrderedSame;
+        }] mutableCopy];
+    }
 
 }
 
@@ -42,15 +44,6 @@
     return children;
 }
 
-- (void)addChild:(GLWObject *)child {
-    if ([children containsObject: child])
-        @throw [NSException exceptionWithName: @"can't add child" reason: @"child has already been added" userInfo: nil];
-
-    [children addObject: child];
-    [self setDirty];
-
-    child.parent = self;
-}
 
 - (void)touch:(CFTimeInterval)dt {
     [super touch: dt];

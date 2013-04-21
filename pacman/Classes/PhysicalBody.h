@@ -7,23 +7,27 @@
 #import <Foundation/Foundation.h>
 #import "GLWTypes.h"
 
+@class Shape;
+
 
 @interface PhysicalBody : NSObject {
-    GLWVertexData* shape;
+    Shape* shape;
     uint shapeVerticesCount;
 }
 
-//@property (nonatomic, assign) CGPoint position;
+@property (nonatomic, assign) CGPoint position;
 // velocity represented as a vector
 @property (nonatomic, readonly) CGPoint velocity;
 // the vertices of the shape
 @property (nonatomic, assign) CGFloat mass;
 @property (nonatomic, assign) float maxVelocity;
+// radius for primary collision testing
+@property (nonatomic, readonly) float radius;
 
--(GLWVertexData*) shape;
+-(Shape *)shape;
 -(uint)shapeVerticesCount;
 
-- (PhysicalBody *)initWithShape:(GLWVertexData *)shape verticesCount:(uint)count;
+- (PhysicalBody *)initWithRadius:(float)radius verticesCount:(uint)count;
 -(void) applyForce: (CGPoint) forceVector;
 -(void) applyImpulse: (CGPoint) impulseVector;
 

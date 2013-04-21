@@ -8,6 +8,7 @@
 #import "PhysicalBody.h"
 #import "GLWMath.h"
 #import "OpenGLConfig.h"
+#import "Shape.h"
 
 
 @implementation PhysicalBody {
@@ -24,11 +25,11 @@
     return self;
 }
 
-- (PhysicalBody *)initWithShape:(GLWVertexData *)theShape verticesCount:(uint)count {
+- (PhysicalBody *)initWithRadius:(float)radius verticesCount:(uint)count {
     self = [self init];
 
     if (self) {
-        shape = theShape;
+        _radius = radius;
         shapeVerticesCount = count;
     }
 
@@ -55,7 +56,7 @@
     _velocity = CGPointAdd(_velocity, impulseVector);
 }
 
-- (GLWVertexData *)shape {
+- (Shape *)shape {
     return shape;
 }
 

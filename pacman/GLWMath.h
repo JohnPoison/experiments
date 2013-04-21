@@ -56,6 +56,10 @@ static inline CGPoint CGPointMultNumber(CGPoint a, float number) {
     return CGPointMake(a.x * number, a.y * number);
 }
 
+static inline float Vector2Length(CGPoint v1, CGPoint v2) {
+    return sqrtf(powf(v2.x - v1.x, 2) + powf(v2.y - v1.y, 2));
+}
+
 static inline float VectorLength(CGPoint v) {
     return sqrtf(v.x * v.x + v.y * v.y);
 }
@@ -77,6 +81,11 @@ static inline void GLToCGAffine(const GLfloat *m, CGAffineTransform *t)
 static inline float dotCrossProduct(CGPoint p1, CGPoint p2)
 {
     return p1.x * p2.y - p1.y *p2.x;
+}
+
+static inline float dotProduct(CGPoint p1, CGPoint p2)
+{
+    return p1.x*p2.x + p1.y*p2.y;
 }
 
 
@@ -119,21 +128,23 @@ static inline BOOL line2Intersection(CGPoint a1, CGPoint a2, CGPoint b1, CGPoint
 }
 
 
-static inline BOOL isLinesCross(int x11, int y11, int x12, int y12, int x21, int y21, int x22, int y22)
+static inline BOOL isLinesCross(float x11, float y11, float x12, float y12, float x21, float y21, float x22, float y22)
 {
+    NSLog(@"line (%5.5f,%5.5f),(%5.5f,%5.5f), line (%5.5f,%5.5f),(%5.5f,%5.5f)", x11,y11,x12,y12,x21,y21,x22,y22);
 
-    int maxx1 = MAX(x11, x12), maxy1 = MAX(y11, y12);
-    int minx1 = MIN(x11, x12), miny1 = MIN(y11, y12);
-    int maxx2 = MAX(x21, x22), maxy2 = MAX(y21, y22);
-    int minx2 = MIN(x21, x22), miny2 = MIN(y21, y22);
+    float maxx1 = MAX(x11, x12), maxy1 = MAX(y11, y12);
+    float minx1 = MIN(x11, x12), miny1 = MIN(y11, y12);
+    float maxx2 = MAX(x21, x22), maxy2 = MAX(y21, y22);
+    float minx2 = MIN(x21, x22), miny2 = MIN(y21, y22);
+
 
     if (minx1 > maxx2 || maxx1 < minx2 || miny1 > maxy2 || maxy1 < miny2)
         return FALSE;
 
 
-    int dx1 = x12-x11, dy1 = y12-y11; // Длина проекций первой линии на ось x и y
-    int dx2 = x22-x21, dy2 = y22-y21; // Длина проекций второй линии на ось x и y
-    int dxx = x11-x21, dyy = y11-y21;
+    float dx1 = x12-x11, dy1 = y12-y11; // Длина проекций первой линии на ось x и y
+    float dx2 = x22-x21, dy2 = y22-y21; // Длина проекций второй линии на ось x и y
+    float dxx = x11-x21, dyy = y11-y21;
     int div, mul;
 
 
@@ -150,6 +161,7 @@ static inline BOOL isLinesCross(int x11, int y11, int x12, int y12, int x21, int
         return FALSE; // Первый отрезок пересекается за своими границами...
     if ((mul = -(int)((double)dx2*dyy-(double)dy2*dxx)) < 0 || mul > -div)
         return FALSE; // Второй отрезок пересекается за своими границами...
+
 
     return TRUE;
 }

@@ -6,10 +6,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class GLWLayer;
+@class GLWObject;
 
 @protocol RenderableEntity <NSObject>
--(void)addToParent: (GLWLayer *)parent;
+-(void)addToParent: (GLWObject *)parent;
 -(CGPoint)position;
 -(void)setPosition: (CGPoint) p;
 @end

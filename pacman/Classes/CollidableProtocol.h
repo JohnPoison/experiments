@@ -7,5 +7,5 @@
 #import <Foundation/Foundation.h>
 
 @protocol CollidableProtocol <NSObject>
--(BOOL) collideWithLineWithPointA: (CGPoint) a b: (CGPoint) b;
+-(BOOL) collideWithShape: (id)otherShape;
 @end

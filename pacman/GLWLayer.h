@@ -9,12 +9,9 @@
 
 
 @interface GLWLayer : GLWObject {
-    @protected
-        NSMutableArray *children;
 }
 
 -(void) sortChildren;
 -(NSArray *) children;
--(void) addChild: (GLWObject *) child;
 
 @end

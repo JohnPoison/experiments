@@ -12,6 +12,11 @@
 
 
 @interface Asteroid : Entity <RenderableEntity> {
-    GLWLinesPrimitive *primitive;
+    GLWLinesPrimitive *_primitive;
+    int _size;
 }
+
+- (Asteroid *)initWithPosition:(CGPoint)p size:(int)size;
+-(void) destroy;
+@property (nonatomic, assign) int parentAsteroidId;
 @end

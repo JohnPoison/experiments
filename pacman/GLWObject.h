@@ -21,6 +21,7 @@
         BOOL transformationDirty;
         //factual coordinate of object
         float zCoordinate;
+        NSMutableArray *children;
 }
 
 @property (nonatomic, strong) GLWShaderProgram *shaderProgram;
@@ -51,5 +52,8 @@
 - (void)setScale: (float) scale;
 - (GLWVertexData *) vertices;
 - (uint) verticesCount;
+- (void) removeFromParent;
+- (void) removeChild: (GLWObject *) child;
+- (void) addChild: (GLWObject *) child;
 
 @end

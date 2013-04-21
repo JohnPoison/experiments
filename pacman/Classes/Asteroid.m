@@ -13,6 +13,7 @@
 #import "PhysicalBody.h"
 #import "PhysicsComponent.h"
 #import "CollisionComponent.h"
+#import "CircleShape.h"
 
 
 @implementation Asteroid {
@@ -32,10 +33,11 @@
         float x = cosf(DegToRad(alpha)) * radius;
         float y = sinf(DegToRad(alpha)) * radius;
 
-        float randomModificator = randomNumberInRange(0, radius / 2);
-        y += randomModificator;
+//        float randomModificator = randomNumberInRange(0, radius / 2);
+//        y += randomModificator;
 
-        CGPoint p = CGPointApplyAffineTransform(CGPointMake(x, y), t);
+        CGPoint p = CGPointMake(x, y);
+//        CGPoint p = CGPointApplyAffineTransform(CGPointMake(x, y), t);
 //        CGPoint p = CGPointMake(x , y);
 
         [points addObject: [NSValue valueWithCGPoint: p]];
@@ -50,48 +52,76 @@
     return points;
 }
 
--(NSArray *) generateRandomShapePoints {
-    // generate circle first
-    return [self generateCircleWithRadius: 25 verticesCount: 3];
-}
 
-- (id)init {
+- (Asteroid *)initWithPosition:(CGPoint)p size:(int)size {
     self = [super init];
+
     if (self) {
-        NSArray *arr = [self generateRandomShapePoints];
-        primitive = [[GLWLinesPrimitive alloc] initWithVertices: arr lineWidth: 3.f color: (Vec4){255,0,0,255}];
-        primitive.rotation = randomNumberInRange(0, 360);
+        self.parentAsteroidId = 0;
+
+        _size = size;
+
+        NSArray *arr = [self generateCircleWithRadius: size verticesCount:20];
+        _primitive = [[GLWLinesPrimitive alloc] initWithVertices: arr lineWidth: 3.f color: (Vec4){255,0,0,255}];
+//        _primitive.rotation = randomNumberInRange(0, 360);
 
 
-        [self addComponent: [RenderComponent componentWithObject: primitive ]];
+        [self addComponent:[RenderComponent componentWithObject:_primitive]];
 
-        PhysicalBody *body = [[PhysicalBody alloc] initWithShape:[primitive vertices] verticesCount:[primitive verticesCount]];
+//        CircleShape *shape = [[CircleShape alloc] init];
+//        shape.radius = 50;
+
+        PhysicalBody *body = [[PhysicalBody alloc] initWithRadius:size verticesCount:[_primitive verticesCount]];
         PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
         [self addComponent: component];
 
         CollisionComponent *collisionComponent = [[CollisionComponent alloc] init];
         [self addComponent:collisionComponent];
+        PhysicsComponent *physicsComponent = (PhysicsComponent *)[self getComponentOfClass:[PhysicsComponent class]];
 
+        physicsComponent.physicalBody.position = p;
     }
 
     return self;
 }
 
-- (void)addToParent:(GLWLayer *)parent {
-    [parent addChild: primitive];
+- (void)addToParent:(GLWObject *)parent {
+    [parent addChild:_primitive];
 }
 
 
 - (void)dealloc {
-    primitive = nil;
+    _primitive = nil;
 }
 
 - (CGPoint)position {
-    return primitive.position;
+    PhysicsComponent *physicsComponent = (PhysicsComponent *)[self getComponentOfClass:[PhysicsComponent class]];
+    return physicsComponent.physicalBody.position;
 }
 
 - (void)setPosition:(CGPoint)p {
-    primitive.position = p;
+    PhysicsComponent *physicsComponent = (PhysicsComponent *)[self getComponentOfClass:[PhysicsComponent class]];
+    physicsComponent.physicalBody.position = p;
+}
+
+- (void)destroy {
+
+    if (!self.parentAsteroidId) {
+
+        for (int i = 0; i < 4; i++) {
+            Asteroid *asteroid = [[Asteroid alloc] initWithPosition:self.position size: _size / 2];
+            [asteroid addToParent: _primitive.parent];
+            PhysicsComponent *asteroidPhysicsComponent = (PhysicsComponent *)[asteroid getComponentOfClass: [PhysicsComponent class]];
+            asteroid.parentAsteroidId = self.eid;
+
+            float velocity = 10;
+            [asteroidPhysicsComponent.physicalBody applyImpulse:CGPointMake(randomNumberInRange(-velocity, velocity), randomNumberInRange(-velocity,velocity))];
+
+        }
+    }
+
+    [_primitive removeFromParent];
+    [self removeEntity];
 }
 
 @end

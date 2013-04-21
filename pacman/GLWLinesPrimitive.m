@@ -24,6 +24,7 @@ static const int VertexSize = sizeof(GLWVertexData);
     if (self) {
         self.shaderProgram = [[GLWShaderManager sharedManager] getProgram: kGLWPositionColorProgram];
         self.drawMethod = kGLWLinesPrimitiveDrawLineStrip;
+        self.anchorPoint = CGPointMake(0.5, 0.5);
     }
 
     return self;

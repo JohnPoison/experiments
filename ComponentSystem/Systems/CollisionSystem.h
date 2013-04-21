@@ -7,7 +7,14 @@
 #import <Foundation/Foundation.h>
 #import "System.h"
 
+@protocol CollisionListener;
+
 @interface CollisionSystem : System {
-    NSArray *physicalObjects;
+    NSMutableArray *collisionListeners;
 }
+
+-(void) addListener: (id<CollisionListener>) listener;
+-(void) removeListener: (id<CollisionListener>) listener;
+
+
 @end

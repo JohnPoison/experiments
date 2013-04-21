@@ -53,9 +53,9 @@
                 [NSValue valueWithCGPoint:CGPointMake(90, 19)],
         ];
         GLWLinesPrimitive *primitive = [[GLWLinesPrimitive alloc] initWithVertices:v lineWidth:3 color:Vec4Make(255, 255, 0, 1)];
-//        primitive.position = CGPointMake(-25, -100);
-//        primitive.rotation = 45;
-//        primitive.visible = NO;
+//        _primitive.position = CGPointMake(-25, -100);
+//        _primitive.rotation = 45;
+//        _primitive.visible = NO;
         [layer addChild:primitive];
         [layer setScale:0.5];
 
@@ -92,7 +92,7 @@
     fire.visible = engine.status == kEngineOn ? YES : NO;
 }
 
-- (void)addToParent:(GLWLayer *)parent {
+- (void)addToParent:(GLWObject *)parent {
     [parent addChild: layer];
 }
 

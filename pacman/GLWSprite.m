@@ -64,7 +64,7 @@ static const int VertexSize = sizeof(GLWVertexData);
     // size should be in points according to ortho projection
     self.size = CGSizeMake(textureRect.rect.size.width / SCALE(), textureRect.rect.size.height / SCALE());
 
-    [self updateTexCoords];
+//    [self updateTexCoords];
 
 }
 
@@ -122,10 +122,10 @@ static const int VertexSize = sizeof(GLWVertexData);
         CGPoint tl = CGPointMake(left, top);
         CGPoint tr = CGPointMake(right, top);
 
-        vertices[0].vertex     = [self transformedCoordinate: bl];
-        vertices[1].vertex    = [self transformedCoordinate: br];
-        vertices[2].vertex        = [self transformedCoordinate: tl];
-        vertices[3].vertex       = [self transformedCoordinate: tr];
+        vertices[0].vertex = [self transformedCoordinate: bl];
+        vertices[1].vertex = [self transformedCoordinate: br];
+        vertices[2].vertex = [self transformedCoordinate: tl];
+        vertices[3].vertex = [self transformedCoordinate: tr];
 
         [self updateTexCoords];
 
