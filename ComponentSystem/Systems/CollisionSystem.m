@@ -29,6 +29,13 @@
 
 //    NSMutableArray *verticesVectors = [NSMutableArray array];
 
+    CollisionComponent *collisionComponent = (CollisionComponent *)[entity1 getComponentOfClass: [CollisionComponent class]];
+    CollisionComponent *collisionComponent2 = (CollisionComponent *)[entity1 getComponentOfClass: [CollisionComponent class]];
+
+    if (!collisionComponent.collisionEnabled || !collisionComponent2.collisionEnabled)
+        return NO;
+
+
     PhysicsComponent *physicsComponent = (PhysicsComponent *)[entity1 getComponentOfClass: [PhysicsComponent class]];
     PhysicsComponent *physicsComponent2 = (PhysicsComponent *)[entity2 getComponentOfClass: [PhysicsComponent class]];
 
@@ -104,7 +111,9 @@
 
             if ([self checkPrimaryCollisionOfObject1:entity1 andObject2:entity2]) {
                 for (id listener in collisionListeners) {
+                    // two times because it's a bidirectional collision
                     [listener object1:entity1 collidedWithObject2:entity2];
+                    [listener object1:entity2 collidedWithObject2:entity1];
                 }
             }
 

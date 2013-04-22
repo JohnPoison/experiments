@@ -18,6 +18,7 @@
 #import "GLWMath.h"
 #import "SpaceshipEngineComponent.h"
 #import "GLWObject.h"
+#import "CollisionComponent.h"
 
 
 @implementation Spaceship {
@@ -62,7 +63,7 @@
 
         [self addComponent: [RenderComponent componentWithObject: layer ]];
 
-        PhysicalBody *body = [[PhysicalBody alloc] init];
+        PhysicalBody *body = [[PhysicalBody alloc] initWithRadius: 30 verticesCount: 0];
         PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
         [self addComponent: component];
 
@@ -70,6 +71,9 @@
 //        engine.status = kEngineOn;
         engine.delegate = self;
         [self addComponent: engine];
+
+        CollisionComponent *collisionComponent = [[CollisionComponent alloc] init];
+        [self addComponent:collisionComponent];
     }
 
     return self;
@@ -81,11 +85,13 @@
 }
 
 - (CGPoint)position {
-    return layer.position;
+    PhysicsComponent *component = (PhysicsComponent *)[self getComponentOfClass: [PhysicsComponent class]];
+    return component.physicalBody.position;
 }
 
 - (void)setPosition:(CGPoint)p {
-    layer.position = p;
+    PhysicsComponent *component = (PhysicsComponent *)[self getComponentOfClass: [PhysicsComponent class]];
+    component.physicalBody.position = p;
 }
 
 - (void)engineStateChanged:(SpaceshipEngineComponent *)engine {

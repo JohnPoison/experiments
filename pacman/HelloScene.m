@@ -36,17 +36,17 @@
     self = [super init];
     if (self) {
 
-//        asteroids = [NSMutableArray array];
-//
-//        Asteroid *asteroid = [[Asteroid alloc] initWithPosition:CGPointMake(200, 200) size:50];
-//        [asteroid addToParent: self];
-//
-//        PhysicsComponent *physicsComponent = (PhysicsComponent *)[asteroid getComponentOfClass:[PhysicsComponent class]];
-//        [physicsComponent.physicalBody applyImpulse:CGPointMake(-20, -20)];
-//
-//
-//        asteroid = [[Asteroid alloc] initWithPosition:CGPointMake(100, 50) size:25];
-//        [asteroid addToParent: self];
+        asteroids = [NSMutableArray array];
+
+        Asteroid *asteroid = [[Asteroid alloc] initWithPosition:CGPointMake(200, 200) size:50];
+        [asteroid addToParent: self];
+
+        PhysicsComponent *physicsComponent = (PhysicsComponent *)[asteroid getComponentOfClass:[PhysicsComponent class]];
+        [physicsComponent.physicalBody applyImpulse:CGPointMake(-20, -20)];
+
+
+        asteroid = [[Asteroid alloc] initWithPosition:CGPointMake(100, 50) size:25];
+        [asteroid addToParent: self];
 
 
 //        NSArray *points = @[
@@ -66,10 +66,10 @@
 //                1,-1, 1,1
 //        ));
 
-//        float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2;
+        float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2;
 //
-//        self.spaceship = [[Spaceship alloc] init];
-//        self.spaceship.position = CGPointMake(centeredX, 100);
+        self.spaceship = [[Spaceship alloc] init];
+        self.spaceship.position = CGPointMake(centeredX, 100);
 //
 //
 //
@@ -77,20 +77,20 @@
 //        self.space = [GLWSprite spriteWithFile: @"space.png"];
 //        self.space.position = CGPointMake(100, 100);
 //        [self addChild: self.space];
-//        [self.spaceship addToParent: self];
+        [self.spaceship addToParent: self];
 
 
 
 
-        [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
+//        [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
 //
-        sprite = [GLWSprite spriteWithRectName: @"spaceship"];
+//        sprite = [GLWSprite spriteWithRectName: @"spaceship"];
 //
 //        GLWSpriteGroup *group = [GLWSpriteGroup spriteGroupWithTexture: sprite.texture];
 //        [group addChild: sprite];
-        sprite.position = CGPointMake(100, 50);
+//        sprite.position = CGPointMake(100, 50);
 //        [self addChild: group];
-        [self addChild: sprite];
+//        [self addChild: sprite];
 
         [self requireSystem: [CollisionSystem class]];
         [self requireSystem: [PhysicsSystem class]];
@@ -202,11 +202,14 @@
         if (((Asteroid *)object1).parentAsteroidId == 0 || ((Asteroid *)object2).parentAsteroidId == 0 || ((Asteroid *)object1).parentAsteroidId != ((Asteroid *)object2).parentAsteroidId) {
 
             [(Asteroid *)object1 destroy];
-            [asteroids removeObject: object1];
 
-            [(Asteroid *)object2 destroy];
-            [asteroids removeObject: object2];
+//            [(Asteroid *)object2 destroy];
+//            [asteroids removeObject: object2];
         }
+    }
+
+    if ([object1 isKindOfClass: [Asteroid class]] && [object2 isKindOfClass:[Spaceship class]]) {
+        [(Asteroid *)object1 destroy];
     }
 }
 

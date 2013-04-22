@@ -153,7 +153,7 @@ static const int VertexSize = sizeof(GLWVertexData);
     [GLWTexture bindTexture: self.texture];
     [GLWSprite enableAttribs];
 
-    long v = (long)&vertices;
+    long v = (long)vertices;
     NSInteger diff = offsetof( GLWVertexData, vertex);
     glVertexAttribPointer(kAttributeIndexPosition, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)(v+diff));
     diff = offsetof( GLWVertexData, color);
