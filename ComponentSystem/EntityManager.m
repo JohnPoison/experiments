@@ -10,6 +10,7 @@
 #import "PhysicsSystem.h"
 #import "SpaceshipControlSystem.h"
 #import "CollisionSystem.h"
+#import "BulletSystem.h"
 
 
 @interface EntityManager (Private)
@@ -48,6 +49,7 @@ static EntityManager* _sharedManager = nil;
     [self registerSystem: [[PhysicsSystem alloc] init]];
     [self registerSystem: [[SpaceshipControlSystem alloc] init]];
     [self registerSystem: [[CollisionSystem alloc] init]];
+    [self registerSystem: [[BulletSystem alloc] init]];
 }
 
 - (uint32_t) generateNewEid {

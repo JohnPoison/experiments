@@ -31,19 +31,43 @@
 
     position = CGPointAdd(position, CGPointMultNumber(physicsComponent.physicalBody.velocity, dt));
 
-    float radius = physicsComponent.physicalBody.radius;
+    // divide in half due to get size respective to center
+    CGSize size = CGSizeMake(physicsComponent.physicalBody.size.width / 2, physicsComponent.physicalBody.size.height / 2);
+    CGPoint velocity = physicsComponent.physicalBody.velocity;
 
-    if (position.x - radius > winSize.width) {
-        position = CGPointMake(-radius, position.y);
-    } else if (position.x + radius < 0) {
-        position = CGPointMake(winSize.width + radius, position.y) ;
+    // wrap using line equation
+    // (x - x0) / l = (y - y0) / m
+    if (velocity.x != 0 && velocity.y != 0) {
+        float x,y,lineEquation;
+        if (position.x - size.width > winSize.width) {
+            x = -size.width;
+            lineEquation = (x - position.x) / velocity.x;
+            y = lineEquation * velocity.y + position.y;
+
+            position = CGPointMake(x, y);
+        } else if (position.x + size.width < 0) {
+            x = winSize.width + size.width;
+            lineEquation = (x - position.x) / velocity.x;
+            y = lineEquation * velocity.y + position.y;
+
+            position = CGPointMake(x, y);
+        }
+
+        if (position.y - size.height > winSize.height) {
+            y = -size.height;
+            lineEquation = (y - position.y) / velocity.y;
+            x = lineEquation * velocity.x + position.x;
+
+            position = CGPointMake(x, y);
+        } else if (position.y + size.height < 0) {
+            y = winSize.height+size.height;
+            lineEquation = (y - position.y) / velocity.y;
+            x = lineEquation * velocity.x + position.x;
+
+            position = CGPointMake(x, y);
+        }
     }
 
-    if (position.y - radius > winSize.height) {
-        position = CGPointMake(position.x, -radius);
-    } else if (position.y + radius < 0) {
-        position = CGPointMake(position.x, winSize.height + radius) ;
-    }
 
     physicsComponent.physicalBody.position = position;
 

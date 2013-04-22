@@ -14,8 +14,5 @@
 
 @interface HelloScene : ComponentLayer <CollisionListener>
 
-@property (nonatomic, strong) Spaceship *spaceship;
-@property (nonatomic, assign) GLWSprite *space;
-@property (nonatomic, strong) UISwipeGestureRecognizer *gestureRecognizer;
 
 @end

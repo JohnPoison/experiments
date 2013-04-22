@@ -19,10 +19,12 @@
 #import "SpaceshipEngineComponent.h"
 #import "GLWObject.h"
 #import "CollisionComponent.h"
+#import "Bullet.h"
+#import "EntityManager.h"
+#import "BulletComponent.h"
 
 
 @implementation Spaceship {
-
 }
 - (id)init {
     self = [super init];
@@ -45,25 +47,26 @@
         [fire runAnimation:[GLWAnimation animationWithFrameNames:@[@"fire1", @"fire2"] delay:0.15f repeat:0]];
         [layer addChild:fire];
 
-        NSArray *v = @[
-                [NSValue valueWithCGPoint:CGPointMake(0, 0)],
-                [NSValue valueWithCGPoint:CGPointMake(50, 100)],
-                [NSValue valueWithCGPoint:CGPointMake(50, 100)],
-                [NSValue valueWithCGPoint:CGPointMake(100, 0)],
-                [NSValue valueWithCGPoint:CGPointMake(10, 19)],
-                [NSValue valueWithCGPoint:CGPointMake(90, 19)],
-        ];
-        GLWLinesPrimitive *primitive = [[GLWLinesPrimitive alloc] initWithVertices:v lineWidth:3 color:Vec4Make(255, 255, 0, 1)];
+//        NSArray *v = @[
+//                [NSValue valueWithCGPoint:CGPointMake(0, 0)],
+//                [NSValue valueWithCGPoint:CGPointMake(50, 100)],
+//                [NSValue valueWithCGPoint:CGPointMake(50, 100)],
+//                [NSValue valueWithCGPoint:CGPointMake(100, 0)],
+//                [NSValue valueWithCGPoint:CGPointMake(10, 19)],
+//                [NSValue valueWithCGPoint:CGPointMake(90, 19)],
+//        ];
+
+//        GLWLinesPrimitive *primitive = [[GLWLinesPrimitive alloc] initWithVertices:v lineWidth:3 color:Vec4Make(255, 255, 0, 1)];
 //        _primitive.position = CGPointMake(-25, -100);
 //        _primitive.rotation = 45;
 //        _primitive.visible = NO;
-        [layer addChild:primitive];
+//        [layer addChild:primitive];
         [layer setScale:0.5];
 
 
         [self addComponent: [RenderComponent componentWithObject: layer ]];
 
-        PhysicalBody *body = [[PhysicalBody alloc] initWithRadius: 30 verticesCount: 0];
+        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(60,60) verticesCount:0];
         PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
         [self addComponent: component];
 
@@ -102,10 +105,25 @@
     [parent addChild: layer];
 }
 
+- (void)shoot {
+    if ([[EntityManager sharedManager] getAllEntitiesPosessingComponentOfClass: [BulletComponent class]].count < 1) {
+
+        CGPoint velocity = CGPointApplyAffineTransform(CGPointMake(0, 200), CGAffineTransformMakeRotation(-DegToRad(layer.rotation)));
+        Bullet* bullet = [Bullet bulletWithVelocityVector:velocity range:300 rotation:layer.rotation];
+        bullet.position = layer.position;
+        [bullet addToParent: layer.parent];
+    }
+}
+
+- (void)destroy {
+    [fire removeFromParent];
+}
+
 - (void)dealloc {
-    layer = nil;
     spaceship = nil;
     fire = nil;
+    [layer removeFromParent];
+    layer = nil;
 }
 
 

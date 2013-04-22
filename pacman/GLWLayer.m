@@ -15,7 +15,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        children = [NSMutableArray array];
         isDirty = NO;
     }
 
@@ -39,12 +38,6 @@
 
 }
 
-- (NSArray *)children {
-
-    return children;
-}
-
-
 - (void)touch:(CFTimeInterval)dt {
     [super touch: dt];
     if (!self.visible)
@@ -54,6 +47,10 @@
         if (object.visible)
             [object touch: dt];
     }
+}
+
+- (void)dealloc {
+
 }
 
 - (void)draw:(CFTimeInterval)dt {

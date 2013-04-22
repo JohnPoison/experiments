@@ -4,6 +4,7 @@
 
 
 
+#import <CoreGraphics/CoreGraphics.h>
 #import "CollisionSystem.h"
 #import "PhysicsComponent.h"
 #import "GLWTypes.h"
@@ -39,20 +40,23 @@
     PhysicsComponent *physicsComponent = (PhysicsComponent *)[entity1 getComponentOfClass: [PhysicsComponent class]];
     PhysicsComponent *physicsComponent2 = (PhysicsComponent *)[entity2 getComponentOfClass: [PhysicsComponent class]];
 
-    float distance = Vector2Length(physicsComponent.physicalBody.position, physicsComponent2.physicalBody.position);
-    float radius1 = physicsComponent.physicalBody.radius;
-    float radius2 = physicsComponent2.physicalBody.radius;
+    PhysicalBody *body1 = physicsComponent.physicalBody;
+    PhysicalBody *body2 = physicsComponent2.physicalBody;
 
-    if (distance <= radius1+radius2) {
-        return YES;
-    }
+    CGRect rect1 = CGRectMake(body1.position.x-body1.size.width / 2, body1.position.y - body1.size.height / 2, body1.size.width, body1.size.height);
+    CGRect rect2 = CGRectMake(body2.position.x-body2.size.width / 2, body2.position.y - body2.size.height / 2, body2.size.width, body2.size.height);
+
+    return CGRectIntersectsRect(rect1, rect2);
+
+//    if (distance <= radius1+radius2) {
+//        return YES;
+//    }
 
 
 
 
 
 
-    return NO;
 
 //    for (int i = 0; i < physicsComponent.physicalBody.shapeVerticesCount; i++) {
 //        GLWVertexData v = physicsComponent.physicalBody.shape[i];

@@ -20,6 +20,10 @@
 
 @synthesize position = _position;
 
+- (void)dealloc {
+    children = nil;
+}
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -34,6 +38,7 @@
         self.anchorPoint = CGPointZero;
         self.scaleX = 1;
         self.scaleY = 1;
+        children = [NSMutableArray array];
     }
 
     return self;

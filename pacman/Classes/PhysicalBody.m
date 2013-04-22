@@ -25,11 +25,11 @@
     return self;
 }
 
-- (PhysicalBody *)initWithRadius:(float)radius verticesCount:(uint)count {
+- (PhysicalBody *)initWithSize:(CGSize)size verticesCount:(uint)count {
     self = [self init];
 
     if (self) {
-        _radius = radius;
+        _size = size;
         shapeVerticesCount = count;
     }
 

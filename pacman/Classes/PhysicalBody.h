@@ -22,12 +22,12 @@
 @property (nonatomic, assign) CGFloat mass;
 @property (nonatomic, assign) float maxVelocity;
 // radius for primary collision testing
-@property (nonatomic, readonly) float radius;
+@property (nonatomic, readonly) CGSize size;
 
 -(Shape *)shape;
 -(uint)shapeVerticesCount;
 
-- (PhysicalBody *)initWithRadius:(float)radius verticesCount:(uint)count;
+- (PhysicalBody *)initWithSize:(CGSize)size verticesCount:(uint)count;
 -(void) applyForce: (CGPoint) forceVector;
 -(void) applyImpulse: (CGPoint) impulseVector;
 

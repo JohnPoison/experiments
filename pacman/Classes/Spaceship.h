@@ -24,5 +24,7 @@
 -(CGPoint)velocity;
 -(CGPoint)position;
 -(void)setPosition: (CGPoint) p;
+-(void)shoot;
+-(void)destroy;
 
 @end

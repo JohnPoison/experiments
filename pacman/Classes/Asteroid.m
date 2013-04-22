@@ -71,7 +71,7 @@
 //        CircleShape *shape = [[CircleShape alloc] init];
 //        shape.radius = 50;
 
-        PhysicalBody *body = [[PhysicalBody alloc] initWithRadius:size verticesCount:[_primitive verticesCount]];
+        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(size*2,size*2) verticesCount:[_primitive verticesCount]];
         PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
         [self addComponent: component];
 
@@ -91,6 +91,7 @@
 
 
 - (void)dealloc {
+    [_primitive removeFromParent];
     _primitive = nil;
 }
 
@@ -120,7 +121,6 @@
         }
     }
 
-    [_primitive removeFromParent];
     [self removeEntity];
 }
 

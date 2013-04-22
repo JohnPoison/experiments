@@ -21,15 +21,17 @@
 #import "GLWTypes.h"
 #import "CircleShape.h"
 #import "GLWTextureCache.h"
+#import "BulletSystem.h"
+#import "Bullet.h"
 
 
 @implementation HelloScene {
     GLWSprite *sprite;
     NSMutableArray *asteroids;
+    __weak Spaceship *spaceship;
+    GLWSprite *space;
 }
 - (void)dealloc {
-    self.spaceship = nil;
-    self.gestureRecognizer = nil;
 }
 
 - (id)init {
@@ -68,8 +70,8 @@
 
         float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2;
 //
-        self.spaceship = [[Spaceship alloc] init];
-        self.spaceship.position = CGPointMake(centeredX, 100);
+        spaceship = [[Spaceship alloc] init];
+        spaceship.position = CGPointMake(centeredX, 100);
 //
 //
 //
@@ -77,7 +79,7 @@
 //        self.space = [GLWSprite spriteWithFile: @"space.png"];
 //        self.space.position = CGPointMake(100, 100);
 //        [self addChild: self.space];
-        [self.spaceship addToParent: self];
+        [spaceship addToParent: self];
 
 
 
@@ -95,6 +97,7 @@
         [self requireSystem: [CollisionSystem class]];
         [self requireSystem: [PhysicsSystem class]];
         [self requireSystem: [SpaceshipControlSystem class]];
+        [self requireSystem: [BulletSystem class]];
 
         CollisionSystem *collisionSystem = (CollisionSystem *)[[EntityManager sharedManager] getSystemOfClass:[CollisionSystem class]];
 
@@ -106,91 +109,8 @@
     return self;
 }
 
-- (BOOL)checkPrimaryCollisionOfObject1:(Entity *)entity1 andObject2: (Entity *) entity2 {
-
-//    NSMutableArray *verticesVectors = [NSMutableArray array];
-
-    PhysicsComponent *physicsComponent = (PhysicsComponent *)[entity1 getComponentOfClass: [PhysicsComponent class]];
-    PhysicsComponent *physicsComponent2 = (PhysicsComponent *)[entity2 getComponentOfClass: [PhysicsComponent class]];
-
-    float distance = Vector2Length(physicsComponent.physicalBody.position, physicsComponent2.physicalBody.position);
-    float radius1 = physicsComponent.physicalBody.radius;
-    float radius2 = physicsComponent2.physicalBody.radius;
-
-    if (distance <= radius1+radius2) {
-        DebugLog(@"COLLISION");
-        return YES;
-    }
-
-
-
-
-
-
-    return NO;
-
-//    for (int i = 0; i < physicsComponent.physicalBody.shapeVerticesCount; i++) {
-//        GLWVertexData v = physicsComponent.physicalBody.shape[i];
-//        CGPoint vertex = CGPointMake(v.vertex.x, v.vertex.y);
-////        CGPoint vertexVelocityVector = CGPointAdd(vertex, physicsComponent.physicalBody.velocity);
-//        CGPoint vertexVelocityVector = CGPointAdd(vertex, CGPointMake(0, -10));
-//
-//        [verticesVectors addObject: [NSValue valueWithCGPoint: vertex]];
-//        [verticesVectors addObject: [NSValue valueWithCGPoint: vertexVelocityVector]];
-//    }
-//
-//    BOOL stop = NO;
-//    for (uint i = 0; i < verticesVectors.count / 2; i+=2) {
-//        CGPoint pointA = [[verticesVectors objectAtIndex: i] CGPointValue];
-//        CGPoint pointB = [[verticesVectors objectAtIndex: i+1] CGPointValue];
-//
-//        for (uint j = 0; j < physicsComponent2.physicalBody.shapeVerticesCount-1; j++) {
-//            GLWVertexData v = physicsComponent2.physicalBody.shape[j];
-//            GLWVertexData v2 = physicsComponent2.physicalBody.shape[j+1];
-//            CGPoint pointC = CGPointMake(v.vertex.x, v.vertex.y);
-//            CGPoint pointD = CGPointMake(v2.vertex.x, v2.vertex.y);
-//
-//            if (isLinesCross(pointA.x, pointA.y, pointB.x, pointB.y, pointC.x, pointC.y, pointD.x, pointD.y)) {
-//                DebugLog(@"collision");
-//                stop = YES;
-//            }
-//
-//
-//            if (stop) {
-//                break;
-//            }
-//        }
-//
-//        if (stop) {
-//            break;
-//        }
-//
-////        if (isLinesCross(<#(int)x11#>, <#(int)y11#>, <#(int)x12#>, <#(int)y12#>, <#(int)x21#>, <#(int)y21#>, <#(int)x22#>, <#(int)y22#>))
-//    }
-
-    return NO;
-
-}
 
 - (void) update: (CFTimeInterval) dt {
-    GL_ERROR();
-    return;
-    for (int i = 0; i < asteroids.count-1; i++) {
-        for (int j = i+1; j < asteroids.count; j++) {
-            id entity1 = [asteroids objectAtIndex: i];
-            id entity2 = [asteroids objectAtIndex: j];
-
-            if ([self checkPrimaryCollisionOfObject1:entity1 andObject2:entity2]) {
-
-            }
-
-        }
-    }
-
-
-
-
-
 //    CGPoint v = self.spaceship.velocity;
 //    float scaleFactor = 0.02f;
 //    self.space.textureOffset = CGPointAdd(self.space.textureOffset, CGPointMake(-v.x * scaleFactor, -v.y * scaleFactor));
@@ -199,17 +119,24 @@
 - (void)object1:(Entity *)object1 collidedWithObject2:(Entity *)object2 {
     if ([object1 isKindOfClass: [Asteroid class]] && [object2 isKindOfClass: [Asteroid class]])  {
 
+        // avoid colliding broken parts of the one parent asteroid
         if (((Asteroid *)object1).parentAsteroidId == 0 || ((Asteroid *)object2).parentAsteroidId == 0 || ((Asteroid *)object1).parentAsteroidId != ((Asteroid *)object2).parentAsteroidId) {
 
             [(Asteroid *)object1 destroy];
 
-//            [(Asteroid *)object2 destroy];
-//            [asteroids removeObject: object2];
         }
     }
 
-    if ([object1 isKindOfClass: [Asteroid class]] && [object2 isKindOfClass:[Spaceship class]]) {
+    if ([object1 isKindOfClass: [Asteroid class]] && ![object2 isKindOfClass:[Asteroid class]]) {
         [(Asteroid *)object1 destroy];
+    }
+
+    if ([object1 isKindOfClass: [Bullet class]] && ![object2 isKindOfClass: [Spaceship class]]) {
+        [object1 removeEntity];
+    }
+
+    if ( [object1 isKindOfClass: [Spaceship class]] &&  [object2 isKindOfClass: [Asteroid class]])  {
+        [object1 removeEntity];
     }
 }
 
