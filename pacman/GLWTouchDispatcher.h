@@ -6,10 +6,14 @@
 
 #import <Foundation/Foundation.h>
 #import "OpenGLView.h"
+#import "GLWGestureRecognizerDelegate.h"
 
+@protocol GLWGestureRecognizerDelegate;
 
-
-@interface GLWTouchDispatcher : NSObject
+@interface GLWTouchDispatcher : NSObject <UIGestureRecognizerDelegate, GLWGestureRecognizerDelegate> {
+    NSMutableArray *children;
+    NSMutableArray *touchesToBeHandled;
+}
 
 +(GLWTouchDispatcher *) sharedDispatcher;
 
@@ -19,7 +23,8 @@
 //- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 //- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
 //- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)addGestureRecognizer: (UIGestureRecognizer *) gestureRecognizer;
+- (UIGestureRecognizer *)addGestureRecognizer:(Class)gestureRecognizerClass withDelegate:(id <GLWGestureRecognizerDelegate>)target;
 - (void)removeGestureRecognizer: (UIGestureRecognizer *) gestureRecognizer;
+- (void)removeDelegate: (id <GLWGestureRecognizerDelegate>) delegate;
 
 @end

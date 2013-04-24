@@ -62,7 +62,7 @@
         _size = size;
 
         NSArray *arr = [self generateCircleWithRadius: size verticesCount:20];
-        _primitive = [[GLWLinesPrimitive alloc] initWithVertices: arr lineWidth: 1.f color: (Vec4){255,0,0,255}];
+        _primitive = [[GLWLinesPrimitive alloc] initWithVertices: arr lineWidth: 1.f color: (Vec4){49,49,62,255}];
 //        _primitive.rotation = randomNumberInRange(0, 360);
 
 

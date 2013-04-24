@@ -4,14 +4,17 @@
 
 
 
+#import <CoreGraphics/CoreGraphics.h>
 #import "SpaceshipEngineComponent.h"
 #import "GLWTouchDispatcher.h"
 #import "UIGestureRecognizer+GLWTouchLocation.h"
 #import "SpaceshipEngineDelegate.h"
+#import "GLWMath.h"
 
 
 @implementation SpaceshipEngineComponent {
     CGPoint lastTouchLocation;
+    CGPoint startTouchLocation;
     float rotateBy;
 }
 - (id)init {
@@ -41,14 +44,12 @@
     if (self) {
         self.power = power;
         self.maxSpeed = maxSpeed;
-        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget: self action:@selector(handleTouch:)];
+        self.panGesture = (UIPanGestureRecognizer *)[[GLWTouchDispatcher sharedDispatcher] addGestureRecognizer: [UIPanGestureRecognizer class] withDelegate:self];
         self.panGesture.minimumNumberOfTouches = 1;
         self.panGesture.maximumNumberOfTouches = 1;
-        self.pressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouch:)];
+        self.pressGesture = (UILongPressGestureRecognizer *)[[GLWTouchDispatcher sharedDispatcher] addGestureRecognizer: [UILongPressGestureRecognizer class] withDelegate:self];
         self.pressGesture.minimumPressDuration = 0;
         rotateBy = 0;
-        [[GLWTouchDispatcher sharedDispatcher] addGestureRecognizer:self.panGesture];
-        [[GLWTouchDispatcher sharedDispatcher] addGestureRecognizer:self.pressGesture];
     }
 
     return self;
@@ -67,22 +68,40 @@
     return YES;
 }
 
-- (void) handleTouch: (UIGestureRecognizer *) gestureRecognizer {
+- (float) getAngleOfRotation: (CGPoint) loc {
+
+
+    CGPoint direction = CGPointSub(loc, startTouchLocation);
+    if (direction.x == 0 && direction.y == 0) {
+        return 0;
+    }
+    float vectorsAngle = angleBetweenVectors(CGPointMake(0, 1), direction);
+    float angle = RadToDeg(vectorsAngle);
+
+    if (direction.x < 0)
+        angle = 360-angle;
+
+    return angle;
+}
+
+- (BOOL) handleTouch: (UIGestureRecognizer *) gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         lastTouchLocation = [gestureRecognizer touchLocation];
+        startTouchLocation = [gestureRecognizer touchLocation];
 
         self.status = kEngineOn;
     } else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
         CGPoint loc = [gestureRecognizer touchLocation];
-        // 1 degrees for every 1 pixel by X-axis only
-        rotateBy = loc.x - lastTouchLocation.x;
 
-        lastTouchLocation = loc;
+        float targetRotation = [self getAngleOfRotation:loc];
+        rotateBy = targetRotation - [self.delegate currentRotation];
 
     } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         self.status = kEngineOff;
         rotateBy = 0;
     }
+
+    return NO;
 }
 
 - (void)setStatus:(SpaceshipEngineStatus)status {
@@ -98,4 +117,5 @@
 
     return tmpRotate;
 }
+
 @end

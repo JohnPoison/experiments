@@ -6,6 +6,8 @@
 
 #import "Entity.h"
 #import "EntityManager.h"
+#import "GLWObject.h"
+#import "RenderableEntity.h"
 
 
 @implementation Entity

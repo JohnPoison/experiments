@@ -28,17 +28,17 @@
     if (self) {
         NSArray *points = @[
                 [NSValue valueWithCGPoint:CGPointMake(0, 0)],
-                [NSValue valueWithCGPoint:CGPointMake(5, 0)],
-                [NSValue valueWithCGPoint:CGPointMake(5, 5)],
-                [NSValue valueWithCGPoint:CGPointMake(0, 5)],
+                [NSValue valueWithCGPoint:CGPointMake(1, 0)],
+                [NSValue valueWithCGPoint:CGPointMake(1, 1)],
+                [NSValue valueWithCGPoint:CGPointMake(0, 1)],
                 [NSValue valueWithCGPoint:CGPointMake(0, 0)],
         ];
 
-        primitive = [[GLWLinesPrimitive alloc] initWithVertices: points lineWidth: 3 color: (Vec4){255,0,0,255}];
+        primitive = [[GLWLinesPrimitive alloc] initWithVertices: points lineWidth: 3 color: (Vec4){49,49,62,255}];
         primitive.rotation = rotation;
         [self addComponent: [RenderComponent componentWithObject: primitive]];
 
-        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(5, 5) verticesCount:4];
+        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(1,1) verticesCount:4];
         [self addComponent: [PhysicsComponent componentWithBody: body]];
 
         [body applyImpulse: velocity];
@@ -62,6 +62,7 @@
 - (void)setPosition:(CGPoint)p {
     PhysicsComponent *component = (PhysicsComponent *)[self getComponentOfClass: [PhysicsComponent class]];
     component.physicalBody.position = p;
+    primitive.position = p;
 }
 
 - (void)destroy {

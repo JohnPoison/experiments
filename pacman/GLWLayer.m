@@ -49,9 +49,6 @@
     }
 }
 
-- (void)dealloc {
-
-}
 
 - (void)draw:(CFTimeInterval)dt {
     if (!self.visible)

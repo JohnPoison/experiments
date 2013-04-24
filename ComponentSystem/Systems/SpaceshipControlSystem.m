@@ -12,40 +12,20 @@
 #import "GLWObject.h"
 #import "GLWMath.h"
 #import "Spaceship.h"
+#import "AudioProcessor.h"
 
 
 @implementation SpaceshipControlSystem {
+    AudioProcessor *audioProcessor;
+    float previousPeak;
 }
 
 - (id)init {
     self = [super init];
     if (self) {
-//        NSError *error;
-//
-//        AVAudioSession *audioS =[AVAudioSession sharedInstance];
-//        [audioS setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
-//        [audioS setActive:YES error:&error];
-//
-//        NSURL *url = [NSURL fileURLWithPath:@"/dev/null"];
-//
-//        NSDictionary *settings = [NSDictionary dictionaryWithObjectsAndKeys:
-//                [NSNumber numberWithFloat: 8000.0], AVSampleRateKey,
-//                [NSNumber numberWithInt: kAudioFormatAppleLossless], AVFormatIDKey,
-//                [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
-//                [NSNumber numberWithInt: AVAudioQualityMin], AVEncoderAudioQualityKey,
-//        nil];
-//
-//        recorder = [[AVAudioRecorder alloc] initWithURL:url settings:settings error: &error];
-//        [recorder prepareToRecord];
-//        recorder.meteringEnabled = YES;
-//        [recorder record];
-//
-//        //initial value
-//        previousPeak = 1000.f;
-//
-//        if (error != nil) {
-//            DebugLog(@"error with recorder %@", error.localizedDescription);
-//        }
+        audioProcessor = [AudioProcessor sharedAudioProcessor];
+        audioProcessor.enablePlayback = NO;
+        [audioProcessor start];
     }
 
     return self;
@@ -58,16 +38,15 @@
 
 - (void)updateEntity:(Entity *)entity delta:(CFTimeInterval)dt {
 
-//    [recorder updateMeters];
-//    if (previousPeak == 1000.f)
-//        previousPeak = [recorder peakPowerForChannel:0];
-//    float delta = [recorder peakPowerForChannel:0] - previousPeak;
-//    if (delta < 0) {
+    if (previousPeak == 1000.f)
+        previousPeak = audioProcessor.decibelsLevel;
+    float delta = audioProcessor.decibelsLevel - previousPeak;
+    if (delta < -8) {
 //        DebugLog(@"%5.5f", delta);
-//        [(Spaceship *)entity shoot];
-//    }
-//
-//    previousPeak = [recorder peakPowerForChannel: 0];
+        [(Spaceship *)entity shoot];
+    }
+
+    previousPeak = audioProcessor.decibelsLevel;
 
     SpaceshipEngineComponent *engine = (SpaceshipEngineComponent *)[entity getComponentOfClass: [SpaceshipEngineComponent class]];
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass: [RenderComponent class]];
@@ -76,7 +55,6 @@
     render.object.rotation += engine.shouldRotateBy;
 
     if (engine.status == kEngineOn) {
-        [(Spaceship *)entity shoot];
         physics.physicalBody.maxVelocity = engine.maxSpeed;
         CGPoint forceVector = CGPointMake(0, engine.power);
         CGAffineTransform t = CGAffineTransformMakeRotation(-DegToRad(render.object.rotation));

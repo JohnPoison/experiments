@@ -32,19 +32,18 @@
         [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
 
         layer = [[GLWLayer alloc] init];
-        layer.rotation = 45;
 
-        spaceship = [GLWSprite spriteWithRectName: @"spaceship"];
+        spaceship = [GLWSprite spriteWithRectName: @"rocket"];
 //        //center ship to make a proper rotation
 ////        self.spaceship.position = CGPointMake(-spaceship.size.width / 2, -spaceship.size.height / 2);
         spaceship.anchorPoint = CGPointMake(0.5, 0.5);
         [layer addChild:spaceship];
 //
-        fire = [GLWSprite spriteWithRectName: @"fire1"];
+        fire = [GLWSprite spriteWithRectName: @"fire"];
 //        fire.position = CGPointMake(38.f, -32.f);
-        fire.position = CGPointMake(-fire.size.width / 2 - 2, -100.f);
+        fire.position = CGPointMake(-fire.size.width / 2 , -60.f);
         fire.visible = NO;
-        [fire runAnimation:[GLWAnimation animationWithFrameNames:@[@"fire1", @"fire2"] delay:0.15f repeat:0]];
+        [fire runAnimation:[GLWAnimation animationWithFrameNames:@[@"fire", @"fire2"] delay:0.15f repeat:0]];
         [layer addChild:fire];
 
 //        NSArray *v = @[
@@ -61,18 +60,17 @@
 //        _primitive.rotation = 45;
 //        _primitive.visible = NO;
 //        [layer addChild:primitive];
-        [layer setScale:0.5];
 
 
         [self addComponent: [RenderComponent componentWithObject: layer ]];
 
-        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(60,60) verticesCount:0];
+        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(40,49) verticesCount:0];
         PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
         [self addComponent: component];
 
-        SpaceshipEngineComponent *engine = [SpaceshipEngineComponent componentWithPower:10 maxSpeed:100];
-//        engine.status = kEngineOn;
+        SpaceshipEngineComponent *engine = [SpaceshipEngineComponent componentWithPower:5 maxSpeed:250];
         engine.delegate = self;
+
         [self addComponent: engine];
 
         CollisionComponent *collisionComponent = [[CollisionComponent alloc] init];
@@ -106,9 +104,9 @@
 }
 
 - (void)shoot {
-    if ([[EntityManager sharedManager] getAllEntitiesPosessingComponentOfClass: [BulletComponent class]].count < 1) {
+    if ([[EntityManager sharedManager] getAllEntitiesPosessingComponentOfClass: [BulletComponent class]].count < 4) {
 
-        CGPoint velocity = CGPointApplyAffineTransform(CGPointMake(0, 200), CGAffineTransformMakeRotation(-DegToRad(layer.rotation)));
+        CGPoint velocity = CGPointApplyAffineTransform(CGPointMake(0, 500), CGAffineTransformMakeRotation(-DegToRad(layer.rotation)));
         Bullet* bullet = [Bullet bulletWithVelocityVector:velocity range:300 rotation:layer.rotation];
         bullet.position = layer.position;
         [bullet addToParent: layer.parent];
@@ -118,6 +116,15 @@
 - (void)destroy {
     [fire removeFromParent];
 }
+
+- (float)currentRotation {
+    return layer.rotation;
+}
+
+- (GLWLayer *)layer {
+    return layer;
+}
+
 
 - (void)dealloc {
     spaceship = nil;

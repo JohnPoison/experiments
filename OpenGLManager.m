@@ -28,8 +28,10 @@
     _view = view;
 }
 
-- (void) runScene: (GLWObject *) scene {
-    self.view.renderer.currentScene = scene;
+- (void)runScene: (Class) scene {
+    [self stopRender];
+    self.view.renderer.currentScene = [[[scene alloc] init] autorelease];
+    [self startRender];
 }
 
 - (void)startRender {

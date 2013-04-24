@@ -6,6 +6,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Component.h"
+#import "GLWGestureRecognizerDelegate.h"
 
 @protocol SpaceshipEngineDelegate;
 
@@ -15,7 +16,7 @@ typedef enum SpaceshipEngineStatus {
 } SpaceshipEngineStatus;
 
 
-@interface SpaceshipEngineComponent : Component <UIGestureRecognizerDelegate>
+@interface SpaceshipEngineComponent : Component <UIAccelerometerDelegate, GLWGestureRecognizerDelegate>
 
 @property (nonatomic, assign) SpaceshipEngineStatus status;
 @property (nonatomic, assign) float power;

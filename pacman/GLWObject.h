@@ -52,6 +52,8 @@
 - (void)setScale: (float) scale;
 - (GLWVertexData *) vertices;
 - (uint) verticesCount;
+// use this to cleanup object before dealloc
+- (void) cleanup;
 - (void) removeFromParent;
 - (void) removeChild: (GLWObject *) child;
 - (void) addChild: (GLWObject *) child;

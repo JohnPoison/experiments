@@ -3,11 +3,13 @@
 
 #define DegToRadF  0.017453292519943f
 #define RadToDegF  57.29577951308232f
-//#define DegToRad (D) ((D) * DegToRadF)
-#define RadToDeg (R) ((R) * RadToDegF)
 
 static inline float DegToRad(float d) {
     return d * DegToRadF;
+}
+
+static inline float RadToDeg(float r) {
+    return r / DegToRadF;
 }
 
 static inline BOOL Vec3AreEqual(Vec3 v1, Vec3 v2) {
@@ -52,9 +54,14 @@ static inline CGPoint CGPointAdd(CGPoint a, CGPoint b) {
     return CGPointMake(a.x + b.x, a.y + b.y);
 }
 
+static inline CGPoint CGPointSub(CGPoint a, CGPoint b) {
+    return CGPointMake(a.x - b.x, a.y - b.y);
+}
+
 static inline CGPoint CGPointMultNumber(CGPoint a, float number) {
     return CGPointMake(a.x * number, a.y * number);
 }
+
 
 static inline float Vector2Length(CGPoint v1, CGPoint v2) {
     return sqrtf(powf(v2.x - v1.x, 2) + powf(v2.y - v1.y, 2));
@@ -62,6 +69,15 @@ static inline float Vector2Length(CGPoint v1, CGPoint v2) {
 
 static inline float VectorLength(CGPoint v) {
     return sqrtf(v.x * v.x + v.y * v.y);
+}
+
+static inline CGPoint NormalizeVector(CGPoint v) {
+    float length = VectorLength(v);
+
+    if (length == 0)
+        return CGPointZero;
+
+    return CGPointMultNumber(v, 1.0f / length);
 }
 
 static inline void CGAffineToGL(const CGAffineTransform *t, GLfloat *m)
@@ -88,6 +104,13 @@ static inline float dotProduct(CGPoint p1, CGPoint p2)
     return p1.x*p2.x + p1.y*p2.y;
 }
 
+static inline float angleBetweenVectors(CGPoint v1, CGPoint v2) {
+
+    v1= NormalizeVector(v1);
+    v2 = NormalizeVector(v2);
+
+    return acosf(dotProduct(v1, v2));
+}
 
 static inline BOOL line2Intersection(CGPoint a1, CGPoint a2, CGPoint b1, CGPoint b2) {
 

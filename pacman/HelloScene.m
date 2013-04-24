@@ -9,36 +9,37 @@
 #import "GLWRenderManager.h"
 #import "GLWSprite.h"
 #import "Spaceship.h"
-#import "GLWMath.h"
 #import "PhysicsSystem.h"
-#import "GLWLinesPrimitive.h"
 #import "SpaceshipControlSystem.h"
-#import "GLWUtils.h"
 #import "Asteroid.h"
 #import "PhysicsComponent.h"
 #import "PhysicalBody.h"
 #import "CollisionSystem.h"
-#import "GLWTypes.h"
-#import "CircleShape.h"
-#import "GLWTextureCache.h"
 #import "BulletSystem.h"
 #import "Bullet.h"
+#import "SpaceshipFactory.h"
+#import "AsteroidsFactory.h"
+#import "GLWMath.h"
 
 
 @implementation HelloScene {
     GLWSprite *sprite;
     NSMutableArray *asteroids;
     __weak Spaceship *spaceship;
-    GLWSprite *space;
+    __weak GLWSprite *space;
 }
 - (void)dealloc {
+    [spaceship removeEntity];
 }
 
 - (id)init {
     self = [super init];
     if (self) {
 
-        asteroids = [NSMutableArray array];
+//        asteroids = [NSMutableArray array];
+//
+        space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
+        [self addChild: space];
 
         Asteroid *asteroid = [[Asteroid alloc] initWithPosition:CGPointMake(200, 200) size:50];
         [asteroid addToParent: self];
@@ -50,6 +51,8 @@
         asteroid = [[Asteroid alloc] initWithPosition:CGPointMake(100, 50) size:25];
         [asteroid addToParent: self];
 
+
+        spaceship = [self newSpaceship];
 
 //        NSArray *points = @[
 //                [NSValue valueWithCGPoint:CGPointMake(0, 0)],
@@ -68,18 +71,11 @@
 //                1,-1, 1,1
 //        ));
 
-        float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2;
-//
-        spaceship = [[Spaceship alloc] init];
-        spaceship.position = CGPointMake(centeredX, 100);
 //
 //
 //
-//        self.space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
 //        self.space = [GLWSprite spriteWithFile: @"space.png"];
 //        self.space.position = CGPointMake(100, 100);
-//        [self addChild: self.space];
-        [spaceship addToParent: self];
 
 
 
@@ -137,7 +133,14 @@
 
     if ( [object1 isKindOfClass: [Spaceship class]] &&  [object2 isKindOfClass: [Asteroid class]])  {
         [object1 removeEntity];
+        spaceship = [self newSpaceship];
     }
+}
+
+-(Spaceship *) newSpaceship {
+
+    float centeredX = [GLWRenderManager sharedManager].windowSize.width / 2;
+    return (Spaceship*)[[SpaceshipFactory sharedFactory] newEntityWithPosition:CGPointMake(centeredX, 100) parent: self];
 }
 
 @end

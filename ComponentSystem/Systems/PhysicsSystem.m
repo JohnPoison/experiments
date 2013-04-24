@@ -35,38 +35,14 @@
     CGSize size = CGSizeMake(physicsComponent.physicalBody.size.width / 2, physicsComponent.physicalBody.size.height / 2);
     CGPoint velocity = physicsComponent.physicalBody.velocity;
 
-    // wrap using line equation
-    // (x - x0) / l = (y - y0) / m
-    if (velocity.x != 0 && velocity.y != 0) {
-        float x,y,lineEquation;
-        if (position.x - size.width > winSize.width) {
-            x = -size.width;
-            lineEquation = (x - position.x) / velocity.x;
-            y = lineEquation * velocity.y + position.y;
-
-            position = CGPointMake(x, y);
-        } else if (position.x + size.width < 0) {
-            x = winSize.width + size.width;
-            lineEquation = (x - position.x) / velocity.x;
-            y = lineEquation * velocity.y + position.y;
-
-            position = CGPointMake(x, y);
-        }
-
-        if (position.y - size.height > winSize.height) {
-            y = -size.height;
-            lineEquation = (y - position.y) / velocity.y;
-            x = lineEquation * velocity.x + position.x;
-
-            position = CGPointMake(x, y);
-        } else if (position.y + size.height < 0) {
-            y = winSize.height+size.height;
-            lineEquation = (y - position.y) / velocity.y;
-            x = lineEquation * velocity.x + position.x;
-
-            position = CGPointMake(x, y);
-        }
-    }
+    if (position.x - size.width > winSize.width)
+        position.x = -size.width;
+    if (position.x + size.width < 0)
+        position.x = winSize.width+size.width;
+    if (position.y - size.height > winSize.height)
+        position.y = -size.height;
+    if (position.y + size.height < 0)
+        position.y = winSize.height+size.height;
 
 
     physicsComponent.physicalBody.position = position;

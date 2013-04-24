@@ -45,10 +45,10 @@ static const int VertexSize = sizeof(GLWVertexData);
     Vec2 br = [_textureRect.texture normalizedCoordsForPoint:CGPointMake(right, bottom)];
 
     // inverted y-axis due to iOS coordinates system
-    vertices[3].texCoords = bl;
-    vertices[2].texCoords = br;
-    vertices[1].texCoords = tl;
-    vertices[0].texCoords = tr;
+    vertices[3].texCoords = br;
+    vertices[2].texCoords = bl;
+    vertices[1].texCoords = tr;
+    vertices[0].texCoords = tl;
 }
 
 - (void)setTextureRect:(GLWTextureRect *)textureRect {
@@ -169,21 +169,21 @@ static const int VertexSize = sizeof(GLWVertexData);
 }
 
 + (GLWSprite *) spriteWithRectName: (NSString *) name {
-    GLWSprite *sprite = [[GLWSprite alloc] init];
+    GLWSprite *sprite = [[self alloc] init];
     sprite.textureRect = [[GLWTextureCache sharedTextureCache] rectWithName: name];
 
     return sprite;
 }
 
 + (GLWSprite *) spriteWithFile: (NSString *)filename {
-    GLWSprite *sprite = [[GLWSprite alloc] init];
+    GLWSprite *sprite = [[self alloc] init];
     sprite.textureRect = [GLWTextureRect textureRectWithTexture:[[GLWTextureCache sharedTextureCache] textureWithFile:filename]];
 
     return sprite;
 }
 
 + (GLWSprite *) spriteWithFile: (NSString *)filename rect: (CGRect) rect {
-    GLWSprite *sprite = [[GLWSprite alloc] init];
+    GLWSprite *sprite = [[self alloc] init];
     sprite.textureRect = [GLWTextureRect textureRectWithTexture:[[GLWTextureCache sharedTextureCache] textureWithFile:filename] rect: CGRectInPixels(rect) name: filename];
 
     return sprite;

@@ -20,6 +20,7 @@
 #import "GLWObject.h"
 #import "GLWUtils.h"
 #import "OpenGLManager.h"
+#import "GLWTouchDispatcher.h"
 
 
 @implementation GLWRenderManager {

@@ -12,6 +12,7 @@
 #import "GLWMatrix.h"
 #import "GLWTypes.h"
 #import "GLWLayer.h"
+#import "GLWTouchDispatcher.h"
 
 
 @implementation GLWObject {
@@ -21,6 +22,9 @@
 @synthesize position = _position;
 
 - (void)dealloc {
+    for (GLWObject *child in children) {
+        [child cleanup];
+    }
     children = nil;
 }
 
@@ -201,7 +205,11 @@
     [children removeObject: child];
 }
 
+- (void)cleanup {
+}
+
 - (void)removeFromParent {
+    [self cleanup];
     [self.parent removeChild: self];
 }
 

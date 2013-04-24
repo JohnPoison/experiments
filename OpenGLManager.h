@@ -19,6 +19,6 @@
 
 -(void) startRender;
 -(void) stopRender;
--(void) runScene: (GLWObject *) scene;
+-(void)runScene: (Class) scene;
 
 @end

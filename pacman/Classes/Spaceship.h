@@ -21,6 +21,7 @@
 }
 
 
+-(GLWLayer *)layer;
 -(CGPoint)velocity;
 -(CGPoint)position;
 -(void)setPosition: (CGPoint) p;

@@ -10,4 +10,6 @@
 
 @protocol SpaceshipEngineDelegate <NSObject>
 - (void) engineStateChanged: (SpaceshipEngineComponent *) engine;
+// should return current rotation of the object's sprite
+- (float) currentRotation;
 @end
