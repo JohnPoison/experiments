@@ -49,6 +49,7 @@
 
     RenderComponent *renderComponent = (RenderComponent *)[entity getComponentOfClass: [RenderComponent class]];
     renderComponent.object.position = physicsComponent.physicalBody.position;
+    renderComponent.object.rotation += physicsComponent.physicalBody.angularVelocity * dt;
 
 
 }

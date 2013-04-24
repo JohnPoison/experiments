@@ -150,6 +150,20 @@ static inline BOOL line2Intersection(CGPoint a1, CGPoint a2, CGPoint b1, CGPoint
         return YES;
 }
 
+static inline BOOL isPointInPolygon(NSArray *vertices, CGPoint test) {
+    NSUInteger nvert = [vertices count];
+    NSInteger i, j, c = 0;
+    CGPoint verti, vertj;
+    for (i = 0, j = nvert-1; i < nvert; j = i++) {
+        verti = [[vertices objectAtIndex:i] CGPointValue];
+        vertj = [[vertices objectAtIndex:j] CGPointValue];
+        if (( (verti.y > test.y) != (vertj.y > test.y) ) && ( test.x < ( vertj.x - verti.x ) * ( test.y - verti.y ) / ( vertj.y - verti.y ) + verti.x) )
+            c = !c;
+    }
+
+    return (c ? YES : NO);
+}
+
 
 static inline BOOL isLinesCross(float x11, float y11, float x12, float y12, float x21, float y21, float x22, float y22)
 {

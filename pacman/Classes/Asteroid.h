@@ -10,6 +10,7 @@
 
 @class GLWLinesPrimitive;
 
+extern const int kAsteroidCollisionGroup;
 
 @interface Asteroid : Entity <RenderableEntity> {
     GLWLinesPrimitive *_primitive;

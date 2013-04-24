@@ -12,7 +12,7 @@
 
 @interface GLWTouchDispatcher : NSObject <UIGestureRecognizerDelegate, GLWGestureRecognizerDelegate> {
     NSMutableArray *children;
-    NSMutableArray *touchesToBeHandled;
+    NSMutableArray *childrenToBeRemoved;
 }
 
 +(GLWTouchDispatcher *) sharedDispatcher;

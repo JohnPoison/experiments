@@ -15,7 +15,8 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.collisionEnabled = YES;
+        self.collisionMask = kCollisionEnabled;
+        self.collisionGroup = kCollisionEnabled;
         [requiredComponents addObject: @"PhysicsComponent"];
     }
 

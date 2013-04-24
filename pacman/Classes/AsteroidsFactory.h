@@ -9,4 +9,5 @@
 
 
 @interface AsteroidsFactory : AbstractGameObjectFactory
+- (Entity *)newEntityWithPosition:(CGPoint)position parent:(GLWObject *)parent size: (int) size;
 @end

@@ -8,6 +8,7 @@
 #import "Entity.h"
 #import "RenderableEntity.h"
 
+extern const int kBulletCollisionGroup;
 
 @interface Bullet : Entity <RenderableEntity> {
 }

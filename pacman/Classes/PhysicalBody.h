@@ -12,23 +12,26 @@
 
 @interface PhysicalBody : NSObject {
     Shape* shape;
+    GLWVertexData*_shapeVertices;
     uint shapeVerticesCount;
 }
 
 @property (nonatomic, assign) CGPoint position;
 // velocity represented as a vector
 @property (nonatomic, readonly) CGPoint velocity;
+@property (nonatomic, readonly) float angularVelocity;
 // the vertices of the shape
 @property (nonatomic, assign) CGFloat mass;
 @property (nonatomic, assign) float maxVelocity;
 // radius for primary collision testing
 @property (nonatomic, readonly) CGSize size;
 
--(Shape *)shape;
 -(uint)shapeVerticesCount;
+-(GLWVertexData *)shapeVertices;
 
-- (PhysicalBody *)initWithSize:(CGSize)size verticesCount:(uint)count;
+- (PhysicalBody *)initWithSize:(CGSize)size vertices:(GLWVertexData *)vertices verticesCount:(uint)count;
 -(void) applyForce: (CGPoint) forceVector;
 -(void) applyImpulse: (CGPoint) impulseVector;
+-(void) applyAngularImpulse: (float) impulse;
 
 @end

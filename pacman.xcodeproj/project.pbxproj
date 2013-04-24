@@ -25,8 +25,10 @@
 		36EBC367671081A16F92C267 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCE89EA1E7CAA99DFB58F /* Button.m */; };
 		36EBC3B3F9D04356C24A0453 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36EBCAE31560814243312FFA /* AudioToolbox.framework */; };
 		36EBC3E1C059B53FE581E5A1 /* ComponentLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC002C9B53BA10E8D93A0 /* ComponentLayer.m */; };
+		36EBC3F7FA28365B53023820 /* BulletFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC42AAFF29E97F53DF5B5 /* BulletFactory.m */; };
 		36EBC4481D79C4454E6DB4F9 /* GLWSpriteGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA2EA1157E8255DD9785 /* GLWSpriteGroup.m */; };
 		36EBC4AD58509B7CADA0BBC8 /* SpaceshipFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCB0B1C714892E2143B7C /* SpaceshipFactory.m */; };
+		36EBC55F727963793FA96C19 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36EBCA1754CE90B29919F399 /* settings.plist */; };
 		36EBC5FC7258161F0819F296 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC6D36989989353E96FC8 /* Component.m */; };
 		36EBC67C98AD54E8E63FBCCD /* UIGestureRecognizer+GLWTouchLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC0CDE38C021C4CE16E7B /* UIGestureRecognizer+GLWTouchLocation.m */; };
 		36EBC69E173D37FB4916481A /* AudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC7DC6F686CDFA156D48E /* AudioProcessor.m */; };
@@ -56,6 +58,7 @@
 		36EBCDEF2206B322110DC5EB /* GLWLinesPrimitive.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC6AB01FC494D331E6973 /* GLWLinesPrimitive.m */; };
 		36EBCE403AF6093243390DD6 /* GLWAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC4B6A60DE088C88C70B4 /* GLWAnimation.m */; };
 		36EBCE4B0EA05AC9EB663420 /* AbstractGameObjectFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC03AD7E8BE56D735D581 /* AbstractGameObjectFactory.m */; };
+		36EBCE5B0D1324FBF31E26A7 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCF2E721A6D84690BFDBE /* Settings.m */; };
 		36EBCE753168CC535FCE48BC /* GLWLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC434350C587F2987652E /* GLWLayer.m */; };
 		36EBCE83138A06E84EE96AE7 /* HelloScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA0DD3551D10646D5D39 /* HelloScene.m */; };
 		36EBCE8B69A12BADFE12D88B /* Asteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC9BF5A1ED570DAE06878 /* Asteroid.m */; };
@@ -89,6 +92,7 @@
 		36EBC14963C46F27C681420B /* GLWRenderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWRenderManager.h; sourceTree = "<group>"; };
 		36EBC159AB799D0DEAC6EB7F /* PhysicsSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsSystem.m; sourceTree = "<group>"; };
 		36EBC18BD870B45877605B1F /* CollisionDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollisionDetector.m; sourceTree = "<group>"; };
+		36EBC1947CD436EB480EE133 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		36EBC1B68A9F23DC3B69E0A8 /* PhysicalBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalBody.h; sourceTree = "<group>"; };
 		36EBC256EF20BDFD842C5B33 /* BulletComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulletComponent.m; sourceTree = "<group>"; };
 		36EBC2B9BA4F89EFE0AEFA66 /* CollisionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionObject.h; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 		36EBC3C25A6E6307C1E78971 /* GLWTouchDispatcherChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTouchDispatcherChild.m; sourceTree = "<group>"; };
 		36EBC40F25407A1B0CABE6CC /* GLWTextureRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTextureRect.m; sourceTree = "<group>"; };
 		36EBC41213785419ADE08023 /* RenderComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderComponent.m; sourceTree = "<group>"; };
+		36EBC42AAFF29E97F53DF5B5 /* BulletFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulletFactory.m; sourceTree = "<group>"; };
 		36EBC434350C587F2987652E /* GLWLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWLayer.m; sourceTree = "<group>"; };
 		36EBC4B6A60DE088C88C70B4 /* GLWAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLWAnimation.m; path = ComponentSystem/Systems/GLWAnimation.m; sourceTree = SOURCE_ROOT; };
 		36EBC4BAE876DE5620E580FD /* GLWTextureCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWTextureCache.m; sourceTree = "<group>"; };
@@ -155,6 +160,7 @@
 		36EBC9FB4FB93CEBBA23DCDE /* PhysicsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsSystem.h; sourceTree = "<group>"; };
 		36EBCA0DD3551D10646D5D39 /* HelloScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloScene.m; sourceTree = "<group>"; };
 		36EBCA14029C260167A445B9 /* PhysicalBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicalBody.m; sourceTree = "<group>"; };
+		36EBCA1754CE90B29919F399 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = settings.plist; sourceTree = "<group>"; };
 		36EBCA24C7A2E34F476EC384 /* BulletSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulletSystem.m; sourceTree = "<group>"; };
 		36EBCA2EA1157E8255DD9785 /* GLWSpriteGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWSpriteGroup.m; sourceTree = "<group>"; };
 		36EBCA7FC45BA750CD237A4C /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 		36EBCD2B8D9581E7EB8EDE09 /* GLWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWCamera.h; sourceTree = "<group>"; };
 		36EBCD494D792A877D84448A /* GLWLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWLayer.h; sourceTree = "<group>"; };
 		36EBCDC7324A448579D7CE83 /* System.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = System.m; sourceTree = "<group>"; };
+		36EBCDD55854B5F013AD8CE5 /* BulletFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletFactory.h; sourceTree = "<group>"; };
 		36EBCE00C66A6A8A2F6C0681 /* CollidableProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollidableProtocol.h; sourceTree = "<group>"; };
 		36EBCE1F8F8AA88D0E413C98 /* GLWAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLWAnimation.h; path = ComponentSystem/Systems/GLWAnimation.h; sourceTree = SOURCE_ROOT; };
 		36EBCE3FDFEDC01EF5EB6051 /* RenderComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderComponent.h; sourceTree = "<group>"; };
@@ -184,6 +191,7 @@
 		36EBCEE4F4C7218D18F00360 /* SpaceshipEngineDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceshipEngineDelegate.h; sourceTree = "<group>"; };
 		36EBCF0E051C54A0E797E7A7 /* AsteroidsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsteroidsFactory.m; sourceTree = "<group>"; };
 		36EBCF21660E6F235CE8020C /* EntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
+		36EBCF2E721A6D84690BFDBE /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		36EBCF361CA36478BFD92F23 /* GLWCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLWCamera.m; sourceTree = "<group>"; };
 		36EBCF43A2F7F05060960052 /* CollisionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollisionObject.m; sourceTree = "<group>"; };
 		36EBCF6F9D8290B362F2A3D4 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
@@ -308,6 +316,10 @@
 				36EBC0F4927802C7598D7D20 /* IntroScene.h */,
 				36EBCE89EA1E7CAA99DFB58F /* Button.m */,
 				36EBC7CB79A0F157F23DB410 /* Button.h */,
+				36EBCF2E721A6D84690BFDBE /* Settings.m */,
+				36EBC1947CD436EB480EE133 /* Settings.h */,
+				36EBC42AAFF29E97F53DF5B5 /* BulletFactory.m */,
+				36EBCDD55854B5F013AD8CE5 /* BulletFactory.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -321,6 +333,7 @@
 				36EBC814C83E88974099EDEA /* retina-spaceship.png */,
 				36EBC5069F83AA67439D8D8A /* spaceship.png */,
 				36EBC2C625ACFBE88F00D1ED /* retina-space.png */,
+				36EBCA1754CE90B29919F399 /* settings.plist */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -545,6 +558,7 @@
 				36EBC960F7294213A9590E06 /* retina-spaceship.png in Resources */,
 				36EBCFC6AFF87BD4011998CC /* spaceship.png in Resources */,
 				36EBC0DB0EFDD001B5B8392A /* retina-space.png in Resources */,
+				36EBC55F727963793FA96C19 /* settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +622,8 @@
 				36EBC6AF16A16EF35D8382BE /* IntroScene.m in Sources */,
 				36EBCDDD6E11FAAAC52D5975 /* GLWTouchDispatcherChild.m in Sources */,
 				36EBC367671081A16F92C267 /* Button.m in Sources */,
+				36EBCE5B0D1324FBF31E26A7 /* Settings.m in Sources */,
+				36EBC3F7FA28365B53023820 /* BulletFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

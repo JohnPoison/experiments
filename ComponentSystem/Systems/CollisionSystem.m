@@ -26,6 +26,17 @@
     return self;
 }
 
+-(NSArray *) arrayFromData: (GLWVertexData *) data withCount: (uint) count {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
+
+    for (uint i = 0; i < count; i++) {
+        GLWVertexData v = data[i];
+        [array addObject:[NSValue valueWithCGPoint:CGPointMake(v.vertex.x, v.vertex.y)]];
+    }
+
+    return array;
+}
+
 - (BOOL)checkPrimaryCollisionOfObject1:(Entity *)entity1 andObject2: (Entity *) entity2 {
 
 //    NSMutableArray *verticesVectors = [NSMutableArray array];
@@ -33,8 +44,14 @@
     CollisionComponent *collisionComponent = (CollisionComponent *)[entity1 getComponentOfClass: [CollisionComponent class]];
     CollisionComponent *collisionComponent2 = (CollisionComponent *)[entity1 getComponentOfClass: [CollisionComponent class]];
 
-    if (!collisionComponent.collisionEnabled || !collisionComponent2.collisionEnabled)
+    if (collisionComponent.collisionMask == kCollisionDisabled || collisionComponent2.collisionMask == kCollisionDisabled)
         return NO;
+
+
+    // if there is no objects to collide
+    if (!(collisionComponent.collisionMask & collisionComponent2.collisionGroup || collisionComponent2.collisionMask & collisionComponent.collisionGroup)) {
+        return NO;
+    }
 
 
     PhysicsComponent *physicsComponent = (PhysicsComponent *)[entity1 getComponentOfClass: [PhysicsComponent class]];
@@ -46,7 +63,24 @@
     CGRect rect1 = CGRectMake(body1.position.x-body1.size.width / 2, body1.position.y - body1.size.height / 2, body1.size.width, body1.size.height);
     CGRect rect2 = CGRectMake(body2.position.x-body2.size.width / 2, body2.position.y - body2.size.height / 2, body2.size.width, body2.size.height);
 
-    return CGRectIntersectsRect(rect1, rect2);
+    if (CGRectIntersectsRect(rect1, rect2)) {
+        NSArray *poly1Points = [self arrayFromData:physicsComponent.physicalBody.shapeVertices withCount:physicsComponent.physicalBody.shapeVerticesCount];
+        NSArray *poly2Points = [self arrayFromData:physicsComponent2.physicalBody.shapeVertices withCount:physicsComponent2.physicalBody.shapeVerticesCount];
+
+        for (uint i = 0; i < poly1Points.count; i ++) {
+            if (isPointInPolygon(poly2Points, [[poly1Points objectAtIndex:i] CGPointValue])) {
+                return YES;
+            }
+        }
+
+        for (uint i = 0; i < poly2Points.count; i ++) {
+            if (isPointInPolygon(poly1Points, [[poly1Points objectAtIndex:i] CGPointValue])) {
+                return YES;
+            }
+        }
+    }
+
+    return NO;
 
 //    if (distance <= radius1+radius2) {
 //        return YES;

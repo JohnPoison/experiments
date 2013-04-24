@@ -13,6 +13,7 @@
 #import "PhysicalBody.h"
 #import "CollisionComponent.h"
 
+const int kBulletCollisionGroup       = 2 << 1;
 
 @implementation Bullet {
     GLWLinesPrimitive *primitive;
@@ -28,9 +29,9 @@
     if (self) {
         NSArray *points = @[
                 [NSValue valueWithCGPoint:CGPointMake(0, 0)],
-                [NSValue valueWithCGPoint:CGPointMake(1, 0)],
-                [NSValue valueWithCGPoint:CGPointMake(1, 1)],
-                [NSValue valueWithCGPoint:CGPointMake(0, 1)],
+                [NSValue valueWithCGPoint:CGPointMake(2, 0)],
+                [NSValue valueWithCGPoint:CGPointMake(2, 2)],
+                [NSValue valueWithCGPoint:CGPointMake(0, 2)],
                 [NSValue valueWithCGPoint:CGPointMake(0, 0)],
         ];
 
@@ -38,7 +39,7 @@
         primitive.rotation = rotation;
         [self addComponent: [RenderComponent componentWithObject: primitive]];
 
-        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(1,1) verticesCount:4];
+        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(2, 2) vertices:primitive.vertices verticesCount:primitive.verticesCount];
         [self addComponent: [PhysicsComponent componentWithBody: body]];
 
         [body applyImpulse: velocity];

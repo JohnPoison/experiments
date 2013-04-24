@@ -28,12 +28,23 @@
     self = [super init];
     if (self) {
         children = [NSMutableArray array];
+        childrenToBeRemoved = [NSMutableArray array];
     }
 
     return self;
 }
 
 - (BOOL)handleTouch:(UIGestureRecognizer *)gestureRecognizer {
+
+    if (childrenToBeRemoved.count) {
+        for (GLWTouchDispatcherChild *child in childrenToBeRemoved) {
+            [self.delegate removeGestureRecognizer: child.gestureRecognizer];
+            [children removeObject: child];
+        }
+
+        [childrenToBeRemoved removeAllObjects];
+    }
+
     // reverse enumerator because latest children has higher priority
     for (GLWTouchDispatcherChild *child in [children reverseObjectEnumerator]) {
         // if touch was swallowed we'll stop iterating
@@ -59,16 +70,14 @@
 - (void)removeGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
     for (GLWTouchDispatcherChild *child in [children reverseObjectEnumerator]) {
         if (child.gestureRecognizer == gestureRecognizer)
-            [children removeObject: child];
+        [childrenToBeRemoved addObject: child];
     }
-    [self.delegate removeGestureRecognizer: gestureRecognizer];
 }
 
 - (void)removeDelegate:(id <GLWGestureRecognizerDelegate>)delegate {
     for (GLWTouchDispatcherChild *child in [children reverseObjectEnumerator]) {
         if (child.delegate == delegate) {
-            [self.delegate removeGestureRecognizer: child.gestureRecognizer];
-            [children removeObject: child];
+            [childrenToBeRemoved addObject: child];
         }
     }
 }

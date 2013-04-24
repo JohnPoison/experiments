@@ -13,6 +13,7 @@
 @class GLWSprite;
 @class GLWObject;
 
+extern const int kSpaceshipCollisionGroup;
 
 @interface Spaceship : Entity <SpaceshipEngineDelegate, RenderableEntity> {
     GLWLayer* layer;

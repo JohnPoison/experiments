@@ -22,7 +22,10 @@
 #import "Bullet.h"
 #import "EntityManager.h"
 #import "BulletComponent.h"
+#import "Settings.h"
+#import "BulletFactory.h"
 
+const int kSpaceshipCollisionGroup       = 2 << 1;
 
 @implementation Spaceship {
 }
@@ -61,10 +64,21 @@
 //        _primitive.visible = NO;
 //        [layer addChild:primitive];
 
+        // primitive for tracking collisions
+        NSArray *vertices = @[
+                [NSValue valueWithCGPoint:CGPointMake(0, 0)],
+                [NSValue valueWithCGPoint:CGPointMake(20, 49)],
+                [NSValue valueWithCGPoint:CGPointMake(40, 0)],
+        ];
+        GLWLinesPrimitive *primitive = [[GLWLinesPrimitive alloc] initWithVertices:vertices lineWidth:1.f color:(Vec4){0,0,0,0}];
+        primitive.size = spaceship.size;
+        primitive.anchorPoint = CGPointMake(0.5, 0.5);
+        primitive.visible = NO;
+        [layer addChild: primitive];
 
         [self addComponent: [RenderComponent componentWithObject: layer ]];
 
-        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(40,49) verticesCount:0];
+        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(40, 49) vertices:primitive.vertices verticesCount:primitive.verticesCount];
         PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
         [self addComponent: component];
 
@@ -104,13 +118,7 @@
 }
 
 - (void)shoot {
-    if ([[EntityManager sharedManager] getAllEntitiesPosessingComponentOfClass: [BulletComponent class]].count < 4) {
-
-        CGPoint velocity = CGPointApplyAffineTransform(CGPointMake(0, 500), CGAffineTransformMakeRotation(-DegToRad(layer.rotation)));
-        Bullet* bullet = [Bullet bulletWithVelocityVector:velocity range:300 rotation:layer.rotation];
-        bullet.position = layer.position;
-        [bullet addToParent: layer.parent];
-    }
+    [[BulletFactory sharedFactory] newEntityWithPosition:layer.position parent:layer.parent rotation:layer.rotation];
 }
 
 - (void)destroy {

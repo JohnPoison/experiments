@@ -41,15 +41,13 @@
         space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
         [self addChild: space];
 
-        Asteroid *asteroid = [[Asteroid alloc] initWithPosition:CGPointMake(200, 200) size:50];
-        [asteroid addToParent: self];
+        [[AsteroidsFactory sharedFactory] newEntityWithPosition:CGPointMake(200,200) parent: self size: 25];
+        Entity *e = [[AsteroidsFactory sharedFactory] newEntityWithPosition:CGPointMake(100,50) parent: self size: 25];
 
-        PhysicsComponent *physicsComponent = (PhysicsComponent *)[asteroid getComponentOfClass:[PhysicsComponent class]];
-        [physicsComponent.physicalBody applyImpulse:CGPointMake(-20, -20)];
+        PhysicsComponent *physicsComponent = [e getComponentOfClass: [PhysicsComponent class]];
+        [physicsComponent.physicalBody applyImpulse:CGPointMake(30, 30)];;
 
 
-        asteroid = [[Asteroid alloc] initWithPosition:CGPointMake(100, 50) size:25];
-        [asteroid addToParent: self];
 
 
         spaceship = [self newSpaceship];

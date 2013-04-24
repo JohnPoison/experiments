@@ -20,16 +20,18 @@
         _velocity = CGPointZero;
         _maxVelocity = 0.f;
         shapeVerticesCount = 0;
+        _angularVelocity = 0;
     }
 
     return self;
 }
 
-- (PhysicalBody *)initWithSize:(CGSize)size verticesCount:(uint)count {
+- (PhysicalBody *)initWithSize:(CGSize)size vertices:(GLWVertexData *)vertices verticesCount:(uint)count {
     self = [self init];
 
     if (self) {
         _size = size;
+        _shapeVertices = vertices;
         shapeVerticesCount = count;
     }
 
@@ -56,13 +58,17 @@
     _velocity = CGPointAdd(_velocity, impulseVector);
 }
 
-- (Shape *)shape {
-    return shape;
+- (void)applyAngularImpulse:(float)impulse {
+    _angularVelocity += impulse;
 }
+
 
 - (uint)shapeVerticesCount {
     return shapeVerticesCount;
 }
 
+- (GLWVertexData *)shapeVertices {
+    return _shapeVertices;
+}
 
 @end

@@ -15,6 +15,7 @@
 #import "CollisionComponent.h"
 #import "CircleShape.h"
 
+const int kAsteroidCollisionGroup       = 2 << 1;
 
 @implementation Asteroid {
 
@@ -27,17 +28,17 @@
     NSMutableArray *points = [NSMutableArray arrayWithCapacity: count];
 
     CGAffineTransform t = CGAffineTransformMakeScale((float)randomNumberInRange(6, 10) / 10.f, 1.f);
+    t = CGAffineTransformRotate(t, randomNumberInRange(0, 90));
 //    CGAffineTransform t = CGAffineTransformMakeScale(0.8, 1);
 
     for (int i = 0; i < count; i ++) {
         float x = cosf(DegToRad(alpha)) * radius;
         float y = sinf(DegToRad(alpha)) * radius;
 
-//        float randomModificator = randomNumberInRange(0, radius / 2);
-//        y += randomModificator;
+        float randomModificator = randomNumberInRange(0, radius / 2);
+        y += randomModificator;
 
-        CGPoint p = CGPointMake(x, y);
-//        CGPoint p = CGPointApplyAffineTransform(CGPointMake(x, y), t);
+        CGPoint p = CGPointApplyAffineTransform(CGPointMake(x, y), t);
 //        CGPoint p = CGPointMake(x , y);
 
         [points addObject: [NSValue valueWithCGPoint: p]];
@@ -62,7 +63,7 @@
         _size = size;
 
         NSArray *arr = [self generateCircleWithRadius: size verticesCount:20];
-        _primitive = [[GLWLinesPrimitive alloc] initWithVertices: arr lineWidth: 1.f color: (Vec4){49,49,62,255}];
+        _primitive = [[GLWLinesPrimitive alloc] initWithVertices: arr lineWidth: 2.f color: (Vec4){49,49,62,255}];
 //        _primitive.rotation = randomNumberInRange(0, 360);
 
 
@@ -71,7 +72,7 @@
 //        CircleShape *shape = [[CircleShape alloc] init];
 //        shape.radius = 50;
 
-        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(size*2,size*2) verticesCount:[_primitive verticesCount]];
+        PhysicalBody *body = [[PhysicalBody alloc] initWithSize:CGSizeMake(size * 2, size * 2) vertices:_primitive.vertices verticesCount:[_primitive verticesCount]];
         PhysicsComponent *component = [PhysicsComponent componentWithBody: body];
         [self addComponent: component];
 
@@ -115,8 +116,9 @@
             PhysicsComponent *asteroidPhysicsComponent = (PhysicsComponent *)[asteroid getComponentOfClass: [PhysicsComponent class]];
             asteroid.parentAsteroidId = self.eid;
 
-            float velocity = 10;
+            float velocity = 30;
             [asteroidPhysicsComponent.physicalBody applyImpulse:CGPointMake(randomNumberInRange(-velocity, velocity), randomNumberInRange(-velocity,velocity))];
+            [asteroidPhysicsComponent.physicalBody applyAngularImpulse:randomNumberInRange(-90, 90)];
 
         }
     }
