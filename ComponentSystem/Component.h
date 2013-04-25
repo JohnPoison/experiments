@@ -13,6 +13,8 @@
     NSMutableArray *requiredComponents;
 }
 
++ (id)componentWithDict: (NSDictionary *) dict;
++ (id)component;
 - (id)initWithDict: (NSDictionary *) dict;
 - (BOOL) checkDependenciesOnComponents: (NSArray *) entityComponents;
 

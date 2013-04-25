@@ -50,4 +50,12 @@
     return self;
 }
 
++ (id)componentWithDict:(NSDictionary *)dict {
+    return [[self alloc] initWithDict: dict];
+}
+
++ (id)component {
+    return [[self alloc] init];
+}
+
 @end

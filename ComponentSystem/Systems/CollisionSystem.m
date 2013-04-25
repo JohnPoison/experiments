@@ -42,16 +42,26 @@
 //    NSMutableArray *verticesVectors = [NSMutableArray array];
 
     CollisionComponent *collisionComponent = (CollisionComponent *)[entity1 getComponentOfClass: [CollisionComponent class]];
-    CollisionComponent *collisionComponent2 = (CollisionComponent *)[entity1 getComponentOfClass: [CollisionComponent class]];
+    CollisionComponent *collisionComponent2 = (CollisionComponent *)[entity2 getComponentOfClass: [CollisionComponent class]];
 
-    if (collisionComponent.collisionMask == kCollisionDisabled || collisionComponent2.collisionMask == kCollisionDisabled)
-        return NO;
+//    if (collisionComponent.collisionMask == kCollisionDisabled || collisionComponent2.collisionMask == kCollisionDisabled)
+//        return NO;
 
+
+    BOOL object1Collidable = YES, object2Collidable = YES;
 
     // if there is no objects to collide
-    if (!(collisionComponent.collisionMask & collisionComponent2.collisionGroup || collisionComponent2.collisionMask & collisionComponent.collisionGroup)) {
-        return NO;
+    if (collisionComponent.collisionMask & collisionComponent2.collisionGroup) {
+        object1Collidable = NO;
     }
+    // if there is no objects to collide
+    if (collisionComponent2.collisionMask & collisionComponent.collisionGroup) {
+        object2Collidable = NO;
+    }
+
+//    if (!object1Collidable && !object2Collidable) {
+//        return NO;
+//    }
 
 
     PhysicsComponent *physicsComponent = (PhysicsComponent *)[entity1 getComponentOfClass: [PhysicsComponent class]];
@@ -74,7 +84,7 @@
         }
 
         for (uint i = 0; i < poly2Points.count; i ++) {
-            if (isPointInPolygon(poly1Points, [[poly1Points objectAtIndex:i] CGPointValue])) {
+            if (isPointInPolygon(poly1Points, [[poly2Points objectAtIndex:i] CGPointValue])) {
                 return YES;
             }
         }
@@ -82,56 +92,6 @@
 
     return NO;
 
-//    if (distance <= radius1+radius2) {
-//        return YES;
-//    }
-
-
-
-
-
-
-
-//    for (int i = 0; i < physicsComponent.physicalBody.shapeVerticesCount; i++) {
-//        GLWVertexData v = physicsComponent.physicalBody.shape[i];
-//        CGPoint vertex = CGPointMake(v.vertex.x, v.vertex.y);
-////        CGPoint vertexVelocityVector = CGPointAdd(vertex, physicsComponent.physicalBody.velocity);
-//        CGPoint vertexVelocityVector = CGPointAdd(vertex, CGPointMake(0, -10));
-//
-//        [verticesVectors addObject: [NSValue valueWithCGPoint: vertex]];
-//        [verticesVectors addObject: [NSValue valueWithCGPoint: vertexVelocityVector]];
-//    }
-//
-//    BOOL stop = NO;
-//    for (uint i = 0; i < verticesVectors.count / 2; i+=2) {
-//        CGPoint pointA = [[verticesVectors objectAtIndex: i] CGPointValue];
-//        CGPoint pointB = [[verticesVectors objectAtIndex: i+1] CGPointValue];
-//
-//        for (uint j = 0; j < physicsComponent2.physicalBody.shapeVerticesCount-1; j++) {
-//            GLWVertexData v = physicsComponent2.physicalBody.shape[j];
-//            GLWVertexData v2 = physicsComponent2.physicalBody.shape[j+1];
-//            CGPoint pointC = CGPointMake(v.vertex.x, v.vertex.y);
-//            CGPoint pointD = CGPointMake(v2.vertex.x, v2.vertex.y);
-//
-//            if (isLinesCross(pointA.x, pointA.y, pointB.x, pointB.y, pointC.x, pointC.y, pointD.x, pointD.y)) {
-//                DebugLog(@"collision");
-//                stop = YES;
-//            }
-//
-//
-//            if (stop) {
-//                break;
-//            }
-//        }
-//
-//        if (stop) {
-//            break;
-//        }
-//
-////        if (isLinesCross(<#(int)x11#>, <#(int)y11#>, <#(int)x12#>, <#(int)y12#>, <#(int)x21#>, <#(int)y21#>, <#(int)x22#>, <#(int)y22#>))
-//    }
-
-    return NO;
 
 }
 

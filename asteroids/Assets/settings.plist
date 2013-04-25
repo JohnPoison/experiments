@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>bulletSpeed</key>
+        <integer>500</integer>
+        <key>bulletRange</key>
+        <integer>300</integer>
+        <key>maxBullets</key>
+        <integer>4</integer>
+        <key>asteroidsStartSpawnCount</key>
+        <integer>4</integer>
+        <key>bigAsteroidMaxSpeed</key>
+        <integer>30</integer>
+        <key>smallAsteroidMaxSpeed</key>
+        <integer>70</integer>
+        <key>asteroidsMaxAngularSpeed</key>
+        <integer>90</integer>
+        <key>asteroidsMinSize</key>
+        <integer>20</integer>
+        <key>asteroidsMaxSize</key>
+        <integer>20</integer>
+    </dict>
+</plist>
