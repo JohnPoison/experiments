@@ -6,5 +6,5 @@
 #if DEBUG
 #define GL_ERROR() ({ GLenum __error = glGetError(); if(__error) printf("OpenGL error 0x%04X in %s %d\n", __error, __FUNCTION__, __LINE__); })
 #else
-#define CHECK_GL_ERROR_DEBUG()
+#define GL_ERROR()
 #endif

@@ -22,12 +22,10 @@
 @implementation SpaceshipControlSystem {
     AudioProcessor *audioProcessor;
     float previousPeak;
-    float rotateBy;
     CGPoint touchLocation;
     BOOL trackingTouch;
     UIPanGestureRecognizer *pan;
     UILongPressGestureRecognizer *press;
-    id autoShootObserver;
 }
 
 - (id)init {
@@ -62,13 +60,10 @@
     [[GLWTouchDispatcher sharedDispatcher] removeGestureRecognizer:press];
     pan = nil;
     press = nil;
-    autoShootObserver = nil;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString: @"autoShoot"]) {
-        NSArray *entites = [[EntityManager sharedManager] getAllEntitiesPosessingComponentOfClass: [self systemComponentClass]];
-
         if ([[change objectForKey:@"new"] boolValue]) {
             [audioProcessor stop];
         } else {
@@ -99,11 +94,6 @@
 }
 
 - (BOOL) handleTouch: (UIGestureRecognizer *) gestureRecognizer {
-    rotateBy = 0;
-//    CGPoint loc = [gestureRecognizer touchLocation];
-
-//    float targetRotation = [self getAngleOfRotation:loc];
-//    rotateBy = targetRotation - [self.delegate currentRotation];
 
     touchLocation = [gestureRecognizer touchLocation];
 
@@ -122,7 +112,7 @@
         previousPeak = audioProcessor.decibelsLevel;
     float delta = audioProcessor.decibelsLevel - previousPeak;
     if (delta < -8) {
-//        DebugLog(@"%5.5f", delta);
+        DebugLog(@"%5.5f", delta);
         [(Spaceship *)entity shoot];
     }
 

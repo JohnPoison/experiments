@@ -195,17 +195,6 @@ static const GLfloat _zeroMatrix[] = {
     GLfloat* m = matrix.matrix;
     Vec4 resultVec = (Vec4){0,0,0,0};
 
-//    resultVec.x = v.x * m[0] + v.x * m[1] + v.x * m[2] + v.x * m[3];
-//    resultVec.y = v.y * m[4] + v.y * m[5] + v.y * m[6] + v.y * m[7];
-//    resultVec.z = v.z * m[8] + v.z * m[9] + v.z * m[10] + v.z * m[11];
-////    resultVec.w = v.w * m[12] + v.w * m[13] + v.w * m[14] + v.w * m[15];
-//    resultVec.w = m[12] + m[13] + m[14] + m[15];
-
-//    resultVec.x = v.x * m[0] + v.y * m[1] + v.z * m[2] +  m[3];
-//    resultVec.y = v.x * m[4] + v.y * m[5] + v.z * m[6] +  m[7];
-//    resultVec.z = v.x * m[8] + v.y * m[9] + v.z * m[10] +  m[11];
-//    resultVec.w = v.x * m[12] + v.y * m[13] + v.z * m[14] + m[15];
-//
     resultVec.x = v.x * m[0] + v.y * m[4] + v.z * m[8] +  m[12];
     resultVec.y = v.x * m[1] + v.y * m[5] + v.z * m[9] +  m[13];
     resultVec.z = v.x * m[2] + v.y * m[6] + v.z * m[10] +  m[14];
@@ -219,53 +208,8 @@ static const GLfloat _zeroMatrix[] = {
     GLWMatrix *matrix = [GLWMatrix identityMatrix];
     GLfloat* m = matrix.matrix;
 
-    float cx = cosf(v.x);
-    float sx = sinf(v.x);
-    float cy = cosf(v.y);
-    float sy = sinf(v.y);
     float cz = cosf(v.z);
     float sz = sinf(v.z);
-
-//    m[0] = (cy * cz) + (sx * sy * sz);
-//    m[1] = cx * sz;
-//    m[2] = (cy * sx * sz) - (cz * sy);
-//    m[3] = 0.0;
-//
-//    m[4] = (cz * sx * sy) - (cy * sz);
-//    m[5] = cx * cz;
-//    m[6] = (cy * cz * sx) + (sy * sz);
-//    m[7] = 0.0;
-//
-//    m[8] = cx * sy;
-//    m[9] = -sx;
-//    m[10] = cx * cy;
-//    m[11] = 0.0;
-////
-//    m[12] = 0.0;
-//    m[13] = 0.0;
-//    m[14] = 0.0;
-//    m[15] = 1.0;
-
-//    m[0] = cy * cz;
-//    m[1] = -sz;
-//    m[2] = -sy;
-//    m[3] = 0.0;
-
-//    m[4] = sz;
-//    m[5] = cx * cz;
-//    m[6] = -sx;
-//    m[7] = 0.0;
-
-//    m[8] = -sy;
-//    m[9] = sx;
-//    m[10] = cx * cy;
-//    m[11] = 0.0;
-
-//    m[12] = 0.0;
-//    m[13] = 0.0;
-//    m[14] = 0.0;
-//    m[15] = 1.0;
-
 
     m[0] = cz;
     m[1] = sz;

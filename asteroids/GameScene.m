@@ -96,9 +96,9 @@
     if (self) {
         NSURL* music = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource: @"menu" ofType: @"mp3"]];
         NSError *error;
-        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: music  error:&error];
-        [audioPlayer prepareToPlay];
-        [audioPlayer play];
+//        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: music  error:&error];
+//        [audioPlayer prepareToPlay];
+//        [audioPlayer play];
 
         lifePoints = [NSMutableArray array];
 
@@ -107,7 +107,8 @@
         [Settings sharedSettings].score = 0;
         [Settings sharedSettings].level = 1;
 
-        space = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
+        GLWSprite* theSpace = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
+        space = theSpace;
         [self addChild: space];
 
         [self newSpaceship];

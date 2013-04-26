@@ -27,9 +27,10 @@
     self = [super init];
     if (self) {
 
-        NSURL* music = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource: @"menu" ofType: @"mp3"]];
+//        NSURL* music = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource: @"menu" ofType: @"mp3"]];
+        NSURL* music = [NSURL URLWithString:[[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp3"]];
         NSError *error;
-        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: music  error:&error];
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: music  error:nil];
         if (error) {
 
         }

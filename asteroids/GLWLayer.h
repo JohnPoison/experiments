@@ -12,6 +12,5 @@
 }
 
 -(void) sortChildren;
--(NSArray *) children;
 
 @end

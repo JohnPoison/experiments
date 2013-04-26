@@ -51,6 +51,8 @@
         if (child.gestureRecognizer == gestureRecognizer && child.delegate && [child.delegate handleTouch:gestureRecognizer])
             break;
     }
+    
+    return NO;
 }
 
 

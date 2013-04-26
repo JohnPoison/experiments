@@ -8,7 +8,6 @@
 #import "PhysicalBody.h"
 #import "GLWMath.h"
 #import "OpenGLConfig.h"
-#import "Shape.h"
 
 
 @implementation PhysicalBody {

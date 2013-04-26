@@ -33,7 +33,7 @@
 
     // divide in half due to get size respective to center
     CGSize size = CGSizeMake(physicsComponent.physicalBody.size.width / 2, physicsComponent.physicalBody.size.height / 2);
-    CGPoint velocity = physicsComponent.physicalBody.velocity;
+
 
     if (position.x - size.width > winSize.width)
         position.x = -size.width;

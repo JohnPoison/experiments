@@ -52,7 +52,7 @@ static const int VertexSize = sizeof(GLWVertexData);
         indices = malloc(sizeof(GLushort) * 6 * childrenCount);
 
         for (uint i = 0; i < childrenCount; i++) {
-            GLWSprite *child = [children objectAtIndex: i];
+//            GLWSprite *child = [children objectAtIndex: i];
 //            vertices[i] = child.vertices;
 
             indices[i*6]    = (GLushort)i*4;

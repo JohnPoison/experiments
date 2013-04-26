@@ -13,7 +13,6 @@
 #import "PhysicalBody.h"
 #import "PhysicsComponent.h"
 #import "CollisionComponent.h"
-#import "CircleShape.h"
 #import "Bullet.h"
 #import "AsteroidsSpawnComponent.h"
 #import "Settings.h"
