@@ -45,7 +45,6 @@
 		36EBC8F21218705AD03CE986 /* GLWCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCF361CA36478BFD92F23 /* GLWCamera.m */; };
 		36EBC903009EA0D42EA36112 /* GLWRenderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCAFDD123BF106D283A78 /* GLWRenderManager.m */; };
 		36EBC93BEC889FE7242EC248 /* Spaceship.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC8F56D5C04BA9341FEF8 /* Spaceship.m */; };
-		36EBC952DD633BC2291321CF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36EBC92516FE6163E6BCBF00 /* AVFoundation.framework */; };
 		36EBC960F7294213A9590E06 /* retina-spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC814C83E88974099EDEA /* retina-spaceship.png */; };
 		36EBC992A53F2451EE8FDB89 /* CollisionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCF43A2F7F05060960052 /* CollisionObject.m */; };
 		36EBC9AA8C9FCFC2D57FAEE6 /* DependencyNotFoundException.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC78794ABEABE6A235309 /* DependencyNotFoundException.m */; };
@@ -164,7 +163,6 @@
 		36EBC918226182FA4D4442FD /* AbstractGameObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractGameObjectFactory.h; sourceTree = "<group>"; };
 		36EBC91B065DE3F891955964 /* TutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialScene.h; sourceTree = "<group>"; };
 		36EBC924488CA1205ABF3530 /* GLWLinesPrimitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWLinesPrimitive.h; sourceTree = "<group>"; };
-		36EBC92516FE6163E6BCBF00 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		36EBC939D5618E9A81090EDE /* GLWTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLWTypes.h; sourceTree = "<group>"; };
 		36EBC93D0612F052C1255447 /* DependencyNotFoundException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DependencyNotFoundException.h; sourceTree = "<group>"; };
 		36EBC9772612D9BB5C2C2971 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 				CE7161A316EE5EB400A32C9E /* CoreGraphics.framework in Frameworks */,
 				CE7161A716EE5EB400A32C9E /* OpenGLES.framework in Frameworks */,
 				36EBC3B3F9D04356C24A0453 /* AudioToolbox.framework in Frameworks */,
-				36EBC952DD633BC2291321CF /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +497,6 @@
 				CE7161A216EE5EB400A32C9E /* CoreGraphics.framework */,
 				CE7161A616EE5EB400A32C9E /* OpenGLES.framework */,
 				36EBCAE31560814243312FFA /* AudioToolbox.framework */,
-				36EBC92516FE6163E6BCBF00 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

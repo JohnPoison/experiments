@@ -27,15 +27,6 @@
     self = [super init];
     if (self) {
 
-//        NSURL* music = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource: @"menu" ofType: @"mp3"]];
-        NSURL* music = [NSURL URLWithString:[[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp3"]];
-        NSError *error;
-        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: music  error:nil];
-        if (error) {
-
-        }
-        [audioPlayer prepareToPlay];
-        [audioPlayer play];
 
         GLWSprite *back = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
         [self addChild: back];

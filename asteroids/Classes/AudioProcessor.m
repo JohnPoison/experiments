@@ -11,8 +11,8 @@
 
 #pragma mark Recording callback
 
-const float kDecibelOffset = -74.0f;
-const float kLowpassFilterTimeSlice = 0.001f;
+const float kDecibelOffset = -0.0f;
+const float kLowpassFilterTimeSlice = 1.0f;
 
 static OSStatus recordingCallback(void *inRefCon, 
                                   AudioUnitRenderActionFlags *ioActionFlags, 

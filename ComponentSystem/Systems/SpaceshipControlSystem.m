@@ -111,6 +111,7 @@
     if (previousPeak == 1000.f)
         previousPeak = audioProcessor.decibelsLevel;
     float delta = audioProcessor.decibelsLevel - previousPeak;
+
     if (delta < -8) {
         DebugLog(@"%5.5f", delta);
         [(Spaceship *)entity shoot];

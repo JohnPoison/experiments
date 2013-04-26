@@ -94,11 +94,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        NSURL* music = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource: @"menu" ofType: @"mp3"]];
-        NSError *error;
-//        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: music  error:&error];
-//        [audioPlayer prepareToPlay];
-//        [audioPlayer play];
 
         lifePoints = [NSMutableArray array];
 
