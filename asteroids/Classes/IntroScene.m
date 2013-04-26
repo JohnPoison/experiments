@@ -15,15 +15,26 @@
 #import "GameScene.h"
 #import "Settings.h"
 #import "TutorialScene.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 @implementation IntroScene {
     Spaceship *spaceship;
+    AVAudioPlayer* audioPlayer;
 }
 
 - (id)init {
     self = [super init];
     if (self) {
+
+        NSURL* music = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource: @"menu" ofType: @"mp3"]];
+        NSError *error;
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: music  error:&error];
+        if (error) {
+
+        }
+        [audioPlayer prepareToPlay];
+        [audioPlayer play];
 
         GLWSprite *back = [GLWSprite spriteWithFile: @"space.png" rect:CGRectMake(0.f, 0.f, [GLWRenderManager sharedManager].windowSize.width, [GLWRenderManager sharedManager].windowSize.height)];
         [self addChild: back];
@@ -56,6 +67,8 @@
 - (void)dealloc {
     [spaceship removeEntity];
     spaceship = nil;
+    [audioPlayer stop];
+    audioPlayer = nil;
 }
 
 

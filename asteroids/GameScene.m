@@ -5,6 +5,7 @@
 
 
 #import <CoreGraphics/CoreGraphics.h>
+#import <AVFoundation/AVFoundation.h>
 #import "GameScene.h"
 #import "GLWRenderManager.h"
 #import "GLWSprite.h"
@@ -38,6 +39,7 @@
     __weak GLWSprite *space;
     __weak GLWString *score;
     NSMutableArray *lifePoints;
+    AVAudioPlayer* audioPlayer;
 }
 - (void)dealloc {
     lifePoints = nil;
@@ -92,6 +94,11 @@
 - (id)init {
     self = [super init];
     if (self) {
+        NSURL* music = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource: @"menu" ofType: @"mp3"]];
+        NSError *error;
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: music  error:&error];
+        [audioPlayer prepareToPlay];
+        [audioPlayer play];
 
         lifePoints = [NSMutableArray array];
 
