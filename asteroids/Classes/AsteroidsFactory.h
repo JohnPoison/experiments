@@ -9,5 +9,5 @@
 
 
 @interface AsteroidsFactory : AbstractGameObjectFactory
-- (Entity *)newEntityWithPosition:(CGPoint)position parent:(GLWObject *)parent size:(int)size maxSpeed:(int)maxSpeed maxAngularSpeed:(int)maxAngularSpeed;
+- (Entity *)newEntityWithPosition:(CGPoint)position parent:(GLWObject *)parent size:(int)size maxSpeed:(int)maxSpeed maxAngularSpeed:(int)maxAngularSpeed score:(int)score;
 @end

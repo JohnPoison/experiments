@@ -12,7 +12,7 @@
 @class GLWSprite;
 
 
-@interface HelloScene : ComponentLayer <CollisionListener>
+@interface GameScene : ComponentLayer <CollisionListener>
 
 
 @end

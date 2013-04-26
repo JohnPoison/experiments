@@ -18,8 +18,8 @@
 
 }
 
-- (Entity *)newEntityWithPosition:(CGPoint)position parent:(GLWObject *)parent size:(int)size maxSpeed:(int)maxSpeed maxAngularSpeed:(int)maxAngularSpeed {
-    Asteroid *asteroid = [[Asteroid alloc] initWithPosition: position size: size];
+- (Entity *)newEntityWithPosition:(CGPoint)position parent:(GLWObject *)parent size:(int)size maxSpeed:(int)maxSpeed maxAngularSpeed:(int)maxAngularSpeed score:(int)score {
+    Asteroid *asteroid = [[Asteroid alloc] initWithPosition:position size:size score:score];
     PhysicsComponent *physicsComponent = (PhysicsComponent *)[asteroid getComponentOfClass: [PhysicsComponent class]];
     [physicsComponent.physicalBody applyImpulse:CGPointMake(randomNumberInRange(-maxSpeed, maxSpeed), randomNumberInRange(-maxSpeed, maxSpeed))];
     [physicsComponent.physicalBody applyAngularImpulse: maxAngularSpeed];

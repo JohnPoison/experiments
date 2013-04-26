@@ -4,6 +4,7 @@
 //
 //  Created by Stefan Popp on 21.09.11.
 //  Copyright 2011 http://www.stefanpopp.de/2011/capture-iphone-microphone/ . All rights reserved.
+//  modified by JohnPoison <truefiresnake@gmail.com>
 //
 
 #import "AudioProcessor.h"
@@ -251,8 +252,6 @@ static OSStatus playbackCallback(void *inRefCon,
 	// Initialize the Audio Unit and cross fingers =)
 	status = AudioUnitInitialize(audioUnit);
 	[self hasError:status:__FILE__:__LINE__];
-    
-    NSLog(@"Started");
     
 }
 

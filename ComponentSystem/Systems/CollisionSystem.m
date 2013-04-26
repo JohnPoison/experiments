@@ -48,20 +48,20 @@
 //        return NO;
 
 
-    BOOL object1Collidable = YES, object2Collidable = YES;
+    BOOL object1Collidable = NO, object2Collidable = NO;
 
     // if there is no objects to collide
     if (collisionComponent.collisionMask & collisionComponent2.collisionGroup) {
-        object1Collidable = NO;
+        object1Collidable = YES;
     }
     // if there is no objects to collide
     if (collisionComponent2.collisionMask & collisionComponent.collisionGroup) {
-        object2Collidable = NO;
+        object2Collidable = YES;
     }
 
-//    if (!object1Collidable && !object2Collidable) {
-//        return NO;
-//    }
+    if (!object1Collidable && !object2Collidable) {
+        return NO;
+    }
 
 
     PhysicsComponent *physicsComponent = (PhysicsComponent *)[entity1 getComponentOfClass: [PhysicsComponent class]];

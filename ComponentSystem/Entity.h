@@ -17,6 +17,7 @@
 - (void) setEid: (uint32_t)eid;
 - (void) addComponent: (Component *) component;
 - (Component *)getComponentOfClass:(Class)componentClass;
+- (void) removeComponentOfClass: (Class)componentClass;
 - (void) removeEntity;
 
 @end

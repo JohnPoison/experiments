@@ -18,6 +18,7 @@
 #import "AsteroidsSpawnComponent.h"
 #import "Settings.h"
 #import "AsteroidsFactory.h"
+#import "Spaceship.h"
 
 const int kAsteroidCollisionGroup       = 1 << 2;
 
@@ -58,13 +59,14 @@ const int kAsteroidCollisionGroup       = 1 << 2;
 }
 
 
-- (Asteroid *)initWithPosition:(CGPoint)p size:(int)size {
+- (Asteroid *)initWithPosition:(CGPoint)p size:(int)size score:(int)score {
     self = [super init];
 
     if (self) {
         self.parentAsteroidId = 0;
 
         _size = size;
+        _score = score;
 
         NSArray *arr = [self generateCircleWithRadius: size verticesCount:20];
         _primitive = [[GLWLinesPrimitive alloc] initWithVertices: arr lineWidth: 2.f color: (Vec4){49,49,62,255}];
@@ -78,7 +80,7 @@ const int kAsteroidCollisionGroup       = 1 << 2;
 
         CollisionComponent *collisionComponent = [CollisionComponent component];
         collisionComponent.collisionGroup = kAsteroidCollisionGroup;
-        collisionComponent.collisionMask = kBulletCollisionGroup;
+        collisionComponent.collisionMask = kBulletCollisionGroup | kSpaceshipCollisionGroup;
         [self addComponent:collisionComponent];
 
         PhysicsComponent *physicsComponent = (PhysicsComponent *)[self getComponentOfClass:[PhysicsComponent class]];
@@ -115,19 +117,13 @@ const int kAsteroidCollisionGroup       = 1 << 2;
 
     if (!self.parentAsteroidId) {
 
+        float speedFactor = [Settings sharedSettings].level * [[[Settings sharedSettings] getSettingWithName: @"levelSpeedFactor"] floatValue];
+        int maxSpeed = [[[Settings sharedSettings] getSettingWithName: @"smallAsteroidMaxSpeed"] integerValue];
+        int maxAngularSpeed = [[[Settings sharedSettings] getSettingWithName: @"asteroidsMaxAngularSpeed"] integerValue];
+
         for (int i = 0; i < 4; i++) {
-            int maxSpeed = [[[Settings sharedSettings] getSettingWithName: @"smallAsteroidMaxSpeed"] integerValue];
-            int maxAngularSpeed = [[[Settings sharedSettings] getSettingWithName: @"asteroidsMaxAngularSpeed"] integerValue];
-            Asteroid *asteroid = (Asteroid *) [[AsteroidsFactory sharedFactory] newEntityWithPosition:self.position parent:_primitive.parent size:_size / 2 maxSpeed:maxSpeed maxAngularSpeed:maxAngularSpeed];
-//            [[Asteroid alloc] initWithPosition:self.position size: _size / 2];
-//            [asteroid addToParent: _primitive.parent];
-//            PhysicsComponent *asteroidPhysicsComponent = (PhysicsComponent *)[asteroid getComponentOfClass: [PhysicsComponent class]];
+            Asteroid *asteroid = (Asteroid *) [[AsteroidsFactory sharedFactory] newEntityWithPosition:self.position parent:_primitive.parent size:_size / 2 maxSpeed:maxSpeed * (int) speedFactor maxAngularSpeed:maxAngularSpeed score:self.score * 2];
             asteroid.parentAsteroidId = self.eid;
-
-//            float velocity = 30;
-//            [asteroidPhysicsComponent.physicalBody applyImpulse:CGPointMake(randomNumberInRange(-velocity, velocity), randomNumberInRange(-velocity,velocity))];
-//            [asteroidPhysicsComponent.physicalBody applyAngularImpulse:randomNumberInRange(-90, 90)];
-
         }
     }
 

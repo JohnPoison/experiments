@@ -13,12 +13,16 @@
     self = [super init];
     if (self) {
         _systems = [NSMutableArray array];
+        runSystems = YES;
     }
 
     return self;
 }
 
 - (void)updateSystemsWithDelta: (CFTimeInterval) dt {
+    if (!runSystems)
+        return;
+
     for (System* theSystem in _systems) {
         [theSystem update: dt];
     }
@@ -37,5 +41,14 @@
         [_systems addObject: theSystem];
     }
 }
+
+- (void)stopSystems {
+    runSystems = NO;
+}
+
+- (void)startSystems {
+    runSystems = YES;
+}
+
 
 @end

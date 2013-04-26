@@ -45,4 +45,8 @@
     [[EntityManager sharedManager] removeEntity: self];
 }
 
+- (void)removeComponentOfClass:(Class)componentClass {
+    [[EntityManager sharedManager] removeComponentOfClass: componentClass forEntity: self];
+}
+
 @end

@@ -16,7 +16,7 @@ typedef enum SpaceshipEngineStatus {
 } SpaceshipEngineStatus;
 
 
-@interface SpaceshipEngineComponent : Component <UIAccelerometerDelegate, GLWGestureRecognizerDelegate>
+@interface SpaceshipEngineComponent : Component <UIAccelerometerDelegate>
 
 @property (nonatomic, assign) SpaceshipEngineStatus status;
 @property (nonatomic, assign) float power;
@@ -27,6 +27,5 @@ typedef enum SpaceshipEngineStatus {
 
 +(SpaceshipEngineComponent *) componentWithPower: (float) power maxSpeed: (float) maxSpeed;
 -(SpaceshipEngineComponent *) initWithPower: (float) power maxSpeed: (float) maxSpeed;
--(float) shouldRotateBy;
 
 @end

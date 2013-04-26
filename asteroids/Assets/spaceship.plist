@@ -134,10 +134,23 @@
                 <key>sourceSize</key>
                 <string>{8,13}</string>
             </dict>
+            <key>auto</key>
+            <dict>
+                <key>frame</key>
+                <string>{{102,2},{40,37}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,37}}</string>
+                <key>sourceSize</key>
+                <string>{40,37}</string>
+            </dict>
             <key>boom</key>
             <dict>
                 <key>frame</key>
-                <string>{{102,2},{100,66}}</string>
+                <string>{{144,2},{100,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -147,36 +160,10 @@
                 <key>sourceSize</key>
                 <string>{100,66}</string>
             </dict>
-            <key>drop25</key>
-            <dict>
-                <key>frame</key>
-                <string>{{204,2},{100,100}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{100,100}}</string>
-                <key>sourceSize</key>
-                <string>{100,100}</string>
-            </dict>
-            <key>drop50</key>
-            <dict>
-                <key>frame</key>
-                <string>{{306,2},{100,100}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{100,100}}</string>
-                <key>sourceSize</key>
-                <string>{100,100}</string>
-            </dict>
             <key>fire</key>
             <dict>
                 <key>frame</key>
-                <string>{{408,2},{12,37}}</string>
+                <string>{{246,2},{12,37}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -189,7 +176,7 @@
             <key>fire2</key>
             <dict>
                 <key>frame</key>
-                <string>{{422,2},{12,37}}</string>
+                <string>{{260,2},{12,37}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -199,10 +186,36 @@
                 <key>sourceSize</key>
                 <string>{12,37}</string>
             </dict>
+            <key>gameover</key>
+            <dict>
+                <key>frame</key>
+                <string>{{274,2},{200,100}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{200,100}}</string>
+                <key>sourceSize</key>
+                <string>{200,100}</string>
+            </dict>
+            <key>hiscore</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,104},{110,17}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{110,17}}</string>
+                <key>sourceSize</key>
+                <string>{110,17}</string>
+            </dict>
             <key>play</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,104},{264,76}}</string>
+                <string>{{114,104},{264,76}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +228,7 @@
             <key>rocket</key>
             <dict>
                 <key>frame</key>
-                <string>{{268,104},{40,49}}</string>
+                <string>{{380,104},{40,49}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -225,18 +238,44 @@
                 <key>sourceSize</key>
                 <string>{40,49}</string>
             </dict>
-            <key>spaceship</key>
+            <key>score</key>
             <dict>
                 <key>frame</key>
-                <string>{{310,104},{101,138}}</string>
+                <string>{{422,104},{82,17}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{101,138}}</string>
+                <string>{{0,0},{82,17}}</string>
                 <key>sourceSize</key>
-                <string>{101,138}</string>
+                <string>{82,17}</string>
+            </dict>
+            <key>tutorial</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,182},{158,314}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{158,314}}</string>
+                <key>sourceSize</key>
+                <string>{158,314}</string>
+            </dict>
+            <key>voice</key>
+            <dict>
+                <key>frame</key>
+                <string>{{162,182},{40,37}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,37}}</string>
+                <key>sourceSize</key>
+                <string>{40,37}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -246,9 +285,9 @@
             <key>realTextureFileName</key>
             <string>spaceship.png</string>
             <key>size</key>
-            <string>{512,256}</string>
+            <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d9e7edada396ceafdd3997d6385c6449$</string>
+            <string>$TexturePacker:SmartUpdate:c868aca91d542e128a1b36a3600eb26a$</string>
             <key>textureFileName</key>
             <string>spaceship.png</string>
         </dict>

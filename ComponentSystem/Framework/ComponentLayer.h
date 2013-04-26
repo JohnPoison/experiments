@@ -10,6 +10,9 @@
 
 @interface ComponentLayer : GLWLayer {
     NSMutableArray *_systems;
+    BOOL runSystems;
 }
 - (void)requireSystem:(Class)systemClass ;
+- (void)stopSystems;
+- (void)startSystems;
 @end

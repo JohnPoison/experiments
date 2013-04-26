@@ -10,6 +10,10 @@
         <integer>4</integer>
         <key>asteroidsStartSpawnCount</key>
         <integer>4</integer>
+        <key>asteroidsMaxSpawnCount</key>
+        <integer>8</integer>
+        <key>levelSpeedFactor</key>
+        <real>1.25</real>
         <key>bigAsteroidMaxSpeed</key>
         <integer>30</integer>
         <key>smallAsteroidMaxSpeed</key>
@@ -20,5 +24,11 @@
         <integer>20</integer>
         <key>asteroidsMaxSize</key>
         <integer>20</integer>
+        <key>scoreForAsteroid</key>
+        <integer>10</integer>
+        <key>autoShootInterval</key>
+        <real>0.5</real>
+        <key>lives</key>
+        <integer>1</integer>
     </dict>
 </plist>

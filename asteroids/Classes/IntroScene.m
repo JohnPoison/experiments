@@ -12,7 +12,9 @@
 #import "PhysicsSystem.h"
 #import "Button.h"
 #import "OpenGLManager.h"
-#import "HelloScene.h"
+#import "GameScene.h"
+#import "Settings.h"
+#import "TutorialScene.h"
 
 
 @implementation IntroScene {
@@ -30,6 +32,7 @@
         float centeredY = [GLWRenderManager sharedManager].windowSize.height / 2;
         spaceship = (Spaceship*)[[SpaceshipFactory sharedFactory] newEntityWithPosition:CGPointMake(centeredX, centeredY) parent: self];
         [spaceship.layer setScale:1];
+        // to adjust position
         [self requireSystem: [PhysicsSystem class]];
 
         Button* button = (Button *)[Button spriteWithRectName: @"play"];
@@ -37,7 +40,11 @@
         button.position = CGPointMake(spaceship.position.x, spaceship.position.y - 80);
         button.anchorPoint = CGPointMake(0.5, 0.5);
         button.block = ^{
-            [[OpenGLManager sharedManager] runScene: [HelloScene class]];
+            if (![Settings sharedSettings].tutorialPassed) {
+                [[OpenGLManager sharedManager] runScene: [TutorialScene class]];
+            } else {
+                [[OpenGLManager sharedManager] runScene: [GameScene class]];
+            }
         };
 
         [self addChild: button];

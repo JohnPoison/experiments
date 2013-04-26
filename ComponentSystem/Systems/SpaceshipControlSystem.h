@@ -6,9 +6,10 @@
 
 #import <Foundation/Foundation.h>
 #import "System.h"
+#import "GLWGestureRecognizerDelegate.h"
 
 
-@interface SpaceshipControlSystem : System
+@interface SpaceshipControlSystem : System <GLWGestureRecognizerDelegate>
 
 
 @end

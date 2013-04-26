@@ -12,6 +12,8 @@
 #import "CollisionSystem.h"
 #import "BulletSystem.h"
 #import "AsteroidsSpawnSystem.h"
+#import "TimerSystem.h"
+#import "AutoShootSystem.h"
 
 
 @interface EntityManager (Private)
@@ -52,6 +54,8 @@ static EntityManager* _sharedManager = nil;
     [self registerSystem: [[CollisionSystem alloc] init]];
     [self registerSystem: [[BulletSystem alloc] init]];
     [self registerSystem: [[AsteroidsSpawnSystem alloc] init]];
+    [self registerSystem: [[TimerSystem alloc] init]];
+    [self registerSystem: [[AutoShootSystem alloc] init]];
 }
 
 - (uint32_t) generateNewEid {
@@ -122,15 +126,28 @@ static EntityManager* _sharedManager = nil;
     return nil;
 }
 
+- (void)removeAllEntities {
+    for (NSNumber *eid in [_entities allKeys]) {
+        Entity* e = [_entities objectForKey: eid];
+        [e removeEntity];
+    }
+//    [_componentsByClass removeAllObjects];
+//    [_componentsByEid removeAllObjects];
+//    [_entities removeAllObjects];
+}
+
 - (void)removeEntity:(Entity *)entity {
     NSNumber* eid = [NSNumber numberWithInt: entity.eid];
     for (NSMutableDictionary * components in _componentsByClass.allValues) {
-        if ([components objectForKey: @(entity.eid)]) {
+        if ([components objectForKey: eid]) {
             [components removeObjectForKey: eid];
         }
     }
-    [_componentsByEid removeObjectForKey: @(entity.eid)];
-    [_entities removeObjectForKey:@(entity.eid)];
+    [_componentsByEid removeObjectForKey: eid];
+    for (NSString *class in _componentsByClass) {
+        [[_componentsByClass objectForKey:class] removeObjectForKey: eid];
+    }
+    [_entities removeObjectForKey: eid];
 }
 
 + (EntityManager *)sharedManager {
@@ -153,6 +170,24 @@ static EntityManager* _sharedManager = nil;
     } else {
         return [[NSArray alloc] init];
     }
+}
+
+- (void)removeComponentOfClass:(Class)componentClass forEntity:(Entity *)entity {
+
+    NSMutableArray *componentsByEid = [_componentsByEid objectForKey: @(entity.eid)];
+    NSMutableArray *componentsToRemove = [NSMutableArray array];
+
+    for (Component *component in componentsByEid) {
+        if ([component isKindOfClass: componentClass]) {
+            [componentsToRemove addObject: component];
+        }
+    }
+
+    for (id component in componentsToRemove) {
+        [componentsByEid removeObject: component];
+    }
+
+    [[_componentsByClass objectForKey:NSStringFromClass(componentClass)] removeObjectForKey:@(entity.eid)];
 }
 
 

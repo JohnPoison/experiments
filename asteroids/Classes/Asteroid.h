@@ -17,7 +17,8 @@ extern const int kAsteroidCollisionGroup;
     int _size;
 }
 
-- (Asteroid *)initWithPosition:(CGPoint)p size:(int)size;
+- (Asteroid *)initWithPosition:(CGPoint)p size:(int)size score:(int)score;
 -(void) destroy;
 @property (nonatomic, assign) int parentAsteroidId;
+@property (nonatomic, assign) int score;
 @end

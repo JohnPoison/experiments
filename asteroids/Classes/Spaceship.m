@@ -24,6 +24,9 @@
 #import "BulletComponent.h"
 #import "Settings.h"
 #import "BulletFactory.h"
+#import "Boom.h"
+#import "TimerComponent.h"
+#import "AutoShootComponent.h"
 
 const int kSpaceshipCollisionGroup = 1 << 4;
 
@@ -88,9 +91,26 @@ const int kSpaceshipCollisionGroup = 1 << 4;
 
         [self addComponent: engine];
 
-        CollisionComponent *collisionComponent = [[CollisionComponent alloc] init];
-        collisionComponent.collisionGroup = kSpaceshipCollisionGroup;
-        [self addComponent:collisionComponent];
+        __weak GLWLayer* weakLayer = layer;
+        __weak Spaceship* weakSelf = self;
+
+        TimerComponent *collisionEnableTimer = [TimerComponent component];
+        collisionEnableTimer.timeInterval = 0.1f;
+        collisionEnableTimer.timeIntervalBlock = ^{
+            weakLayer.visible = !weakLayer.visible;
+        };
+
+        collisionEnableTimer.lifetime = 2.f;
+        collisionEnableTimer.finishBlock = ^{
+            weakLayer.visible = YES;
+            CollisionComponent *collisionComponent = [[CollisionComponent alloc] init];
+            collisionComponent.collisionGroup = kSpaceshipCollisionGroup;
+            [weakSelf addComponent:collisionComponent];
+        };
+
+        [self addComponent: collisionEnableTimer];
+
+        [self addComponent: [AutoShootComponent component]];
     }
 
     return self;
@@ -124,12 +144,20 @@ const int kSpaceshipCollisionGroup = 1 << 4;
 }
 
 - (void)destroy {
-    [fire removeFromParent];
+    Boom* boom = [[Boom alloc] init];
+    boom.position = layer.position;
+    [boom addToParent: layer.parent];
+    [self removeEntity];
 }
 
 - (float)currentRotation {
     return layer.rotation;
 }
+
+- (CGPoint)currentPosition {
+    return [self position];
+}
+
 
 - (GLWLayer *)layer {
     return layer;

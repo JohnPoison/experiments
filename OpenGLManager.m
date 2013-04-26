@@ -30,6 +30,7 @@
 
 - (void)runScene: (Class) scene {
     [self stopRender];
+    [self.view.renderer.currentScene cleanup];
     self.view.renderer.currentScene = [[[scene alloc] init] autorelease];
     [self startRender];
 }

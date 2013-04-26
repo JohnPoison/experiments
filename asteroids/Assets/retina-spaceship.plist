@@ -134,10 +134,23 @@
                 <key>sourceSize</key>
                 <string>{16,26}</string>
             </dict>
+            <key>auto</key>
+            <dict>
+                <key>frame</key>
+                <string>{{182,2},{80,74}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{80,74}}</string>
+                <key>sourceSize</key>
+                <string>{80,74}</string>
+            </dict>
             <key>boom</key>
             <dict>
                 <key>frame</key>
-                <string>{{182,2},{200,132}}</string>
+                <string>{{264,2},{200,132}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -147,36 +160,10 @@
                 <key>sourceSize</key>
                 <string>{200,132}</string>
             </dict>
-            <key>drop25</key>
-            <dict>
-                <key>frame</key>
-                <string>{{384,2},{100,100}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{100,100}}</string>
-                <key>sourceSize</key>
-                <string>{100,100}</string>
-            </dict>
-            <key>drop50</key>
-            <dict>
-                <key>frame</key>
-                <string>{{486,2},{100,100}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{100,100}}</string>
-                <key>sourceSize</key>
-                <string>{100,100}</string>
-            </dict>
             <key>fire</key>
             <dict>
                 <key>frame</key>
-                <string>{{588,2},{24,73}}</string>
+                <string>{{466,2},{24,73}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -189,7 +176,7 @@
             <key>fire1</key>
             <dict>
                 <key>frame</key>
-                <string>{{614,2},{46,112}}</string>
+                <string>{{492,2},{46,112}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -202,7 +189,7 @@
             <key>fire2</key>
             <dict>
                 <key>frame</key>
-                <string>{{662,2},{24,73}}</string>
+                <string>{{540,2},{24,73}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -212,10 +199,36 @@
                 <key>sourceSize</key>
                 <string>{24,73}</string>
             </dict>
+            <key>gameover</key>
+            <dict>
+                <key>frame</key>
+                <string>{{566,2},{400,200}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{400,200}}</string>
+                <key>sourceSize</key>
+                <string>{400,200}</string>
+            </dict>
+            <key>hiscore</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,204},{220,34}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{220,34}}</string>
+                <key>sourceSize</key>
+                <string>{220,34}</string>
+            </dict>
             <key>play</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,136},{528,152}}</string>
+                <string>{{224,204},{528,152}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,7 +241,7 @@
             <key>rocket</key>
             <dict>
                 <key>frame</key>
-                <string>{{532,136},{80,97}}</string>
+                <string>{{754,204},{80,97}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -238,18 +251,44 @@
                 <key>sourceSize</key>
                 <string>{80,97}</string>
             </dict>
-            <key>spaceship</key>
+            <key>score</key>
             <dict>
                 <key>frame</key>
-                <string>{{614,136},{202,276}}</string>
+                <string>{{836,204},{164,34}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{202,276}}</string>
+                <string>{{0,0},{164,34}}</string>
                 <key>sourceSize</key>
-                <string>{202,276}</string>
+                <string>{164,34}</string>
+            </dict>
+            <key>tutorial</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,358},{316,628}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{316,628}}</string>
+                <key>sourceSize</key>
+                <string>{316,628}</string>
+            </dict>
+            <key>voice</key>
+            <dict>
+                <key>frame</key>
+                <string>{{320,358},{80,74}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{80,74}}</string>
+                <key>sourceSize</key>
+                <string>{80,74}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -259,9 +298,9 @@
             <key>realTextureFileName</key>
             <string>retina-spaceship.png</string>
             <key>size</key>
-            <string>{1024,512}</string>
+            <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ed1b0a7c855345d4d2e16561bf1b0fb8$</string>
+            <string>$TexturePacker:SmartUpdate:3b461911cc54d5f74abd97313534d27f$</string>
             <key>textureFileName</key>
             <string>retina-spaceship.png</string>
         </dict>

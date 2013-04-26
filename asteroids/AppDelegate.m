@@ -9,10 +9,13 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "AppDelegate.h"
 #import "GLWRenderManager.h"
-#import "HelloScene.h"
+#import "GameScene.h"
 #import "OpenGLManager.h"
 #import "AudioProcessor.h"
 #import "IntroScene.h"
+#import "GameOverScene.h"
+#import "GLWTextureCache.h"
+#import "TutorialScene.h"
 
 @implementation AppDelegate
 
@@ -35,7 +38,7 @@
 
     [OpenGLManager sharedManager].view = self.glView;
     [[OpenGLManager sharedManager] startRender];
-//    [[OpenGLManager sharedManager] runScene: [HelloScene class]];
+    [[GLWTextureCache sharedTextureCache] cacheFile: @"spaceship"];
     [[OpenGLManager sharedManager] runScene: [IntroScene class]];
 
     return YES;

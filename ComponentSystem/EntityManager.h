@@ -26,10 +26,12 @@
 - (void) registerEntity: (Entity *) entity;
 - (void)addComponent:(Component *)component toEntity:(Entity *)entity;
 - (Component *)getComponentOfClass:(Class)componentClass forEntity:(Entity *)entity;
+- (void)removeComponentOfClass:(Class)componentClass forEntity:(Entity *)entity;
 - (NSArray *)getComponentsOfEntity:(Entity *)entity;
 - (void)removeEntity:(Entity *)entity;
 - (NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)componentClass;
 - (void) registerSystem: (System *) theSystem;
 - (System *)getSystemOfClass: (Class) systemClass;
+- (void)removeAllEntities;
 
 @end

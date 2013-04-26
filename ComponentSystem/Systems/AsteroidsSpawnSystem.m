@@ -40,6 +40,8 @@
         int maxAngularSpeed = [[[Settings sharedSettings] getSettingWithName: @"asteroidsMaxAngularSpeed"] integerValue];
         int minSize = [[[Settings sharedSettings] getSettingWithName: @"asteroidsMinSize"] integerValue];
         int maxSize = [[[Settings sharedSettings] getSettingWithName: @"asteroidsMaxSize"] integerValue];
+        int maxSpawn = [[[Settings sharedSettings] getSettingWithName: @"asteroidsMaxSpawnCount"] integerValue];
+        float speedFactor = [Settings sharedSettings].level * [[[Settings sharedSettings] getSettingWithName: @"levelSpeedFactor"] floatValue];
 
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             minSize *= 2;
@@ -85,11 +87,21 @@
             }
 
 
-            [[AsteroidsFactory sharedFactory] newEntityWithPosition:pos parent:[GLWRenderManager sharedManager].currentScene size:randomNumberInRange(minSize, maxSize) maxSpeed:maxSpeed maxAngularSpeed:maxAngularSpeed];
+            [[AsteroidsFactory sharedFactory]
+                    newEntityWithPosition:pos
+                                   parent:[GLWRenderManager sharedManager].currentScene
+                                     size:randomNumberInRange(minSize, maxSize)
+                                 maxSpeed:maxSpeed * (int) speedFactor
+                          maxAngularSpeed:maxAngularSpeed
+                                    score: [[[Settings sharedSettings] getSettingWithName: @"scoreForAsteroid"] integerValue]];
         }
 
         // increasing number of spawned asteroids
-        lastSpawnedCount++;
+        if (lastSpawnedCount < maxSpawn) {
+            lastSpawnedCount++;
+        } else {
+            [Settings sharedSettings].level++;
+        }
 
     }
 
