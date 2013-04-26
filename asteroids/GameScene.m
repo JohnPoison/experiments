@@ -112,6 +112,9 @@
         CollisionSystem *collisionSystem = (CollisionSystem *)[[EntityManager sharedManager] getSystemOfClass:[CollisionSystem class]];
         [collisionSystem addListener: self];
 
+        AsteroidsSpawnSystem *spawnSystem = (AsteroidsSpawnSystem*)[[EntityManager sharedManager] getSystemOfClass:[AsteroidsSpawnSystem class]];
+        [spawnSystem reset];
+
         GLWString *scoreString = [[GLWString alloc] initWithString: @"0"];
         score = scoreString;
         score.position = CGPointMake(30, [GLWRenderManager sharedManager].windowSize.height - 30.f);

@@ -9,4 +9,5 @@
 
 
 @interface AsteroidsSpawnSystem : System
+-(void) reset;
 @end

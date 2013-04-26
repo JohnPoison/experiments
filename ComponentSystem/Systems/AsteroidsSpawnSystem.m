@@ -107,4 +107,8 @@
 
 }
 
+- (void)reset {
+    lastSpawnedCount = 0;
+}
+
 @end

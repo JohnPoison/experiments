@@ -112,9 +112,10 @@
         previousPeak = audioProcessor.decibelsLevel;
     float delta = audioProcessor.decibelsLevel - previousPeak;
 
-    if (delta < -8) {
-        DebugLog(@"%5.5f", delta);
-        [(Spaceship *)entity shoot];
+    if (![Settings sharedSettings].autoShoot) {
+        if (delta < -8) {
+            [(Spaceship *)entity shoot];
+        }
     }
 
     previousPeak = audioProcessor.decibelsLevel;
