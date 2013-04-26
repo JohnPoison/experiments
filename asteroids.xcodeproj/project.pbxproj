@@ -16,6 +16,7 @@
 		36EBC0C559D869BCF387C30D /* PhysicalBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCA14029C260167A445B9 /* PhysicalBody.m */; };
 		36EBC0DB0EFDD001B5B8392A /* retina-space.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBC2C625ACFBE88F00D1ED /* retina-space.png */; };
 		36EBC0E91ADB7E09F1C289AB /* AutoShootComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCEA4578B74BBBB22508A /* AutoShootComponent.m */; };
+		36EBC1C1058BBD262E32FEBA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36EBC198B5A9E7CEC48936A9 /* AVFoundation.framework */; };
 		36EBC1D26C01A324B9329DFC /* PhysicsSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBC159AB799D0DEAC6EB7F /* PhysicsSystem.m */; };
 		36EBC1DA096F917F0C815EEB /* SpaceshipEngineComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCE8A9AE69AB2A2D28851 /* SpaceshipEngineComponent.m */; };
 		36EBC1EE6FF5F197649839D1 /* GLWShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBCCCF0F52320DB7AA36DB /* GLWShaderProgram.m */; };
@@ -101,6 +102,7 @@
 		36EBC159AB799D0DEAC6EB7F /* PhysicsSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsSystem.m; sourceTree = "<group>"; };
 		36EBC18BD870B45877605B1F /* CollisionDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollisionDetector.m; sourceTree = "<group>"; };
 		36EBC1947CD436EB480EE133 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		36EBC198B5A9E7CEC48936A9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		36EBC1B68A9F23DC3B69E0A8 /* PhysicalBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalBody.h; sourceTree = "<group>"; };
 		36EBC256EF20BDFD842C5B33 /* BulletComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulletComponent.m; sourceTree = "<group>"; };
 		36EBC2B9BA4F89EFE0AEFA66 /* CollisionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionObject.h; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				CE7161A316EE5EB400A32C9E /* CoreGraphics.framework in Frameworks */,
 				CE7161A716EE5EB400A32C9E /* OpenGLES.framework in Frameworks */,
 				36EBC3B3F9D04356C24A0453 /* AudioToolbox.framework in Frameworks */,
+				36EBC1C1058BBD262E32FEBA /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +500,7 @@
 				CE7161A216EE5EB400A32C9E /* CoreGraphics.framework */,
 				CE7161A616EE5EB400A32C9E /* OpenGLES.framework */,
 				36EBCAE31560814243312FFA /* AudioToolbox.framework */,
+				36EBC198B5A9E7CEC48936A9 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
